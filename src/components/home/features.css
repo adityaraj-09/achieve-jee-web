@@ -1,0 +1,59 @@
+
+.con-features{
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-content: center;
+}
+.box-features{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.features{
+    gap: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.feature{
+    border-radius: 12px;
+    padding: 10px;
+    width: max-content;
+    box-shadow: 1px 2px 3px 4px rgba(184, 182, 182, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.feature .cir-feat{
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: white;
+    margin: auto;
+    width: 70px;
+    border-radius: 35px;
+    background-color: blue;
+    overflow: hidden;
+}
+.feat-ic{
+    scale: 3;
+    margin: auto;
+}
+.feature strong,p{
+    margin: auto;
+}
+.feature strong{
+    font-size: large;
+}
+.line-feat{
+   height: 2px;
+   background-color: rgb(202, 200, 200); 
+   width: 90%;
+   margin: auto;
+}

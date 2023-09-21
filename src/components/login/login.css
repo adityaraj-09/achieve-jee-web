@@ -1,0 +1,78 @@
+
+.con-login{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #EBEEEF;
+}
+.box-login{
+    box-shadow: 1px 2px 3px 4px rgba(184, 182, 182, 0.4);
+    border-radius: 12px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+    width: 40%;
+    height: 60%;
+    background-color: white;
+}
+.box-e{
+    margin-top: 40px;
+}
+.box-p{
+    margin-top: 20px;
+}
+.box-e,.box-p{
+    padding: 10px;
+    gap: 40px;
+   
+    margin-left: 100px;
+    display: flex;
+
+}
+.in-e{
+    margin-left: 22px;
+}
+input{
+    border: none;
+    width: 250px;
+    border-bottom: 2px solid rgb(171, 170, 170);
+}
+
+input:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(19, 18, 18);
+}
+.login-head{
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(100, 100, 199);
+    color: white;
+}
+
+.login-head strong{
+    font-size: large;
+    margin: auto;
+}
+.login-btns{
+    display: flex;
+    margin-top: 40px;
+    gap: 20px;
+    justify-content: center;
+    align-content: center;
+}
+.login-btns .btn-login,.btn-register{
+    background-color: green;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: white;
+    width: 140px;
+    border-radius: 10px;
+}
