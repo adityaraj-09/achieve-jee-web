@@ -1,8 +1,10 @@
 
 import React from 'react'
 import {Link} from "react-router-dom"
+import Logo from "../../assets/logo.png"
 
 const Header = () => {
+ 
   return (
     <>
       <div class="header-navbar" id="navbar-main">
@@ -15,15 +17,15 @@ const Header = () => {
                   data-target="#bs-example-navbar-collapse-1" aria-expanded> <span class="sr-only">Toggle
                     navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="/" itemscope itemtype="http://schema.org/Organization" itemprop="url"><img
-                    src="images/allen-dlp-logo.png" alt="Achieve Jee"/> </a>
+                <a class="navbar-brand" href="/" itemscope itemtype="http://schema.org/Organization" itemprop="url" style={{width:"80px"}}><img
+                    src={Logo} alt="Achieve Jee" className='logo' width="80"/> </a>
               </div>
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown"
                 data-animations="fadeInUp">
 
                 <ul class="nav navbar-nav navbar-right" id="desktop-menu-top">
                   <li><a href="/" class="active">Home </a> </li>
-                  <li><Link to="/auth" > Login/Signup</Link> </li>
+                  <li><Link to="/login" > Login/Signup</Link> </li>
                   <li><a href="/" class="active">Practice Test </a> </li>
                   <li><a href="/" class="active">Student Zone </a> </li>
                   
