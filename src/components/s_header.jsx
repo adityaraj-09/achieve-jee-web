@@ -27,7 +27,7 @@ const SHeader = () => {
 
 
                             <li class="pull-right"> <a href="https://dlp.allen.ac.in/apps2324/Associate/" class="apply-online" style={{background: "#3d52eb"}}><i class="fa fa-user"></i> Bulk  Registration (DLP)</a></li>
-                            <li class="pull-right" style={{ paddingright: "5px" }}> <Link to="/auth" className='apply-online'><i class="fa fa-mouse-pointer"></i> Login</Link></li>
+                            <li class="pull-right" style={{ paddingright: "5px" }}> <Link to="/login" className='apply-online'><i class="fa fa-mouse-pointer"></i> Login</Link></li>
 
                             
 
