@@ -1,10 +1,38 @@
 .main-ques{
     display: flex;
     width: 100%;
-    overflow-y: hidden;
     height: max-content;
     flex-direction: column;
 
+}
+.popup{
+    position: fixed;
+    top: calc((100% - 400px)/2);
+    left: calc((100% - 400px)/2);
+    height: 400px;
+    background-color: rgb(104, 4, 104);
+   display: flex;
+   flex-direction: column;
+   
+    width: 400px;
+}
+.popup .h-cr{
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.h-cr h3{
+    color: white;
+}
+.cross{
+    width: 40px;
+    cursor: pointer;
+    justify-content: center;
+    display: flex;
+    border-radius: 20px;
+    height: 40px;
+    background-color: white
 }
 .main-ques .heading{
     padding: 10px;
@@ -25,6 +53,7 @@
     padding-left: 10px;
     margin-top: 10px;
     gap: 10px;
+    overflow-y: scroll;
     width: 75%;
     display: flex;
     height: auto;
@@ -32,6 +61,7 @@
 }
 .ques-rightp{
     margin-top: 10px;
+    overflow-y: scroll;
     display: flex;
     gap: 20px;
     flex-direction: column;
@@ -44,6 +74,8 @@
     display: flex;
     box-shadow: 1px 2px 3px 4px rgba(184, 182, 182, 0.4);
     padding: 10px;
+    justify-content: center;
+    align-items: center;
     background-color: aliceblue;
     border: 2px solid black;
     gap: 10px;
@@ -74,14 +106,17 @@
     background-color: rgb(77, 77, 188);
     padding: 5px 10px;
 }
+.ques-sec:hover{
+    box-shadow: 1px 2px 3px 4px rgba(184, 182, 182, 0.4);
+}
 .allsec{
     background-color: rgb(6, 6, 115);
 }
 .ques-mainbox{
+
     border: 2px solid black;
     display: flex;
     flex-direction: column;
-    
 }
 .qno{
     display: flex;
@@ -99,6 +134,7 @@
 }
 .ques-img{
     display: flex;
+    object-fit: cover;
     justify-content: center;
     width: 100%;
 }
@@ -133,7 +169,7 @@
 }
 .option{
     width: max-content;
-    height: 40px;
+
     display: flex;
     gap: 20px;
     justify-content: baseline;
@@ -155,10 +191,13 @@
     background-color: rgb(77, 77, 188);
     padding: 5px 10px;
 }
+.nav-btn-que:hover{
+    background-color: rgb(6, 6, 115);
+}
 .ques-palette{
     border: 2px solid black;
     display: flex;
-    height: auto;
+    height: fit-content;
     min-height: 300px;
     flex-direction: column;
     background-color: aliceblue;
@@ -261,7 +300,11 @@ align-items: center;
 }
 .solved-q,.unsolved-q,.notvisited-q{
     font-weight: 600;
+    cursor: pointer;
     font-size: large;
+}
+.solved-q:hover,.unsolved-q:hover,.notvisited-q:hover{
+    box-shadow: 1px 2px 3px 4px rgba(184, 182, 182, 0.4);
 }
 .exam-btns-ques{
     width: 100%;
@@ -286,4 +329,53 @@ align-items: center;
 }
 .stu-name{
     font-weight: 600;
+}
+
+@media screen and (max-width:761px) {
+    .main-ques{
+        height: max-content;
+    }
+    .box-ques{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: max-content;
+    }
+    .ques-leftp{
+        width: 95%;
+        overflow-x: hidden;
+    }
+    .ques-rightp{
+       width: 95%;
+       margin: 10px;
+       height: max-content;
+       position: relative;
+       left: 0;
+    }
+    .option{
+        width: max-content;
+        height: max-content;
+    }
+    .option label{
+        width: max-content;
+    }
+    .ques-palette{
+        min-height: 0;
+        height: max-content;
+    }
+    .exam-btns-ques{
+        justify-content: space-around;
+    }
+    .no-qp{
+        justify-content: space-evenly;
+    }
+}
+@media screen and (max-width:500px) {
+    .popup{
+        width: 80vw;
+        height: 350px;
+        top: calc((100vh - 350px)/2);
+        left: 10vw;
+    }
+
 }

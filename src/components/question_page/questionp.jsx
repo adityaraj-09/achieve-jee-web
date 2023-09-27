@@ -1,14 +1,21 @@
 import React from 'react'
+import { useState } from 'react';
 import CountdownTimer from './countdown';
 import "./questionp.css"
+import {ImCross} from "react-icons/im"
 const Questionp = () => {
-    
-    const timeleft="2.3hr"
+   const [curr_question,setcurrq]=useState(1);
+   const [setq,setsetq]=useState(0);
+    const [opted,setopt]=useState(null)
+    const [dis,setd]=useState(true)
+
     const solved_questions=[1,2,3,4,5]
+    const l=["ALL SECTIONS","PHYSICS","CHEMISTRY","MATHEMATICS"]
     const solved=[2,5,6,7,8,9,13,14,15,16]
     const unsolved=[1,3,4,10,11,12]
     const notvisited=[21,22,23,24,25,26,27,28,29,30]
     const total_questions=[]
+
     for (let index = 0; index < 54; index++) {
         total_questions.push(index+1)
         
@@ -32,18 +39,17 @@ const Questionp = () => {
             <div className="box-ques">
                 <div className="ques-leftp">
                     <div className="ques-secs">
-                        <div className="ques-sec allsec">
-                            ALL Sections
-                        </div>
-                        <div className="ques-sec">
-                            PHYSICS
-                        </div>
-                        <div className="ques-sec">
-                            CHEMISTRY
-                        </div>
-                        <div className="ques-sec">
-                            MATHEMATICS
-                        </div>
+                        {
+                            l.map((d,i)=>{
+                                return(
+                                    <div className="ques-sec" style={{backgroundColor:setq==i?"rgb(6, 6, 115)":"rgb(77, 77, 188)"}} onClick={()=>setsetq(i)}>
+                                    {d}
+                                </div>
+                                )
+                            })
+                        }
+
+                        
 
                     </div>
                     <div className="ques-mainbox">
@@ -72,7 +78,7 @@ const Questionp = () => {
                                         return (
                                               <div className="option">
 
-                                                <input type="radio" id={index}  value={opt} name="opts" className='r'/>
+                                                <input type="radio" id={index}  value={opt} name="opts" className='r'checked={opted===index} onChange={()=>setopt(index)}/>
                                                 <label for={index}>{opt}</label><br />
                                             </div>
                                             
@@ -86,7 +92,7 @@ const Questionp = () => {
                     </div>
 
                     <div className="nav-btns-ques">
-                                <div className="nav-btn-que" on >
+                                <div className="nav-btn-que" onClick={()=>setopt(null)} >
                                     CLEAR RESPONSE
                                 </div>
                                 <div className="nav-btn-que">
@@ -119,7 +125,7 @@ const Questionp = () => {
                                     total_questions.map((t,index)=>{
                                         return(
                                             <>  
-                                                <div className={notvisited.includes(t)?"notvisited-q":  (solved.includes(t)?"solved-q":"unsolved-q")}>
+                                                <div className={notvisited.includes(t)?"notvisited-q":  (solved.includes(t)?"solved-q":"unsolved-q")} key={index} onClick={()=>setcurrq(t)}>
                                                     {t}
                                                 </div>
                                             </>
@@ -150,7 +156,7 @@ const Questionp = () => {
                          <div className="exam-btn-que"  >
                                     Profile
                                 </div>
-                                <div className="exam-btn-que">
+                                <div className="exam-btn-que" onClick={()=>setd(true)}>
                                     Instr
                                 </div>
                                 <div className="exam-btn-que">
@@ -164,6 +170,15 @@ const Questionp = () => {
 
                 </div>
 
+            </div>
+            <div className="popup" style={{display:dis?"flex":"none"}}>
+                <div className="h-cr">
+
+                <h3>INSTRUCTIONS</h3>
+                <div className="cross" onClick={()=>setd(false)} >
+                            <strong>close</strong>
+                </div>
+                </div>
             </div>
         </section>
     )
