@@ -2,13 +2,15 @@ import React from 'react'
 import { useState } from 'react';
 import CountdownTimer from './countdown';
 import "./questionp.css"
+import { AuthContext, useAuth } from '../../AuthContext'
 import {ImCross} from "react-icons/im"
+import { useContext } from 'react';
 const Questionp = () => {
    const [curr_question,setcurrq]=useState(1);
    const [setq,setsetq]=useState(0);
     const [opted,setopt]=useState(null)
     const [dis,setd]=useState(true)
-
+    const auth=useContext(AuthContext)
     const solved_questions=[1,2,3,4,5]
     const l=["ALL SECTIONS","PHYSICS","CHEMISTRY","MATHEMATICS"]
     const solved=[2,5,6,7,8,9,13,14,15,16]
@@ -113,7 +115,7 @@ const Questionp = () => {
 
                                 <CountdownTimer className="timer"/>
                                 <p className="stu-name">
-                                    Aditya
+                                    {localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["name"]:null}
                                 </p>
                             </div>
 

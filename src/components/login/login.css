@@ -12,6 +12,7 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
+
     align-content: center;
     margin: auto;
     width: 40%;
@@ -31,6 +32,39 @@
     margin-left: 100px;
     display: flex;
 
+}
+.error{
+    height:100px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 300px;
+    overflow: hidden;
+    background: white;
+    position: fixed;
+    right: 0;
+    color: red;
+}
+.error-head{
+    height: 30px;
+    color: white;
+    
+    gap: 50px;
+    width: 100%;
+    font-size: large;
+    padding-left: 10px;
+    background-color: red;
+}
+.main-err{
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    gap: 15px;
+    font-size: large;
+    display: flex;
+}
+.main-err h5{
+    color: black;
 }
 .in-e{
     margin-left: 22px;
@@ -75,4 +109,17 @@ input:focus{
     color: white;
     width: 140px;
     border-radius: 10px;
+}
+
+
+
+@media screen and (max-width:761px) {
+    .box-login{
+        width: 90%;
+        height: 60%;
+    }
+    .box-e,.box-p{
+        margin-left: 15px;
+        gap: 20px;
+    }
 }
