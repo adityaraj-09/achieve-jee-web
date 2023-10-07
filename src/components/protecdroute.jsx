@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
    
     if (!jwtToken) {
-     
+      
       return navigate("/login");
     }
     fetch('https://achieve-jee-server.onrender.com/api/istokenvalid', {
@@ -30,6 +30,8 @@ const ProtectedRoute = ({ children }) => {
         
       })
       .catch((error) => {
+        localStorage.removeItem("jwtToken")
+          localStorage.removeItem("user")
         return navigate("/login");
         
       });

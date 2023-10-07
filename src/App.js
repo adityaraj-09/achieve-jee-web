@@ -9,6 +9,7 @@ import ProtectedRoute from './components/protecdroute';
 import { useState } from 'react';
 import RequireAuth from './components/requireAuth';
 import { AuthContextProvider } from './AuthContext';
+import Dashboard from './components/dashboard/dashboard';
 
 
 function App() {
@@ -28,11 +29,13 @@ function App() {
      <Route path="/">
                 <Route index element={<HomePage/>}/>
                 <Route path='login' element={<LoginPage/>}/>
+                <Route path='dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
                 <Route path="q"  element={
                   <ProtectedRoute>
                     <Quesionpage/>
                   </ProtectedRoute>
                 }/>
+                
     </Route> 
   
     </Routes>

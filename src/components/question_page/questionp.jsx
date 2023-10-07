@@ -6,6 +6,16 @@ import { AuthContext, useAuth } from '../../AuthContext'
 import {ImCross} from "react-icons/im"
 import { useContext } from 'react';
 const Questionp = () => {
+    window.addEventListener('beforeunload', function (e) {
+  
+        const confirmationMessage = 'Are you sure you want to leave this page?';
+      
+     
+        (e || window.event).returnValue = confirmationMessage;
+      
+    
+        return confirmationMessage;
+      });
    const [curr_question,setcurrq]=useState(1);
    const [setq,setsetq]=useState(0);
     const [opted,setopt]=useState(null)

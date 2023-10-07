@@ -6,7 +6,7 @@ import {AiFillEye} from "react-icons/ai"
 import {ImCross} from "react-icons/im"
 import {AiFillEyeInvisible} from "react-icons/ai"
 import { useState } from 'react'
-import { Navigation, useNavigate, useNavigation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
 
 const Login = () => {
@@ -34,9 +34,6 @@ const Login = () => {
       if (!password.trim()) {
         err.password = 'Password is required';
       }
-      // if(password.length<6 && password.length>0){
-      //   err.password = 'Password must be 6 characters long';
-      // }
     
       seterr(err)
       
@@ -65,7 +62,7 @@ const Login = () => {
           localStorage.setItem("user",JSON.stringify(responseData))
           localStorage.setItem('jwtToken', responseData["token"]);
           
-          navigate("/",{replace:true})
+          navigate("/dashboard",{replace:true})
           console.log(responseData)
        
         })
