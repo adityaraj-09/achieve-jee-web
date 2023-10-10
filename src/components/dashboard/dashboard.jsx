@@ -101,7 +101,7 @@ description
       </aside>
       <main className='main-dash'>
           <div className="box-main">
-            {/* <h2>DASHBOARD</h2>
+            <h2>DASHBOARD</h2>
               <section className='d-cards'>
                 <div className="d-card">
                   <div className="d-card-left">
@@ -160,7 +160,7 @@ description
                
                
 
-              </section> */}
+              </section>
               <Testpaper/>
 
               
