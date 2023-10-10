@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import CountdownTimer from './countdown';
 import "./questionp.css"
 import { AuthContext, useAuth } from '../../AuthContext'
 import {ImCross} from "react-icons/im"
 import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 const Questionp = () => {
+    
+    const location = useLocation();
+    const pid=location.state
+    const [allqs, setallqs] = useState(null)
     window.addEventListener('beforeunload', function (e) {
   
         const confirmationMessage = 'Are you sure you want to leave this page?';
@@ -16,35 +21,49 @@ const Questionp = () => {
     
         return confirmationMessage;
       });
-   const [curr_question,setcurrq]=useState(1);
+   const [cr_q,setcurrq]=useState(0);
    const [setq,setsetq]=useState(0);
     const [opted,setopt]=useState(null)
     const [dis,setd]=useState(true)
     const auth=useContext(AuthContext)
     const solved_questions=[1,2,3,4,5]
     const l=["ALL SECTIONS","PHYSICS","CHEMISTRY","MATHEMATICS"]
-    const solved=[2,5,6,7,8,9,13,14,15,16]
-    const unsolved=[1,3,4,10,11,12]
-    const notvisited=[21,22,23,24,25,26,27,28,29,30]
-    const total_questions=[]
-
-    for (let index = 0; index < 54; index++) {
-        total_questions.push(index+1)
+    const solved=[]
+    const unsolved=[1]
+    const notvisited=[]
+    
+    useEffect(() => {
+        fetch('https://achieve-jee-server.onrender.com/api/start-paper/'+pid, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json', 
+          'x-auth-token':localStorage.getItem("jwtToken")
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+         return response.json()
+        })
+        .then((responseData) => {
+            setallqs(responseData)
+            console.log(responseData)
+          
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+    
+      
+    }, [])
+ 
         
-        if(index>15 && index<20){
-            unsolved.push(index+1)
-        }
-        if(index>29){
-            notvisited.push(index+1)
-        }
-        
-    }
-    const options = ["The ray of light will come out for θ = 30°, for 0 < 𝑙 < L."
-        , "There is an angle for l = L/2 at which the ray of light will come out after two reflections.",
-        "The ray of light will NEVER come out for θ = 60°, and l = L/3.",
-        "The ray of light will come out for θ = 60°, and 0 < 𝑙 < L/2 after six reflections"];
     return (
-        <section className='main-ques'>
+       
+        
+       
+        allqs? <section className='main-ques'>
             <div className="heading" >
                 <h3>ONLINE TEST</h3>
             </div>
@@ -66,27 +85,21 @@ const Questionp = () => {
                     </div>
                     <div className="ques-mainbox">
                         <div className="qno">
-                            Q.NO:8
+                        Question {allqs?cr_q+1:"loading..."}
                         </div>
                         <div className="question-box">
                             <p className='ques'>
-                                Three plane mirrors form an equilateral triangle with
-                                each side of length L. There is a small hole at a
-                                distance l  0 from one of the corners as shown in the
-                                figure. A ray of light is passed through the hole
-                                at an angle θ and can only come out through the
-                                same hole. The cross section of the mirror
-                                configuration and the ray of light lie on the same plane.
+                                {allqs?allqs[cr_q].body:"loading..."}
                             </p>
                             <div className="ques-img">
-                                <img src="https://cdn1.byjus.com/wp-content/uploads/2023/01/jee-advanced-question-paper-2022-physics-paper-1-q-6.png" alt="" />
+                                <img src={allqs?allqs[cr_q].imageurl:"loading..."} alt="" />
 
                             </div>
                             <div className="options">
                                 <form action="" className='form'>
 
                                 {
-                                    options.map((opt, index) => {
+                                   allqs? allqs[cr_q].options.map((opt, index) => {
                                         return (
                                               <div className="option">
 
@@ -95,7 +108,7 @@ const Questionp = () => {
                                             </div>
                                             
                                         );
-                                    })
+                                    }):null
                                 }
                                 </form>
 
@@ -113,7 +126,7 @@ const Questionp = () => {
                                 <div className="nav-btn-que">
                                     PREVIOUS
                                 </div>
-                                <div className="nav-btn-que">
+                                <div className="nav-btn-que" onClick={()=>setcurrq(cr_q+1)}>
                                     NEXT
                                 </div>
                     </div>
@@ -134,15 +147,15 @@ const Questionp = () => {
                             <div className="p-head">Quesions Palette</div>
                             <div className="pal-ques">
                                 {
-                                    total_questions.map((t,index)=>{
+                                    allqs?allqs.map((t,index)=>{
                                         return(
                                             <>  
-                                                <div className={notvisited.includes(t)?"notvisited-q":  (solved.includes(t)?"solved-q":"unsolved-q")} key={index} onClick={()=>setcurrq(t)}>
-                                                    {t}
+                                                <div className={notvisited.includes(index+1)?"notvisited-q":  (solved.includes(index+1)?"solved-q":"unsolved-q")} key={index+1} onClick={()=>setcurrq(index)}>
+                                                    {index+1}
                                                 </div>
                                             </>
                                         );
-                                    })
+                                    }):null
                                 }
                             </div>
 
@@ -163,7 +176,7 @@ const Questionp = () => {
                                     0 Marked
                                 </div>
                          </div>
-                         <div className="tqh">{total_questions.length} Questions</div>
+                         <div className="tqh">{allqs?allqs.length:54} Questions</div>
                          <div className="exam-btns-ques">
                          <div className="exam-btn-que"  >
                                     Profile
@@ -192,7 +205,8 @@ const Questionp = () => {
                 </div>
                 </div>
             </div>
-        </section>
+        </section>: <div>loading....</div>
+        
     )
 }
 

@@ -84,6 +84,20 @@
 }
 .img-sec1{
     margin: 10px;
+    position: relative;
+    display: flex;
+}
+.back,.forward{
+    position: absolute;
+    scale: 4;
+    top: 200px;
+    color: gray;
+}
+.back{
+    left: 30px;
+}
+.forward{
+    right: 30px;
 }
 .right-sec1 img{
     height: 400px;

@@ -6,37 +6,41 @@
     cursor: pointer;
     flex-direction: row;
 }
+
 .prof-img{
     width: 30px;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+  
     height: 30px;
     border-radius: 20px;
     background-color: rgb(82, 2, 82);
 }
+
 .drop-box{
     width: 200px;
     background-color: rgb(82, 2, 82);
     height: max-content;
-   
     display: flex;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 999; 
     flex-direction: column;
     padding: 15px;
     border-radius: 10px;
     position: absolute;
 }
+
 .row1,.row2{
     color: white;
     width: 100%;
     display: flex;
     margin: 5px;
     justify-content: center;
-   
-    
-
 }
+
+
 .log-out-btn{
     width: 100%;
     color: white;

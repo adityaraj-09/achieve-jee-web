@@ -10,6 +10,7 @@ import { useState } from 'react';
 import RequireAuth from './components/requireAuth';
 import { AuthContextProvider } from './AuthContext';
 import Dashboard from './components/dashboard/dashboard';
+import Socketc from './pages/socketc';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                     <Quesionpage/>
                   </ProtectedRoute>
                 }/>
+                <Route path='soc' element={<Socketc/>}/>
                 
     </Route> 
   

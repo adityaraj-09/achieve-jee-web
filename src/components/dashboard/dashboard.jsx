@@ -7,6 +7,7 @@ import { GiProgression} from "react-icons/gi"
 import { FaPowerOff} from "react-icons/fa"
 import { GiCancel} from "react-icons/gi"
 import { useState } from 'react'
+import Testpaper from './testpaper'
 
 const Dashboard = () => {
   
@@ -24,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className="con-dash ">
       {
-        popup? <div className="logout-popup">
+        popup?<div className='overlay'> <div className="logout-popup">
         <div className="logout-head">
               <strong>LOG OUT</strong>
              
@@ -34,7 +35,7 @@ const Dashboard = () => {
                 <div className="no-btn" onClick={()=>setPopup(false)}><GiCancel className='con-ic'/></div>
                 <div className="yes-btn" onClick={logout}><FaPowerOff className='con-ic'/></div>
               </div>
-              </div>:null
+              </div></div>:null
       }
       
             
@@ -100,7 +101,7 @@ description
       </aside>
       <main className='main-dash'>
           <div className="box-main">
-            <h2>DASHBOARD</h2>
+            {/* <h2>DASHBOARD</h2>
               <section className='d-cards'>
                 <div className="d-card">
                   <div className="d-card-left">
@@ -159,7 +160,8 @@ description
                
                
 
-              </section>
+              </section> */}
+              <Testpaper/>
 
               
           </div>
