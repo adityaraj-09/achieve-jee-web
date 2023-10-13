@@ -3,18 +3,22 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import "./dashboard.css"
-import { GiProgression} from "react-icons/gi"
+
 import { FaPowerOff} from "react-icons/fa"
 import { GiCancel} from "react-icons/gi"
 import { useState } from 'react'
 import Testpaper from './testpaper'
+import Dashmain from './dash-main'
 
 const Dashboard = () => {
   
   const navigate=useNavigate()
 
-
+  const li=["Dashboard","Profile",'Upcoming Tests',"Analytics",'Notifications','Test Papers','Settings']
+  const ic=['grid_view','account_circle','description','bar_chart','notifications','description','settings']
   const [popup,setPopup]=useState(false)
+  const [di, setdi] = useState(0)
+  const com_list=[<Dashmain/>,<Testpaper/>]
   function logout(){
     localStorage.removeItem("jwtToken")
     localStorage.removeItem("user");
@@ -52,44 +56,18 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="sidebar">
-          <a href="" id='active'>
-            <span class="material-icons-sharp">
-            grid_view
-          </span>
-            <strong>Dashboard</strong>
-          </a>
-          <a href=""><span class="material-icons-sharp">
-account_circle
-</span>
-            <strong>Profile</strong>
-          </a>
-          <a href=""><span class="material-icons-sharp">
-description
-</span>
-            <strong>Upcoming Tests</strong>
-          </a>
-          <a href=""><span class="material-icons-sharp">
-            bar_chart
-          </span>
-            <strong>Analytics</strong>
-          </a>
-          <a href=""><span class="material-icons-sharp">
-          notifications
-          </span>
-            <strong>Notifications</strong>
-            
-          </a>
-          <a href=""><span class="material-icons-sharp">
-description
-</span>
-            <strong>Test Papers</strong>
-          </a>
-          
-          <a href=""><span class="material-icons-sharp">
-          settings
-          </span>
-            <strong>Settings</strong>
-          </a>
+          {
+            li.map((t,i)=>{
+              return  <a onClick={()=>setdi(i)}  id={di===i?"active":"null"}>
+              <span class="material-icons-sharp">
+              {ic[i]}
+            </span>
+              <strong>{t}</strong>
+            </a>
+            })
+          }
+         
+           
           <a onClick={()=>setPopup(true)}><span class="material-icons-sharp">
             logout
           </span>
@@ -101,67 +79,9 @@ description
       </aside>
       <main className='main-dash'>
           <div className="box-main">
-            <h2>DASHBOARD</h2>
-              <section className='d-cards'>
-                <div className="d-card">
-                  <div className="d-card-left">
-
-                  <div className="card-cir">
-                    <GiProgression/>
-                  </div>
-                  <strong>Topics</strong>
-                  <h3>Mechanics</h3>
-                  </div>
-                  <div className="d-card-right">
-                    <div className="d-progress">
-                      <svg>
-                        <circle cx="38" cy="38" r='36'></circle>
-                      </svg>
-                      <div className="number">81%</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="d-card">
-                  <div className="d-card-left">
-
-                  <div className="card-cir">
-                    <GiProgression/>
-                  </div>
-                  <strong>Topics</strong>
-                  <h3>Mechanics</h3>
-                  </div>
-                  <div className="d-card-right">
-                    <div className="d-progress">
-                      <svg>
-                        <circle cx="38" cy="38" r='36'></circle>
-                      </svg>
-                      <div className="number">81%</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="d-card">
-                  <div className="d-card-left">
-
-                  <div className="card-cir">
-                    <GiProgression/>
-                  </div>
-                  <strong>Topics</strong>
-                  <h3>Mechanics</h3>
-                  </div>
-                  <div className="d-card-right">
-                    <div className="d-progress">
-                      <svg>
-                        <circle cx="38" cy="38" r='36'></circle>
-                      </svg>
-                      <div className="number">81%</div>
-                    </div>
-                  </div>
-                </div>
-               
-               
-
-              </section>
-              <Testpaper/>
+            {
+              com_list[di]
+            }
 
               
           </div>

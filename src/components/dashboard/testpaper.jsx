@@ -1,13 +1,23 @@
 
 
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
+import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
+import "./testpaper.css"
+import Spinner from '../spinner/spinner';
 const Testpaper = () => {
-    const [qs,setqs] =useState([])
-    const navigate =useNavigate()
+    const [qs,setqs] =useState(null)
+    const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
+    
     useEffect(() => {
-        fetch('https://achieve-jee-server.onrender.com/api/papers', {
+      const cachedData =  getCachedData(apiUrl);
+
+      if (cachedData) {
+        
+        setqs(cachedData);
+      }else{
+
+      
+        fetch(apiUrl, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json', 
@@ -24,18 +34,43 @@ const Testpaper = () => {
         .then((responseData) => {
         
             setqs(responseData)
+            cacheData(apiUrl, responseData);
         })
         .catch((error) => {
           
-        });
-    
-      return () => {
-        
-      }
+        });}
+    return ()=>{};
+      
     }, [])
+    const openNewWindow = (id) => {
+      // pidData(id);
+      // const i=getPid()
+      // console.log(i)
+      localStorage.setItem("pid",id);
+     
+      const url = '/q';
+      const windowName = 'myNewWindow';
+      const width = 800;
+      const height = 800;
+      const top=(window.innerHeight-800)/2
+      const left=(window.innerWidth-800)/2
+
+     
+    
+      // Set features to hide status bar and browser tabs
+      const features = `width=${width},height=${height},top=${top},left=${left} scrollbars=no,resizable=yes,status=no,toolbar=no,location=no,menubar=no`;
+      
+      const win=window.open(url, windowName, features);
+      if (win) {
+        win.onload = () => {
+          const data = { id: id };
+          win.postMessage(data, window.location.origin);
+        }; // Update the URL in the main window
+      }
+    };
     
   return (
-    <div className="con-test">
+   !qs? <Spinner/>:<div className="con-test">
         <h2>Test Papers</h2>
         <div className="type-exams">
             <div className="type-exam">
@@ -59,7 +94,7 @@ const Testpaper = () => {
         <div className="con-test-papers">
             <div className="test-papers">
             {
-                            qs.map((data,i)=>{
+                            qs?qs.map((data,i)=>{
                                 const d=data._id
                                 return <div className="test-paper">
                                 <div className="test-details">
@@ -67,14 +102,11 @@ const Testpaper = () => {
                                 <strong>{data.title}</strong>
                                 <p>180 min <span>created on {data.createdAt}</span></p>
                                 </div>
-                                <button className="start-btn" onClick={()=> navigate("/q",{state:d})}>start</button>
+                                <button className="start-btn" onClick={()=> openNewWindow(d)}>start</button>
                                 
                             </div>
-                            })
-                        }
-
-                
-                
+                            }):null
+            }
             </div>
         </div>
     </div>

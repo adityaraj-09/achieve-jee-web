@@ -1,0 +1,75 @@
+.con-test{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.type-exams{
+    display: flex;
+    gap: 40px;
+}
+.type-exam{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+.type-exam strong{
+    font-weight: 400;
+    font-size: large;
+}
+.under-line{
+    width: 80%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgb(125, 7, 125);
+}
+.con-test-papers{
+    width: 500px;
+    border-radius: 10px;
+    background-color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.test-papers{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+}
+.test-paper{
+    display: flex;
+    width: max-content;
+    justify-content: center;
+  
+    align-items: center;
+    gap: 30px;
+}
+.test-details{
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.test-details strong{
+    font-size: medium;
+}
+.test-details p{
+    color: grey;
+    margin: 0;
+}
+.test-details strong{
+    margin: 0;
+}
+.start-btn{
+    width: 80px;
+    display: flex;
+    font-size: medium;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(125, 7, 125);
+    height: 80%;
+}
+

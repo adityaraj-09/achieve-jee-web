@@ -5,6 +5,12 @@
     flex-direction: column;
 
 }
+.s{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    width: 100vh;
+}
 .popup{
     position: fixed;
     top: calc((100% - 400px)/2);

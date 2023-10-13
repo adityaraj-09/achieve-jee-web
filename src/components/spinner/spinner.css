@@ -1,0 +1,37 @@
+.spinner {
+    margin: 0 auto;
+    width: max-content;
+    position: absolute;
+    top: 50vh;
+    left: 38vw;
+    text-align: center;
+  }
+  .spinner h1{
+    color: rgb(104, 4, 104);
+  }
+  .bounce1, .bounce2, .bounce3 {
+    width: 18px;
+    height: 18px;
+    background-color: rgb(104, 4, 104);
+    border-radius: 100%;
+    display: inline-block;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+  
+  .bounce1 {
+    animation-delay: -0.32s;
+  }
+  
+  .bounce2 {
+    animation-delay: -0.16s;
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-18px);
+    }
+  }
+  

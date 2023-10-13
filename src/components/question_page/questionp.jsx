@@ -5,12 +5,42 @@ import "./questionp.css"
 import { AuthContext, useAuth } from '../../AuthContext'
 import {ImCross} from "react-icons/im"
 import { useContext } from 'react';
+import { io } from "socket.io-client";
 import { useLocation } from 'react-router-dom';
+import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
+import Spinner from '../spinner/spinner';
 const Questionp = () => {
     
     const location = useLocation();
-    const pid=location.state
+
+    const [pid, setpid] = useState(null)
+    const [istimer, setistimer] = useState(false)
+    const [messageReceived, setMessageReceived] = useState(false)
+    // const socket = io('https://achieve-jee-server.onrender.com'); 
+    // socket.connect()
+    // if(!istimer){
+
+    //     socket.emit("start-timer",{uid:"njnnjdad55212",pid:"njdnndnn",dur:10800})
+    //     setistimer(true)
+    // }
+      
+
+    // useEffect(()=>{
+    //     socket.on("timer",(data)=>{
+    //         console.log('Received data:', data);
+    //         document.getElementById("c").textContent=data["countDown"];
+            
+    //     })
+    //     return () => {
+    //         // Clean up the event listener when the component unmounts
+    //         socket.off('timer');
+    //       };
+    // },[])
+    
+    
+    
     const [allqs, setallqs] = useState(null)
+    
     window.addEventListener('beforeunload', function (e) {
   
         const confirmationMessage = 'Are you sure you want to leave this page?';
@@ -21,44 +51,67 @@ const Questionp = () => {
     
         return confirmationMessage;
       });
+
    const [cr_q,setcurrq]=useState(0);
    const [setq,setsetq]=useState(0);
     const [opted,setopt]=useState(null)
     const [dis,setd]=useState(true)
     const auth=useContext(AuthContext)
-    const solved_questions=[1,2,3,4,5]
     const l=["ALL SECTIONS","PHYSICS","CHEMISTRY","MATHEMATICS"]
-    const solved=[]
-    const unsolved=[1]
-    const notvisited=[]
+    const [solved, setsolved] = useState([])
     
-    useEffect(() => {
-        fetch('https://achieve-jee-server.onrender.com/api/start-paper/'+pid, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json', 
-          'x-auth-token':localStorage.getItem("jwtToken")
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-         return response.json()
-        })
-        .then((responseData) => {
-            setallqs(responseData)
-            console.log(responseData)
-          
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+    let unsolved=[1]
+    let notvisited=[]
+    
+    // useEffect(() => {
+        
+    //     const receiveMessage = (event) => {
+    //         if (event.origin !== window.location.origin) {
+    //           return;
+    //         }
+        
+            
+    //         setpid(event.data.id);
+           
+    //         setMessageReceived(true);
+            
+    //     }
+    //     window.addEventListener('message', receiveMessage);
     
       
-    }, [])
- 
-        
+    // }, [])
+    // const i=getPid()
+    // console.log(i)
+    const i=  localStorage.getItem("pid");
+    useEffect(() => {
+       
+        // setpid(i)
+      
+        if (i) {
+          fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json', 
+              'x-auth-token': localStorage.getItem('jwtToken'),
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((responseData) => {
+              setallqs(responseData);
+              console.log(responseData)
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      }, [i]);
+
+      
     return (
        
         
@@ -123,12 +176,44 @@ const Questionp = () => {
                                 <div className="nav-btn-que">
                                     REVIEW
                                 </div>
-                                <div className="nav-btn-que">
+                                {
+                                    cr_q===0?null:
+
+                                <div className="nav-btn-que"  onClick={()=>{
+                                    
+                                    
+                                        if(opted){
+                                            solved.push(cr_q)
+                                            setsolved(solved) 
+                                        }
+                                        setopt(null)
+                                        setcurrq(cr_q-1)
+                                    
+                                    
+                                }
+                                    } >
                                     PREVIOUS
                                 </div>
-                                <div className="nav-btn-que" onClick={()=>setcurrq(cr_q+1)}>
+                                }
+                                {
+                                    cr_q===allqs.length-1?null:
+
+                                <div className="nav-btn-que"  onClick={()=>{
+                                    
+                                    if(cr_q!=allqs.length-1){
+                                        if(opted){
+                                            solved.push(cr_q)
+                                            setsolved(solved)
+                                        }
+                                        setopt(null)
+                                        setcurrq(cr_q+1)
+                                    }
+                                    
+                                }
+                                    } >
                                     NEXT
                                 </div>
+                                }
                     </div>
                 </div>
                 <div className="ques-rightp">
@@ -137,6 +222,7 @@ const Questionp = () => {
                             <div className="stu-data">
 
                                 <CountdownTimer className="timer"/>
+                                
                                 <p className="stu-name">
                                     {localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["name"]:null}
                                 </p>
@@ -150,7 +236,7 @@ const Questionp = () => {
                                     allqs?allqs.map((t,index)=>{
                                         return(
                                             <>  
-                                                <div className={notvisited.includes(index+1)?"notvisited-q":  (solved.includes(index+1)?"solved-q":"unsolved-q")} key={index+1} onClick={()=>setcurrq(index)}>
+                                                <div className={notvisited.includes(index)?"notvisited-q":  (solved.includes(index)?"solved-q":"unsolved-q")} key={index} onClick={()=>setcurrq(index)}>
                                                     {index+1}
                                                 </div>
                                             </>
@@ -205,7 +291,7 @@ const Questionp = () => {
                 </div>
                 </div>
             </div>
-        </section>: <div>loading....</div>
+        </section>: <div className="s"><Spinner/></div>
         
     )
 }
