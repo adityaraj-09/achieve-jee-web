@@ -6,6 +6,7 @@ import Profile from './profile';
 
 const Header = () => {
  
+ 
   return (
     <>
       <div class="header-navbar" id="navbar-main">
@@ -25,7 +26,7 @@ const Header = () => {
                 data-animations="fadeInUp">
 
                 <ul class="nav navbar-nav navbar-right" id="desktop-menu-top">
-                  <li><a href="/" class="active">Home </a> </li>
+                  <li><a href="/home" class="active">Home </a> </li>
                   <li><Link to="/login" > Login/Signup</Link> </li>
                   <li><a href="/" class="active">Practice Test </a> </li>
                   <li><a href="/" class="active">Student Zone </a> </li>

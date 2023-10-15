@@ -3,7 +3,56 @@
     --color-light:rgba(132,139,200,0.18);
     --box-shadow:0 2rem 3rem var(--color-light);
 }
-
+.con-dash-prof{
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+}
+.dash-prof{
+    color: grey;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.con-dash-prof .side-menu{
+    display: none;
+}
+.dash-prof .ic-noti{
+    
+    justify-content: center;
+    position: relative;
+}
+.ic-noti .io-noti,.io-set{
+    scale: 2;
+}
+.ic-noti div{
+    position: absolute;
+    top: -18px;
+    height: 20px;
+    display: flex;
+    width: 20px;
+    font-size: small;
+    border-radius: 10px;
+    background-color: rgb(125, 7, 125);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    right: -10px;
+}
+.dash-prof .dp-cir{
+    height: 40px;
+    width: 40px;
+    color: white;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(125, 7, 125);
+    border-radius: 20px;
+}
 .con-dash{
     position: relative;
     background-color: var(--color-bg);
@@ -147,10 +196,11 @@ aside{
 .sidebar a{
     display: flex;
     height: 50px;
+   
     width: 100%;
     position: relative;
-    
-    align-items: center;
+ justify-content: flex-start;
+ align-items: center;
    
 }
 .sidebar a span{
@@ -160,6 +210,8 @@ aside{
 .sidebar a strong{
     width: max-content;
     font-weight: 500;
+    padding-left: 20px;
+    margin: 0;
     font-size: medium;
 }
 .sidebar a:hover span{
@@ -167,6 +219,7 @@ aside{
 }
 
 #active{
+
     background-color: rgb(245, 202, 245);
 }
 .sidebar #active::before{
@@ -251,17 +304,44 @@ aside{
         height: 100vh;
         background-color: var(--color-bg);
     }
+   
+    .con-dash-prof{
+       margin-top: 0;
+        padding: 15px;
+        position: relative;
+        right: 0;
+        top: 0;
+        align-items: center;
+       
+        width: 100vw;
+        justify-content: space-between;
+        background-color: white;
+    }
+    .con-dash-prof .side-menu{
+        scale: 2;
+        margin-left: 15px;
+        display: flex;
+    }
     .box-dash{
         width: 100%;
         height: 100%;
     }
     aside{
+        
       z-index: 3;
         background-color: white;
         height: 100%;
+        position: absolute;
         margin-top: 0;
+        top: 0;
         position: fixed;
         left: 0;
+    }
+    .vis-side{
+        display: flex;
+    }
+    .nvis{
+        display: none;
     }
     .box-dash{
         padding-top: 0;
@@ -271,6 +351,7 @@ aside{
         margin-top: 15px;
     }
     .close{
+       scale: 1.5;
        
         display: flex;
         align-items: center;

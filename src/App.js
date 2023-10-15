@@ -28,11 +28,11 @@ function App() {
 
     
      <Route path="/">
-                <Route index element={<HomePage/>}/>
+                <Route index element={<ProtectedRoute redirect={"/home"}><Dashboard/></ProtectedRoute>}/>
                 <Route path='login' element={<LoginPage/>}/>
-                <Route path='dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+                <Route path='home' element={<HomePage/>}/>
                 <Route path="q"  element={
-                  <ProtectedRoute>
+                  <ProtectedRoute redirect={"/login"}>
                     <Quesionpage/>
                   </ProtectedRoute>
                 }/>

@@ -28,6 +28,7 @@
     z-index: 999; 
     flex-direction: column;
     padding: 15px;
+    right: 20px;
     border-radius: 10px;
     position: absolute;
 }

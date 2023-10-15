@@ -1,0 +1,29 @@
+.page-cpq{
+    width: 100%;
+    pad: 10px;
+    height: 100%;
+}
+.box-btn-ap{
+    display: flex;
+    font-size: medium;
+    font-weight: 500;
+    width: max-content;
+    cursor: pointer;
+    position: absolute;
+    bottom: 40px;
+   
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+#addp-ic{
+    color: rgb(104, 4, 104);
+   scale: 2;
+}
+
+
+@media  screen and (max-width:700px) {
+   .box-btn-ap{
+    left: 20px;
+   }
+}

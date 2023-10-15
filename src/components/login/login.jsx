@@ -62,7 +62,7 @@ const Login = () => {
           localStorage.setItem("user",JSON.stringify(responseData))
           localStorage.setItem('jwtToken', responseData["token"]);
           
-          navigate("/dashboard",{replace:true})
+          navigate("/",{replace:true})
           console.log(responseData)
        
         })

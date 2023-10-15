@@ -1,0 +1,101 @@
+
+.con-addQ{
+    background-color: white;
+    position: absolute;
+   bottom: 90px;
+    box-shadow:  0 2rem 3rem var(--color-light);
+    z-index: 999;
+    width: max-content;
+}
+.box-addQ{
+    display: flex;
+    gap: 10px;
+    
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+.type-papers{
+    display: flex;
+    gap: 20px;
+}
+.type-papers-h strong{
+    font-size: large;
+    font-weight: 500;
+}
+.type-paper{
+    display: flex;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: rgb(104, 4, 104);
+    font-size: medium;
+    background-color: rgb(251, 224, 251);
+    font-weight: 500;
+    
+}
+#ic-can{
+    position: absolute;
+    top: 5px;
+    scale: 2;
+    color: rgb(104, 4, 104);
+    right: 5px;
+}
+.type-paper:hover{
+    box-shadow: 0 2rem 3rem var(--color-light);
+}
+.box-p-title strong{
+    font-size: large;
+    font-weight: 500;
+}
+.box-p-title input{
+    width: 90%;
+    text-align: center;
+    font-weight: 400;
+    font-size: medium;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+.box-tq-tm{
+   width: fit-content;
+    display: flex;
+    gap: 10px;
+    flex: 1;
+   
+}
+.box-tm,.box-tq{
+  
+    width: 120px;
+ 
+    padding: 0;
+    margin: 0;
+}
+.box-tq strong,.box-tm strong{
+    font-size: large;
+   padding: 0;
+    margin: 0;
+    font-weight: 500;
+}
+.box-tq input,.box-tm input{
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: medium;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+#cp{
+    color: white;
+    font-size: large;
+    width: 80%;
+    background-color: rgb(104, 4, 104);
+    margin: auto;
+}
+
+@media  screen and (max-width:700px) {
+    .con-addQ{
+
+       left: 20px;
+    }
+}

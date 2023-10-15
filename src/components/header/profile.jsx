@@ -18,7 +18,7 @@ const Profile = () => {
         <div className="prof-img">
             <FaUserAlt/>
         </div>
-        <div className="h5">{data["name"]}</div>
+       
 
        
     </div>

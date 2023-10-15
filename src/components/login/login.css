@@ -69,13 +69,13 @@
 .in-e{
     margin-left: 22px;
 }
-input{
+.box-e input,.box-p input{
     border: none;
     width: 250px;
     border-bottom: 2px solid rgb(171, 170, 170);
 }
 
-input:focus{
+.box-e input:focus,.box-p input:focus{
     outline: none;
     border-bottom: 2px solid rgb(19, 18, 18);
 }

@@ -16,6 +16,7 @@ const Questionp = () => {
     const [pid, setpid] = useState(null)
     const [istimer, setistimer] = useState(false)
     const [messageReceived, setMessageReceived] = useState(false)
+    
     // const socket = io('https://achieve-jee-server.onrender.com'); 
     // socket.connect()
     // if(!istimer){
@@ -282,7 +283,9 @@ const Questionp = () => {
                 </div>
 
             </div>
-            <div className="popup" style={{display:dis?"flex":"none"}}>
+            <div className="lay" style={{display:dis?"flex":"none"}}>
+
+            <div className="popup" >
                 <div className="h-cr">
 
                 <h3>INSTRUCTIONS</h3>
@@ -290,6 +293,7 @@ const Questionp = () => {
                             <strong>close</strong>
                 </div>
                 </div>
+            </div>
             </div>
         </section>: <div className="s"><Spinner/></div>
         

@@ -5,7 +5,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children,redirect }) => {
   const jwtToken = localStorage.getItem("jwtToken")
   const navigate=useNavigate()
  
@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children }) => {
       .catch((error) => {
         localStorage.removeItem("jwtToken")
           localStorage.removeItem("user")
-        return navigate("/login");
+        return navigate(redirect);
         
       });
   }, [jwtToken]);

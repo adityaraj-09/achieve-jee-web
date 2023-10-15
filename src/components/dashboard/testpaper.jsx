@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from 'react'
 import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
 import "./testpaper.css"
@@ -57,7 +56,7 @@ const Testpaper = () => {
 
      
     
-      // Set features to hide status bar and browser tabs
+      
       const features = `width=${width},height=${height},top=${top},left=${left} scrollbars=no,resizable=yes,status=no,toolbar=no,location=no,menubar=no`;
       
       const win=window.open(url, windowName, features);
@@ -65,7 +64,7 @@ const Testpaper = () => {
         win.onload = () => {
           const data = { id: id };
           win.postMessage(data, window.location.origin);
-        }; // Update the URL in the main window
+        }; 
       }
     };
     
