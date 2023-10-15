@@ -5,6 +5,7 @@ import "./testpaper.css"
 import Spinner from '../spinner/spinner';
 const Testpaper = () => {
     const [qs,setqs] =useState(null)
+    const [tp,settp]=useState(0)
     const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
     
     useEffect(() => {
@@ -74,18 +75,25 @@ const Testpaper = () => {
         <div className="type-exams">
             <div className="type-exam">
 
-            <strong>Upcoming</strong>
-            <div className="under-line"></div>
+            <strong onClick={()=>settp(0)}>Upcoming</strong>
+            {
+              tp===0?<div className="under-line"></div>:null
+            }
+            
             </div>
             <div className="type-exam">
 
-            <strong>Attempted</strong>
-            <div className="under-line"></div>
+            <strong onClick={()=>settp(1)}>Attempted</strong>
+            {
+              tp===1?<div className="under-line"></div>:null
+            }
             </div>
             <div className="type-exam">
 
-            <strong>Live</strong>
-            <div className="under-line"></div>
+            <strong onClick={()=>settp(2)}>Live</strong>
+            {
+              tp===2?<div className="under-line"></div>:null
+            }
             </div>
             
         </div>
