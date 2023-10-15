@@ -16,6 +16,7 @@
 }
 .type-exam strong{
     font-weight: 400;
+    cursor: pointer;
     font-size: large;
 }
 .under-line{

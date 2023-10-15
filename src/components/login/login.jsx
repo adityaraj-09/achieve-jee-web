@@ -17,6 +17,7 @@ const Login = () => {
     const [errors,seterr]=useState({})
     const navigate=useNavigate();
     const auth=useAuth()
+    const [spin, setspin] = useState(false)
 
   function  validateForm() {
      const err={}
@@ -39,6 +40,7 @@ const Login = () => {
       
     };
    function login(){
+    setspin(true)
     const data = {
         email: email,
        password:password
@@ -59,6 +61,7 @@ const Login = () => {
          return response.json()
         })
         .then((responseData) => {
+          setspin(false)
           localStorage.setItem("user",JSON.stringify(responseData))
           localStorage.setItem('jwtToken', responseData["token"]);
           
@@ -67,6 +70,7 @@ const Login = () => {
        
         })
         .catch((error) => {
+          setspin(false)
           localStorage.removeItem("jwtToken")
           localStorage.removeItem("user")
 
@@ -137,7 +141,7 @@ const Login = () => {
            
      
             <div className="login-btns">
-                <button className="btn-login" style={{cursor:"pointer"}} onClick={login} type="submit"><strong>Login</strong></button>
+                <button className="btn-login" style={{cursor:"pointer"}} onClick={login} type="submit">{spin?<div className="spinner-cir"></div>:<strong>Login</strong>}</button>
                 <div className="btn-register" style={{cursor:"pointer"}} onClick={()=>console.log(localStorage.getItem("jwtToken"))}><strong>New Registration</strong></div>
             </div>
             </form>

@@ -196,7 +196,7 @@ aside{
 .sidebar a{
     display: flex;
     height: 50px;
-   
+    cursor: pointer;
     width: 100%;
     position: relative;
  justify-content: flex-start;
@@ -206,6 +206,7 @@ aside{
 .sidebar a span{
     margin-left: 20px;
 }
+
 
 .sidebar a strong{
     width: max-content;
