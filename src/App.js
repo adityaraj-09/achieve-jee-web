@@ -15,7 +15,17 @@ import Socketc from './pages/socketc';
 
 function App() {
   
-  
+ 
+    const body = document.body;
+
+    if(localStorage.getItem("theme")){
+      document.body.className = '';
+      body.classList.add(localStorage.getItem("theme"))
+    }else{
+      body.classList.add("light-theme");
+    }
+    
+
 
  
   return (

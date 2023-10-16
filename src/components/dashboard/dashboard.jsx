@@ -45,6 +45,7 @@ const Dashboard = () => {
   const changeTheme=(i)=>{
     const body = document.body;
     document.body.className = '';
+    localStorage.setItem("theme",classes[i])
     body.classList.add(classes[i]);
     setthemepopup(false)
   }
