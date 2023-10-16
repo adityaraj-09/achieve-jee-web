@@ -93,7 +93,8 @@ const Dashboard = () => {
             <input type="text" placeholder='search'/></div>
           <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
           <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
-          <div className="dp-cir" onClick={() => setdi(1)}><FaUserAlt /></div>
+          <div className="dp-cir" onClick={() => setdi(1)}><img src='https://firebasestorage.googleapis.com/v0/b/faceattendance-a1720.appspot.com/o/AgACAgUAAxkBAAICl2T18G6vBkEJLbW0dDn3SUy_GhzhAAIYuTEbP_ixV6Mpf3WB3ksqAQADAgADeAADMAQ.jpg?alt=media&token=d7769129-e9b1-44d1-8fc7-768d327ec67c'>
+            </img></div>
         </div>
       </div>
 

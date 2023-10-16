@@ -13,6 +13,7 @@
     gap: 20px;
     padding:8px 10px;
     border-radius: 15px;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
 }
@@ -29,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     height: 35px;
     background-color: var(--color-bg);
     border-radius: 10px;
@@ -47,12 +49,14 @@
 
 .ic-noti .io-noti,.io-set{
     scale: 2;
+    cursor: pointer;
 }
 .ic-noti div{
     position: absolute;
     top: -18px;
     height: 20px;
     display: flex;
+    cursor: pointer;
     width: 20px;
     font-size: small;
     border-radius: 10px;
@@ -67,12 +71,17 @@
     height: 40px;
     width: 40px;
     color: white;
+    overflow: hidden;
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     background-color: var(--color-primary);
     border-radius: 20px;
+}
+.dp-cir img{
+    background-position: center;
+    object-fit: cover;
 }
 .con-dash{
     position: relative;
