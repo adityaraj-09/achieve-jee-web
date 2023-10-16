@@ -6,9 +6,13 @@
     top: 30px;
 }
 .dash-prof{
-    color: grey;
+    color: #A3AED0;
+    background-color: white;
     display: flex;
+    box-shadow: var(--box-shadow);
     gap: 20px;
+    padding:8px 10px;
+    border-radius: 15px;
     justify-content: center;
     align-items: center;
 }
@@ -20,6 +24,27 @@
     justify-content: center;
     position: relative;
 }
+.search-bar{
+    padding-left: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    background-color: var(--color-bg);
+    border-radius: 10px;
+}
+.search-bar input{
+    background-color: var(--color-bg);
+    border: none;
+    height: 35px;
+    color: black;
+   
+    border-radius: 10px;
+}
+.search-bar input:focus{
+    outline: none;
+}
+
 .ic-noti .io-noti,.io-set{
     scale: 2;
 }
@@ -366,6 +391,10 @@ aside{
     .nvis{
         display: none;
     }
+    .dash-prof{
+        box-shadow: none;
+    }
+    
     .box-dash{
         padding-top: 0;
     }

@@ -5,13 +5,14 @@ import logo from "../../assets/logo.png"
 import "./dashboard.css"
 
 import { FaPowerOff } from "react-icons/fa"
+import { MdNightlight } from "react-icons/md"
 import { GiCancel } from "react-icons/gi"
 import { useState } from 'react'
 import Testpaper from './testpaper'
 import Dashmain from './dash-main'
 import { FaUserAlt } from "react-icons/fa"
-import { IoMdNotifications } from "react-icons/io"
-import { IoMdSettings } from "react-icons/io"
+import { IoMdNotificationsOutline } from "react-icons/io"
+import { CiSearch } from "react-icons/ci"
 import { GiHamburgerMenu } from "react-icons/gi"
 import Createpaper from './createpaper'
 import AddQuestions from './addQuestions'
@@ -87,8 +88,11 @@ const Dashboard = () => {
       <div className="con-dash-prof">
         <div className="side-menu" onClick={() => setsidemenuVis(true)}><GiHamburgerMenu /></div>
         <div className="dash-prof">
-          <div className="ic-noti"><IoMdNotifications className='io-noti' /> <div>8</div></div>
-          <IoMdSettings className='io-set' onClick={()=> setthemepopup(true) }/>
+          <div className="search-bar">
+            <CiSearch/>
+            <input type="text" placeholder='search'/></div>
+          <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
+          <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
           <div className="dp-cir" onClick={() => setdi(1)}><FaUserAlt /></div>
         </div>
       </div>
