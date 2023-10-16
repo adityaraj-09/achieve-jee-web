@@ -14,8 +14,8 @@ const Createpaper = () => {
             <div className="type-papers-h">
                 <strong>Select Exam </strong>
             <div className="type-papers">
-                <div className="type-paper" onClick={()=>setetype(0)} style={{border:etype==0?"2px solid rgb(104, 4, 104)":null}}>1. Jee Advanced</div>
-                <div className="type-paper" onClick={()=>setetype(1)} style={{border:etype==1?"2px solid rgb(104, 4, 104)":null}}>2. Jee Mains</div>
+                <div className="type-paper" onClick={()=>setetype(0)} style={{border:etype==0?"2px solid #4318FF":null}}>1. Jee Advanced</div>
+                <div className="type-paper" onClick={()=>setetype(1)} style={{border:etype==1?"2px solid #4318FF":null}}>2. Jee Mains</div>
             </div>
             </div>
 

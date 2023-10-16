@@ -17,7 +17,7 @@
     gap: 15px;
 }
 #addp-ic{
-    color: rgb(104, 4, 104);
+    color: var(--color-primary);
    scale: 2;
 }
 /* Spinner.css */

@@ -29,9 +29,9 @@
     padding: 8px;
     cursor: pointer;
     border-radius: 4px;
-    color: rgb(104, 4, 104);
+    color: var(--color-primary);
     font-size: medium;
-    background-color: rgb(251, 224, 251);
+    background-color: var(--color-secondary);
     font-weight: 500;
     
 }
@@ -39,7 +39,7 @@
     position: absolute;
     top: 5px;
     scale: 2;
-    color: rgb(104, 4, 104);
+    color: var(--color-primary);
     right: 5px;
 }
 .type-paper:hover{
@@ -89,7 +89,7 @@
     color: white;
     font-size: large;
     width: 80%;
-    background-color: rgb(104, 4, 104);
+    background-color: var(--color-primary);
     margin: auto;
 }
 

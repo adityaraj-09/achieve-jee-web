@@ -12,3 +12,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+:root{
+  --color-bg:#f6f6f9;
+  --color-light:rgba(132,139,200,0.18);
+  --box-shadow:0 2rem 3rem var(--color-light);
+  --color-primary:#4318FF;
+  --color-paper:rgb(77, 77, 188);
+  --color-secondary:#C6D2FD;
+}
+
+.light-theme{
+  --color-bg:#f6f6f9;
+  --color-light:rgba(132,139,200,0.18);
+  --box-shadow:0 2rem 3rem var(--color-light);
+  --color-primary:#4318FF;
+  --color-paper:rgb(77, 77, 188);
+  --color-secondary:#C6D2FD;
+}
+
+.dark-theme{
+  --color-bg:#f6f6f9;
+  --color-light:rgba(132,139,200,0.18);
+  --box-shadow:0 2rem 3rem var(--color-light);
+  --color-primary:rgb(125,7,125);
+  --color-paper:rgb(77, 77, 188);
+  --color-secondary:#f5a9e0;
+}
+.green-theme{
+  --color-bg:#f6f6f9;
+  --color-light:rgba(132,139,200,0.18);
+  --box-shadow:0 2rem 3rem var(--color-light);
+  --color-primary:#04CD00;
+  --color-paper:#7FE47E;
+  --color-secondary:#BCEFBD;
+}

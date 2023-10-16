@@ -1,8 +1,4 @@
-:root{
-    --color-bg:#f6f6f9;
-    --color-light:rgba(132,139,200,0.18);
-    --box-shadow:0 2rem 3rem var(--color-light);
-}
+
 .con-dash-prof{
     display: flex;
     position: absolute;
@@ -35,7 +31,7 @@
     width: 20px;
     font-size: small;
     border-radius: 10px;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
     color: white;
     justify-content: center;
     align-items: center;
@@ -50,7 +46,7 @@
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
     border-radius: 20px;
 }
 .con-dash{
@@ -80,7 +76,33 @@
     background-color: white;
     position: absolute;
 }
+.theme-popup{
+    height: 200px;
+    width: 300px;
+    top: calc((100% - 200px)/2);;
+    z-index: 3;
+    display: flex;
+    padding: 10px;
+   flex-direction: column;
+    
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    left: calc((100% - 300px)/2);;
+    background-color:black;
+    position: absolute;
+}
+.theme-popup h3{
+    color: white;
+  
+}
+.themes{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+
 .overlay{
+    
     position: fixed; 
   top: 0;
   z-index: 999;
@@ -98,7 +120,7 @@
     width: 100%;
     font-size: large;
     padding-left: 10px;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
 }
 .confirmation{
     width: 100%;
@@ -134,7 +156,7 @@
     color: white;
     width: 40px;
     border-radius: 20px;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
 }
 .con-ic{
     scale: 1.5;
@@ -221,13 +243,13 @@ aside{
 
 #active{
 
-    background-color: rgb(245, 202, 245);
+    background-color: var(--color-secondary);
 }
 .sidebar #active::before{
     content: "";
     height: 50px;
     width: 10px;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
 }
 
 .main-dash{
@@ -291,7 +313,7 @@ aside{
     font-size: large;
     border-radius: 20px;
     color: white;
-    background-color: rgb(125, 7, 125);
+    background-color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;

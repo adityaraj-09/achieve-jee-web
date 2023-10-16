@@ -26,7 +26,7 @@
     top: calc((100% - 400px)/2);
     left: calc((100% - 400px)/2);
     height: 400px;
-    background-color: rgb(104, 4, 104);
+    background-color: var(--color-paper);
    display: flex;
    flex-direction: column;
    
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     color: white;
 }
 .heading h3{
@@ -119,7 +119,7 @@
     color: white;
     border-radius: 5px;
     align-items: center;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     padding: 5px 10px;
 }
 .ques-sec:hover{
@@ -137,7 +137,7 @@
 .qno{
     display: flex;
     width: 100%;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     color: white;
 }
 .question-box{
@@ -204,7 +204,7 @@
     color: white;
     border-radius: 5px;
     align-items: center;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     padding: 5px 10px;
 }
 .nav-btn-que:hover{
@@ -224,7 +224,7 @@
     
     padding-left: 10px;
     width: 100%;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     color: white;
 }
 .no-ques{
@@ -283,7 +283,7 @@
     justify-content: center;
     color: white;
     font-weight: 500;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
     margin: 0 3px;
 }
 .pal-ques .solved-q{
@@ -341,7 +341,7 @@ align-items: center;
     display: flex;
     justify-content: center;
     width: 90px;
-    background-color: rgb(77, 77, 188);
+    background-color: var(--color-paper);
 }
 .stu-name{
     font-weight: 600;

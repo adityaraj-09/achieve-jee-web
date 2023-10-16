@@ -8,12 +8,12 @@
   }
   .spinner h1{
     font-size: medium;
-    color: rgb(104, 4, 104);
+    color: var(--color-primary);
   }
   .bounce1, .bounce2, .bounce3 {
     width: 12px;
     height: 12px;
-    background-color: rgb(104, 4, 104);
+    background-color: var(--color-primary);
     border-radius: 100%;
     display: inline-block;
     animation: bounce 1.4s infinite ease-in-out;
