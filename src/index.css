@@ -43,6 +43,6 @@ code {
   --color-light:rgba(132,139,200,0.18);
   --box-shadow:0 2rem 3rem var(--color-light);
   --color-primary:#04CD00;
-  --color-paper:#7FE47E;
+  --color-paper:rgb(77, 77, 188);
   --color-secondary:#BCEFBD;
 }
