@@ -107,43 +107,50 @@ const Login = () => {
         <div className="box-login">
             <div className="login-head">
 
-            <strong>STUDENT LOGIN-SIGNUP</strong>
+            <strong>STUDENT LOGIN</strong>
             </div>
           <form action="" onSubmit={handleSubmit}>
             <div className="box-e">
 
-          
-            <label htmlFor="e">
-                Email:
-            </label>
+            <h4>Email</h4>
+              
+              <div className="ine">
+
             <input type="text"  className='in-e' placeholder='Type email id' id='e' onChange={(event)=>{
                  
               setemail(event.target.value)
               }} autoComplete="current-password"/><br />
+              </div>
             </div>
             <div className="box-p">
 
-            <label htmlFor="p" >Password:</label>
+              <h4>Password</h4>
             <div className="ini">
 
             <input  type={(hidden==0)?"password":"text"} className='in-p' placeholder='Enter password' id='p' onChange={(event)=>setpassword(event.target.value)} autoComplete="current-password"/>
             {
                 hidden==0?<AiFillEye onClick={
                     ()=> hidden==0?sethidden(1):sethidden(0)                
-                } style={{cursor:"pointer",scale:"2"}}/>:<AiFillEyeInvisible onClick={
+                } style={{cursor:"pointer",scale:"2"}} className="eye"/>:<AiFillEyeInvisible onClick={
                     ()=> hidden==0?sethidden(1):sethidden(0)                
-                } style={{cursor:"pointer",scale:"2"}}/>
+                } style={{cursor:"pointer",scale:"2"}} className="eye"/>
             }
             
             </div>
             </div>
 
            
-     
-            <div className="login-btns">
-                <button className="btn-login" style={{cursor:"pointer"}} onClick={login} type="submit">{spin?<div className="spinner-cir"></div>:<strong>Login</strong>}</button>
-                <div className="btn-register" style={{cursor:"pointer"}} onClick={()=>console.log(localStorage.getItem("jwtToken"))}><strong>New Registration</strong></div>
+            <div className="forg-kpl">
+              <div className="check-box">
+
+              <input type="checkbox" id='ch' /><label htmlFor='ch'>keep me logged in</label>
+              </div>
+              <strong>FORGOT PASSWORD?</strong>
             </div>
+           
+                <div className="btn-login" style={{cursor:"pointer"}} onClick={login} type="submit">{spin?<div className="spinner-cir"></div>:<strong>Login</strong>}</div>
+                
+            
             </form>
 
         </div>

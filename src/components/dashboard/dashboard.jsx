@@ -35,7 +35,7 @@ const Dashboard = () => {
     localStorage.removeItem("user");
     navigate("/login")
   }
-  const colors = ["#4318FF", "rgb(125,7,125)","#04CD00"]
+  const colors = ["#2B3674", "rgb(125,7,125)","#04CD00"]
   const classes=["light-theme","dark-theme","green-theme"]
   const StyledDiv = styled.div`
   background-color: ${props => colors[props.i]};

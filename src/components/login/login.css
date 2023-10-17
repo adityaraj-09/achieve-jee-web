@@ -15,9 +15,9 @@
 position: relative;
     align-content: center;
     margin: auto;
+    gap: 20px;
     z-index: 1000;
-    width: 40%;
-    height: 60%;
+    padding: 30px;
     background-color: white;
 }
 /* .box-login::before{
@@ -45,19 +45,29 @@ position: relative;
         --a:360deg
     }
 } */
-.box-e{
-    margin-top: 40px;
-}
-.box-p{
-    margin-top: 20px;
+
+
+.box-login form{
+    height: 100%;
+   
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
 }
 .box-e,.box-p{
-    padding: 10px;
-    gap: 40px;
-   
-    margin-left: 100px;
+    gap: 8px;
+   flex-direction: column;   
     display: flex;
 
+}
+.box-e h4,.box-p h4{
+    margin: 0;
+    padding: 0;
 }
 .error{
     height:100px;
@@ -92,60 +102,83 @@ position: relative;
 .main-err h5{
     color: black;
 }
-.in-e{
-    margin-left: 22px;
+.ine{
+    width: max-content;
+    
+    border-radius: 10px;
+   background-color: var(--color-bg);
 }
 .box-e input,.box-p input{
     border: none;
-    width: 250px;
-    border-bottom: 2px solid rgb(171, 170, 170);
+    padding: 5px;
+    background-color: var(--color-bg);
+    width: 260px;
+    border-radius: 10px;
 }
 
+.ini{
+    width: max-content;
+    position: relative;
+    border-radius: 10px;
+   background-color: var(--color-bg);
+}
+.ini .eye{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
 .box-e input:focus,.box-p input:focus{
     outline: none;
-    border-bottom: 2px solid rgb(19, 18, 18);
+    
 }
 .login-head{
     height: 40px;
     overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-content: center;
-    background-color: rgb(100, 100, 199);
-    color: white;
+    color:var(--color-primary);
+    
 }
 
 .login-head strong{
     font-size: large;
     margin: auto;
 }
-.login-btns{
-    display: flex;
-    margin-top: 40px;
-    gap: 20px;
-    justify-content: center;
-    align-content: center;
-}
-.login-btns .btn-login,.btn-register{
-    background-color: green;
+
+ .btn-login{
+    background-color: var(--color-primary);
     padding: 2px;
+
     display: flex;
     justify-content: center;
     align-content: center;
     color: white;
-    width: 140px;
+    margin: auto;
+    width: 235px;
     border-radius: 10px;
+}
+.forg-kpl{
+    gap: 10px;
+    display: flex;
+}
+.check-box{
+      cursor: pointer;
+   
+
+}
+.forg-kpl strong{
+    cursor: pointer;
+    color:  var(--color-primary);
+}
+.check-box label{
+   
+    font-weight: 500;
 }
 
 
-
-@media screen and (max-width:761px) {
+@media screen and (max-width:700px) 
+{ 
     .box-login{
-        width: 90%;
-        height: 60%;
+        padding: 10px;
     }
-    .box-e,.box-p{
-        margin-left: 15px;
-        gap: 20px;
-    }
+    
 }
