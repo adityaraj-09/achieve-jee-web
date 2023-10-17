@@ -12,12 +12,16 @@ import { useAuth } from '../../AuthContext'
 const Login = () => {
     const [hidden, sethidden] = useState(0)
     const [email, setemail] = useState("")
+    const [name, setname] = useState("")
     const [password, setpassword] = useState("")
+    const [cp, setcp] = useState("")
     const [error,seterror]=useState(false)
     const [errors,seterr]=useState({})
     const navigate=useNavigate();
     const auth=useAuth()
     const [spin, setspin] = useState(false)
+    const [register, setregister] = useState(false)
+    
 
   function  validateForm() {
      const err={}
@@ -73,10 +77,44 @@ const Login = () => {
           setspin(false)
           localStorage.removeItem("jwtToken")
           localStorage.removeItem("user")
-
           seterror(true)
         });
     
+    }
+
+
+    function reg(){
+      const data={
+        email:email,
+        name:name,
+        password:password
+      }
+
+      fetch("https://achieve-jee.onrender.com/api/signup",{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+         return response.json()
+        })
+        .then((responseData) => {
+          setspin(false)
+ 
+          console.log(responseData)
+       
+        })
+        .catch((error) => {
+          setspin(false)
+         
+
+          seterror(true)
+      })
     }
   const  handleSubmit = (event) => {
       event.preventDefault();
@@ -110,6 +148,21 @@ const Login = () => {
             <strong>STUDENT LOGIN</strong>
             </div>
           <form action="" onSubmit={handleSubmit}>
+            {
+              register && <div className="box-e">
+
+              <h4>Name</h4>
+                
+                <div className="ine">
+              
+              <input type="text"  className='in-e' placeholder='Type name' id='e' onChange={(event)=>{
+                   
+                setname(event.target.value)
+                }} autoComplete="current-password"/><br />
+                </div>
+              </div>
+            }
+          
             <div className="box-e">
 
             <h4>Email</h4>
@@ -119,7 +172,7 @@ const Login = () => {
             <input type="text"  className='in-e' placeholder='Type email id' id='e' onChange={(event)=>{
                  
               setemail(event.target.value)
-              }} autoComplete="current-password"/><br />
+              }} autoComplete="current-email"/><br />
               </div>
             </div>
             <div className="box-p">
@@ -138,17 +191,35 @@ const Login = () => {
             
             </div>
             </div>
+            {
+              register &&   <div className="box-e">
 
-           
-            <div className="forg-kpl">
-              <div className="check-box">
-
-              <input type="checkbox" id='ch' /><label htmlFor='ch'>keep me logged in</label>
+              <h4>Confirm password</h4>
+                
+                <div className="ine">
+  
+              <input type="text"  className='in-e' placeholder='confirm password' id='e' onChange={(event)=>{
+                   
+                setcp(event.target.value)
+                }} /><br />
+                </div>
               </div>
-              <strong>FORGOT PASSWORD?</strong>
-            </div>
+            }
            
-                <div className="btn-login" style={{cursor:"pointer"}} onClick={login} type="submit">{spin?<div className="spinner-cir"></div>:<strong>Login</strong>}</div>
+
+           {
+             !register && <div className="forg-kpl">
+             <div className="check-box">
+
+             <input type="checkbox" id='ch' /><label htmlFor='ch'>keep me logged in</label>
+             </div>
+             <strong>FORGOT PASSWORD?</strong>
+           </div>
+           }
+            
+           
+                <div className="btn-login" style={{cursor:"pointer"}} onClick={!register?login:reg} type="submit">{spin?<div className="spinner-cir"></div>:<strong> {!register?"Login":"Register"}</strong>}</div>
+                <div className='sign-link'>{register?"Already registered?":"not have account?"}<span onClick={()=>!register? setregister(true):setregister(false)}> {!register?"create an Account":"Login"}</span></div>
                 
             
             </form>
