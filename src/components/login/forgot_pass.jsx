@@ -10,6 +10,7 @@ const FPDialog = () => {
     const [loading,setloading]=useState(false)
     const [email,setemail]=useState('')
 
+
     const sendlink=()=>{
         setloading(true)
         const data={
@@ -23,7 +24,7 @@ const FPDialog = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
-          if (!response.ok) {
+          if (response.ok) {
             throw new Error('Network response was not ok');
           }
          return response.json()
@@ -48,7 +49,7 @@ const FPDialog = () => {
                 <input type="text" autoComplete='true' required onChange={(event)=> setemail(event.target.value)} placeholder="enter email"/>
             </div>
             {
-                error && <p id='err-fp'>something went wrong</p>
+                error && <p id='err-fp'>email not found or try again after sometime</p>
             }
             <div className="send-link-btn" onClick={sendlink}>{loading?<div className="spinner-cir"></div>:<strong>Submit</strong>}</div>
             <div className="bck-login" onClick={()=>{}}>
