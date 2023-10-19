@@ -16,7 +16,7 @@ position: relative;
     align-content: center;
     margin: auto;
     gap: 20px;
-    z-index: 1000;
+    z-index: 100;
     padding: 30px;
     background-color: white;
 }
@@ -115,7 +115,6 @@ position: relative;
     width: 260px;
     border-radius: 10px;
 }
-
 .ini{
     width: max-content;
     position: relative;
@@ -138,12 +137,10 @@ position: relative;
     color:var(--color-primary);
     
 }
-
 .login-head strong{
     font-size: large;
     margin: auto;
 }
-
  .btn-login{
     background-color: var(--color-primary);
     padding: 2px;

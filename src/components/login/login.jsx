@@ -8,6 +8,7 @@ import {AiFillEyeInvisible} from "react-icons/ai"
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
+import FPDialog from './forgot_pass'
 
 const Login = () => {
     const [hidden, sethidden] = useState(0)
@@ -21,6 +22,7 @@ const Login = () => {
     const auth=useAuth()
     const [spin, setspin] = useState(false)
     const [register, setregister] = useState(false)
+    const [fpdialog, setfpdialog] = useState(false)
     
 
   function  validateForm() {
@@ -141,6 +143,10 @@ const Login = () => {
           </div>
           </div>:null
       }
+      {
+        fpdialog && <div className="overlay"><FPDialog/></div>
+      }
+      
 
         <div className="box-login">
             <div className="login-head">
@@ -213,7 +219,7 @@ const Login = () => {
 
              <input type="checkbox" id='ch' /><label htmlFor='ch'>keep me logged in</label>
              </div>
-             <strong>FORGOT PASSWORD?</strong>
+             <strong onClick={()=> setfpdialog(true)}>FORGOT PASSWORD?</strong>
            </div>
            }
             
