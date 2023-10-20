@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
 import FPDialog from './forgot_pass'
+import { encryptData, encryptString } from '../encryption'
 
 const Login = () => {
     const [hidden, sethidden] = useState(0)
@@ -68,11 +69,13 @@ const Login = () => {
         })
         .then((responseData) => {
           setspin(false)
-          localStorage.setItem("user",JSON.stringify(responseData))
-          localStorage.setItem('jwtToken', responseData["token"]);
+          const data=encryptData(responseData)
+          const token=encryptString(responseData["token"])
+          localStorage.setItem("user",data)
+          localStorage.setItem('jwtToken', token);
           
           navigate("/",{replace:true})
-          console.log(responseData)
+          
        
         })
         .catch((error) => {

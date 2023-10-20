@@ -4,15 +4,16 @@ import React from 'react'
 
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { decryptString } from './encryption';
 
 const ProtectedRoute = ({ children,redirect }) => {
-  const jwtToken = localStorage.getItem("jwtToken")
+  const token=decryptString(localStorage.getItem("jwtToken"))
   const navigate=useNavigate()
  
 
   useEffect(() => {
    
-    if (!jwtToken) {
+    if (!token) {
       
       return navigate("/login");
     }
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ children,redirect }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-auth-token': jwtToken,
+        'x-auth-token': token,
       },
     })
       .then((response) => {
@@ -35,7 +36,7 @@ const ProtectedRoute = ({ children,redirect }) => {
         return navigate(redirect);
         
       });
-  }, [jwtToken]);
+  }, [token]);
   
 
   return children

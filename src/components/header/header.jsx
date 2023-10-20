@@ -2,10 +2,11 @@
 import React from 'react'
 import {Link} from "react-router-dom"
 import Logo from "../../assets/logo.png"
+import { decryptData } from '../encryption';
 import Profile from './profile';
 
 const Header = () => {
- 
+
  
   return (
     <>
@@ -31,7 +32,7 @@ const Header = () => {
                   <li><a href="/" class="active">Practice Test </a> </li>
                   <li><a href="/" class="active">Student Zone </a> </li>
                   {
-                    localStorage.getItem("user")? <li onClick={()=>console.log("njnxj")}>
+                    localStorage.getItem("user")? <li onClick={()=>{}}>
                       <a ><Profile /></a>
                       </li>:null
                   }

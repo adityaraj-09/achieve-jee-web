@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
 import "./testpaper.css"
 import Spinner from '../spinner/spinner';
+import { decryptData, decryptString } from '../encryption';
 const Testpaper = () => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
     const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
-    
+    const token=decryptString(localStorage.getItem("jwtToken"))
     useEffect(() => {
       const cachedData =  getCachedData(apiUrl);
 
@@ -21,7 +22,7 @@ const Testpaper = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json', 
-          'x-auth-token':localStorage.getItem("jwtToken")
+          'x-auth-token':token
          
         },
       })

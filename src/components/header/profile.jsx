@@ -4,9 +4,10 @@ import "./profile.css"
 import {FaUserAlt} from "react-icons/fa"
 import {MdEmail} from "react-icons/md"
 import { Navigate, useNavigate } from 'react-router-dom'
+import { decryptData } from '../encryption'
 
 const Profile = () => {
-    const data=JSON.parse(localStorage.getItem("user"))
+    const jdata=decryptData(localStorage.getItem("user"))
     const navigate =useNavigate()
     const [popup, setpopup] = useState(false)
    
@@ -27,11 +28,11 @@ const Profile = () => {
         <div className="row1">
 
     <FaUserAlt/>
-    <strong>{data["name"]}</strong>
+    <strong>{jdata["name"]}</strong>
         </div>
         <div className="row2">
         <MdEmail/>
-    <strong>{data["email"]}</strong>
+    <strong>{jdata["email"]}</strong>
         </div>
 
     <div className="log-out-btn" onClick={()=>{

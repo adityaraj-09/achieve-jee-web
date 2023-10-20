@@ -4,6 +4,7 @@ import {IoAddCircleSharp} from "react-icons/io5"
 import "./addq.css"
 import {MdCancel} from "react-icons/md"
 import "./create-paper.css"
+import { decryptData } from '../encryption'
 const AddQuestions = () => {
     const [isVisible, setisVisible] = useState(false)
     const [etype, setetype] = useState(0)
@@ -11,8 +12,9 @@ const AddQuestions = () => {
     const [total_q, settotal_q] = useState(0)
     const [duration, setduration] = useState(0)
     const [spin, setspin] = useState(false)
+    const jdata=decryptData(localStorage.getItem("user"))
   const  handleSubmit= (event)=>{
-    let by= JSON.parse(localStorage.getItem("user"))["_id"]
+    let by= jdata["_id"]
     event.preventDefault();
     setspin(true)
     let data = {

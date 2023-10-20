@@ -9,6 +9,7 @@ import { io } from "socket.io-client";
 import { useLocation } from 'react-router-dom';
 import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
 import Spinner from '../spinner/spinner';
+import { decryptData, decryptString } from '../encryption';
 const Questionp = () => {
     
     const location = useLocation();
@@ -83,6 +84,8 @@ const Questionp = () => {
     // }, [])
     // const i=getPid()
     // console.log(i)
+    const token=decryptString(localStorage.getItem("jwtToken"))
+    const jdata=decryptData(localStorage.getItem("user"))
     const i=  localStorage.getItem("pid");
     useEffect(() => {
        
@@ -93,7 +96,7 @@ const Questionp = () => {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json', 
-              'x-auth-token': localStorage.getItem('jwtToken'),
+              'x-auth-token': token,
             },
           })
             .then((response) => {
@@ -225,7 +228,7 @@ const Questionp = () => {
                                 <CountdownTimer className="timer"/>
                                 
                                 <p className="stu-name">
-                                    {localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["name"]:null}
+                                    {localStorage.getItem("user")?jdata["name"]:null}
                                 </p>
                             </div>
 

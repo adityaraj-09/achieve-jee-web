@@ -20,6 +20,7 @@ import Profile from '../header/profile'
 import { MdCancel } from "react-icons/md"
 import styled from 'styled-components';
 import ProfileDash from './profile'
+import { decryptData } from '../encryption'
 const Dashboard = () => {
 
   const navigate = useNavigate()
@@ -31,6 +32,7 @@ const Dashboard = () => {
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
   const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
+  const jdata=decryptData(localStorage.getItem("user"))
   function logout() {
     localStorage.removeItem("jwtToken")
     localStorage.removeItem("user");
@@ -94,7 +96,7 @@ const Dashboard = () => {
             <input type="text" placeholder='search'/></div>
           <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
           <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
-          <div className="dp-cir" onClick={() => setdi(1)}><img src='https://firebasestorage.googleapis.com/v0/b/faceattendance-a1720.appspot.com/o/AgACAgUAAxkBAAICl2T18G6vBkEJLbW0dDn3SUy_GhzhAAIYuTEbP_ixV6Mpf3WB3ksqAQADAgADeAADMAQ.jpg?alt=media&token=d7769129-e9b1-44d1-8fc7-768d327ec67c'>
+          <div className="dp-cir" onClick={() => setdi(1)}><img src={jdata["image"]}>
             </img></div>
         </div>
       </div>
