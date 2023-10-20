@@ -22,6 +22,7 @@
     background-color: var(--color-primary);
     display: flex;
     padding: 2px;
+    cursor: pointer;
     width: 200px;
     color: white;
     border-radius: 8px;
@@ -73,4 +74,7 @@
 #err-fp{
     color: red;
     margin: 0;
+}
+.bck-login{
+    cursor: pointer;
 }
