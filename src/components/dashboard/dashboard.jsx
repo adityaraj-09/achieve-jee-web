@@ -19,17 +19,18 @@ import AddQuestions from './addQuestions'
 import Profile from '../header/profile'
 import { MdCancel } from "react-icons/md"
 import styled from 'styled-components';
+import ProfileDash from './profile'
 const Dashboard = () => {
 
   const navigate = useNavigate()
 
-  const li = ["Dashboard", "Profile", 'Add Question', "Analytics", 'Notifications', 'Test Papers', 'Settings']
-  const ic = ['grid_view', 'account_circle', 'description', 'bar_chart', 'notifications', 'description', 'settings']
+  const li = ["Dashboard", "Test Papers", 'Add Question', "Analytics", 'Notifications', 'Profile', 'Settings']
+  const ic = ['grid_view', 'description', 'description', 'bar_chart', 'notifications', 'account_circle', 'settings']
   const [popup, setPopup] = useState(false)
   const [di, setdi] = useState(0)
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
-  const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />]
+  const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
   function logout() {
     localStorage.removeItem("jwtToken")
     localStorage.removeItem("user");

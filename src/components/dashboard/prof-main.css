@@ -1,0 +1,66 @@
+
+.outer-cir{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.inner-cir{
+    width: 90px;
+    overflow: hidden;
+    height: 90px;
+    border-radius: 50%;
+}
+.img-edit-btns{
+    gap: 50px;
+    display: flex;
+}
+.img-edit{
+    gap: 20px;
+   
+    display: flex;
+}
+.nea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.nea h3,h4,p{
+    margin: 0;
+    padding: 0;
+    color: var(--color-primary);
+}
+.prof-btns{
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    display: flex;
+}
+.edit-btn{
+    width: max-content;
+    height: max-content;
+    padding: 6px;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: var(--color-primary);
+}
+
+.del-btn{
+    padding: 4px 25px;
+    width: max-content;
+    height: max-content;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bold;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
