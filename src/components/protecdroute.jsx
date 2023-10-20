@@ -7,7 +7,11 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { decryptString } from './encryption';
 
 const ProtectedRoute = ({ children,redirect }) => {
-  const token=decryptString(localStorage.getItem("jwtToken"))
+  let token=localStorage.getItem("jwtToken")
+  if(token){
+
+     token=decryptString(localStorage.getItem("jwtToken"))
+  }
   const navigate=useNavigate()
  
 

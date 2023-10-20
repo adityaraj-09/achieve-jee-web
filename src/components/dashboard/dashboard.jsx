@@ -32,7 +32,11 @@ const Dashboard = () => {
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
   const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
-  const jdata=decryptData(localStorage.getItem("user"))
+
+  let jdata={}
+  if(localStorage.getItem("user")){
+    jdata=decryptData(localStorage.getItem("user"))
+  }
   function logout() {
     localStorage.removeItem("jwtToken")
     localStorage.removeItem("user");
