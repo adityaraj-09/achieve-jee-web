@@ -32,7 +32,8 @@ const AddQuestions = () => {
       fetch('https://achieve-jee-server.onrender.com/api/add-Paper', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', 
+          'Content-Type': 'application/json',
+          'AuthGuardPass' :process.env.REACT_APP_AUTHGUARD_PASS
         },
         body: JSON.stringify(data),
       })

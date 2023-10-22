@@ -26,6 +26,7 @@ const ProtectedRoute = ({ children,redirect }) => {
       headers: {
         'Content-Type': 'application/json',
         'x-auth-token': token,
+        'AuthGuardPass' :process.env.REACT_APP_AUTHGUARD_PASS
       },
     })
       .then((response) => {
