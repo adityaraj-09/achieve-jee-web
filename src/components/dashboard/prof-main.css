@@ -8,13 +8,26 @@
     box-shadow: var(--box-shadow);
     background-color: white;
     border-radius: 50%;
-    overflow: hidden;
+    position: relative;
+}
+.container__prof{
+    margin: 0 10px;
 }
 .inner-cir{
     width: 90px;
     overflow: hidden;
     height: 90px;
+    
     border-radius: 50%;
+}
+#label-img{
+    bottom: -5px;
+    cursor: pointer;
+    right: 20px;
+    z-index: 99;
+    color: var(--color-primary);
+    scale: 2.5;
+    position: absolute;
 }
 .img-edit-btns{
     gap: 50px;
