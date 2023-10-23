@@ -79,16 +79,16 @@ const ProfileDash = () => {
           uploadTask.on(
             'state_changed',
             (snapshot) => {
-              // Update progress
+             
               const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
               setUploadProgress(progress);
             },
             (error) => {
-              // Handle upload error
+             
               console.error('Upload error:', error);
             },
             () => {
-              // Upload completed, get the download URL
+             
               
               getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 resetData(downloadURL)
@@ -112,7 +112,7 @@ const ProfileDash = () => {
                 </div>
                 <label htmlFor="up" style={{display:selectedimgURL?"none":"block"}} id="label-img">
 
-                {/* <div className="edit-btn">Choose new Photo</div> */}
+                
                 <IoMdAddCircle/>
                 </label>
             </div>

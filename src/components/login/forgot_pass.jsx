@@ -6,12 +6,21 @@ import {IoIosArrowBack} from "react-icons/io"
 import {HiOutlineMail} from "react-icons/hi"
 import "./fp.css"
 import { useNavigate } from 'react-router-dom'
-const FPDialog = () => {
+const FPDialog = (props) => {
     const [error,seterr]=useState(false)
     const [loading,setloading]=useState(false)
     const [email,setemail]=useState('')
     const [sent,setsent]=useState(false)
     const navigate=useNavigate()
+    const handleButtonClick = () => {
+    
+      props.executeFunction();
+    };
+
+    const changev=()=>{
+      props.exfg()
+    }
+ 
 
     const sendlink=()=>{
         setloading(true)
@@ -27,7 +36,7 @@ const FPDialog = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
-            console.log(response)
+          
           if (!response.ok) {
             throw new Error("Network resonse was not ok");
           }
@@ -37,6 +46,7 @@ const FPDialog = () => {
             
             setloading(false)
             setsent(true)
+            handleButtonClick()
           
         })
         .catch((error) => {
@@ -55,7 +65,7 @@ const FPDialog = () => {
             <p>Enter your email and we'll send you a link to reset your password</p>
             <div className="email-input-ic">
                 <HiOutlineMail className="em-ic"/>
-                <input type="text" autoComplete='true' required onChange={(event)=> setemail(event.target.value)} placeholder="enter email"/>
+                <input type="text" autoComplete='true' required onChange={(event)=> setemail(event.target.value)} placeholder="enter email" />
             </div>
             {
                 error && <p id='err-fp'>email not found or try again after sometime</p>
@@ -64,7 +74,7 @@ const FPDialog = () => {
            
                 </>
             }
-             <div className="bck-login" onClick={()=>{navigate("/",{replace:true})}}>
+             <div className="bck-login" onClick={()=>{changev()}}>
                 <IoIosArrowBack/>
                 back to login
             </div>

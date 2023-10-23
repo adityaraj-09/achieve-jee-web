@@ -1,0 +1,20 @@
+.alertdialog{
+    background-color: white;
+    display: flex;
+    z-index: 1500;
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 15px;
+    gap: 20px;
+}
+.alertdialog p{
+   
+    font-size: medium;
+    font-weight: 500;
+}
+/* .alertdialog .before{
+    content: "";
+    height: 40px;
+    width: 10px;
+    
+} */

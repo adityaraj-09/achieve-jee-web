@@ -355,6 +355,9 @@ aside{
     justify-content: center;
     margin: auto;
 }
+.main-dash{
+    position: relative;
+}
 
 @media screen  and (max-width:700px){
     .con-dash{
@@ -383,6 +386,7 @@ aside{
     }
     .box-dash{
         width: 100%;
+        overflow-x: hidden;
         height: 100%;
     }
     aside{

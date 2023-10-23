@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../AuthContext'
 import FPDialog from './forgot_pass'
 import { encryptData, encryptString } from '../encryption'
+import AlertDialog from '../dashboard/alert'
 
 const Login = () => {
     const [hidden, sethidden] = useState(0)
@@ -25,7 +26,19 @@ const Login = () => {
     const [register, setregister] = useState(false)
     const [fpdialog, setfpdialog] = useState(false)
     
+    const [isv, setisv] = useState(false)
+    function changeVisibility(){
+      
+      setisv(true)
+    }
+    
+    function changeByAlertD(){
+      setisv(false)
+    }
 
+    function dialogfgChange(){
+      setfpdialog(false)
+    }
   function  validateForm() {
      const err={}
     
@@ -79,6 +92,8 @@ const Login = () => {
        
         })
         .catch((error) => {
+          setisv(true)
+
           setspin(false)
           localStorage.removeItem("jwtToken")
           localStorage.removeItem("user")
@@ -118,7 +133,6 @@ const Login = () => {
         .catch((error) => {
           setspin(false)
          
-
           seterror(true)
       })
     }
@@ -148,8 +162,12 @@ const Login = () => {
           </div>:null
       }
       {
-        fpdialog && <div className="overlay"><FPDialog/></div>
+        fpdialog && <div className="overlay"><FPDialog executeFunction={changeVisibility} exfg={dialogfgChange}/></div>
       }
+      {
+        isv && <AlertDialog isVisible={true} message={"invalid credentials"} color="red" executeFunction={changeByAlertD}/>
+      }
+      
       
 
         <div className="box-login">

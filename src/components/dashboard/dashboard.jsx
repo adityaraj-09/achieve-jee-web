@@ -21,6 +21,7 @@ import { MdCancel } from "react-icons/md"
 import styled from 'styled-components';
 import ProfileDash from './profile'
 import { decryptData } from '../encryption'
+import AlertDialog from './alert'
 const Dashboard = () => {
 
   const navigate = useNavigate()
@@ -31,6 +32,7 @@ const Dashboard = () => {
   const [di, setdi] = useState(0)
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
+  
   const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
 
   let jdata={}
@@ -144,6 +146,7 @@ const Dashboard = () => {
           </div>
         </aside>
         <main className='main-dash'>
+          
           <div className="box-main">
             {
               com_list[di]
