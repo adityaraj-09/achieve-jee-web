@@ -25,11 +25,14 @@ const Login = () => {
     const [spin, setspin] = useState(false)
     const [register, setregister] = useState(false)
     const [fpdialog, setfpdialog] = useState(false)
-    
+    const [errmsg,seterrmsg]=useState("")
     const [isv, setisv] = useState(false)
-    function changeVisibility(){
+    const [color,setcolor]=useState("red")
+    const changeVisibility=(errmsg)=>{
       
       setisv(true)
+      seterrmsg(errmsg["errmsg"])
+      setcolor(errmsg["color"])
     }
     
     function changeByAlertD(){
@@ -75,10 +78,15 @@ const Login = () => {
         body: JSON.stringify(data),
       })
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-         return response.json()
+          if (response.ok) {
+            // Handle successful response here
+            return response.json(); // Parse the JSON response
+        } else {
+            // Handle error response
+            return response.json().then(errorData => {
+                throw new Error(`${errorData.msg}`);
+            });
+        }
         })
         .then((responseData) => {
           setspin(false)
@@ -93,7 +101,8 @@ const Login = () => {
         })
         .catch((error) => {
           setisv(true)
-
+          seterrmsg(error.message);
+          setcolor("red")
           setspin(false)
           localStorage.removeItem("jwtToken")
           localStorage.removeItem("user")
@@ -144,7 +153,7 @@ const Login = () => {
     const t=errors.email+" & "+errors.password
   return (
     <section className="con-login">
-       {
+       {/* {
         (error || Object.keys(errors).length > 0)? <div className='error'>
           <div className="error-head">
             <strong>Error</strong>
@@ -160,12 +169,12 @@ const Login = () => {
              
           </div>
           </div>:null
-      }
+      } */}
       {
         fpdialog && <div className="overlay"><FPDialog executeFunction={changeVisibility} exfg={dialogfgChange}/></div>
       }
       {
-        isv && <AlertDialog isVisible={true} message={"invalid credentials"} color="red" executeFunction={changeByAlertD}/>
+        isv && <AlertDialog isVisible={true} message={errmsg} color={color} executeFunction={changeByAlertD}/>
       }
       
       

@@ -12,9 +12,10 @@ const FPDialog = (props) => {
     const [email,setemail]=useState('')
     const [sent,setsent]=useState(false)
     const navigate=useNavigate()
-    const handleButtonClick = () => {
-    
-      props.executeFunction();
+    const handleButtonClick = (errmsg,color) => {
+      const data = { errmsg: errmsg, color: color };
+      props.executeFunction(data);
+      
     };
 
     const changev=()=>{
@@ -27,7 +28,7 @@ const FPDialog = (props) => {
         const data={
             email:email
         }
-        fetch('https://achieve-jee-server.onrender.com/api/sendlink', {
+        fetch('http://achieve-jee-server.onrender.com/api/sendlink', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', 
@@ -37,29 +38,37 @@ const FPDialog = (props) => {
       })
         .then((response) => {
           
-          if (!response.ok) {
-            throw new Error("Network resonse was not ok");
-          }
-         return response.json()
+          if (response.ok) {
+            // Handle successful response here
+            return response.json(); // Parse the JSON response
+        } else {
+            // Handle error response
+            return response.json().then(errorData => {
+                throw new Error(`${errorData.msg}`);
+            });
+        }
         })
         .then((responseData) => {
             
             setloading(false)
+            handleButtonClick(`email sent to ${email}`,"green")
             setsent(true)
-            handleButtonClick()
+            changev()
+           
           
         })
         .catch((error) => {
+          handleButtonClick(error.message,"red")
            console.log(error)
             setloading(false)
-            seterr(true)
+            
         });
     }
+    
   return (
     <div className="con-fp">
         <div className="box-fp">
-            {
-                sent?<h4>password reset link has been sent to {email}</h4>:<>
+            
                 <AiOutlineInfoCircle className='ic-info'/>
             <h3>FORGOT PASSWORD</h3>
             <p>Enter your email and we'll send you a link to reset your password</p>
@@ -67,13 +76,9 @@ const FPDialog = (props) => {
                 <HiOutlineMail className="em-ic"/>
                 <input type="text" autoComplete='true' required onChange={(event)=> setemail(event.target.value)} placeholder="enter email" />
             </div>
-            {
-                error && <p id='err-fp'>email not found or try again after sometime</p>
-            }
+           
             <div className="send-link-btn" onClick={sendlink}>{loading?<div className="spinner-cir"></div>:<strong>Submit</strong>}</div>
            
-                </>
-            }
              <div className="bck-login" onClick={()=>{changev()}}>
                 <IoIosArrowBack/>
                 back to login
