@@ -346,6 +346,15 @@ align-items: center;
 .stu-name{
     font-weight: 600;
 }
+#siq{
+    font-size: medium;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: none;
+    border-bottom: solid 1px var(--color-paper) ;
+}
+#siq:focus{
+    outline: none;
+}
 
 @media screen and (max-width:761px) {
     .main-ques{

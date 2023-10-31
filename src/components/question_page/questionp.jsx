@@ -3,21 +3,21 @@ import { useState } from 'react';
 import CountdownTimer from './countdown';
 import "./questionp.css"
 import { AuthContext, useAuth } from '../../AuthContext'
-import {ImCross} from "react-icons/im"
+import { ImCross } from "react-icons/im"
 import { useContext } from 'react';
 import { io } from "socket.io-client";
 import { useLocation } from 'react-router-dom';
-import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
+import { getCachedData, cacheData, getPid, pidData } from '../cached-api';
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
 const Questionp = () => {
-    
+
     const location = useLocation();
 
     const [pid, setpid] = useState(null)
     const [istimer, setistimer] = useState(false)
     const [messageReceived, setMessageReceived] = useState(false)
-    
+
     // const socket = io('https://achieve-jee-server.onrender.com'); 
     // socket.connect()
     // if(!istimer){
@@ -25,103 +25,108 @@ const Questionp = () => {
     //     socket.emit("start-timer",{uid:"njnnjdad55212",pid:"njdnndnn",dur:10800})
     //     setistimer(true)
     // }
-      
+
 
     // useEffect(()=>{
     //     socket.on("timer",(data)=>{
     //         console.log('Received data:', data);
     //         document.getElementById("c").textContent=data["countDown"];
-            
+
     //     })
     //     return () => {
     //         // Clean up the event listener when the component unmounts
     //         socket.off('timer');
     //       };
     // },[])
-    
-    
-    
-    const [allqs, setallqs] = useState(null)
-    
-    window.addEventListener('beforeunload', function (e) {
-  
-        const confirmationMessage = 'Are you sure you want to leave this page?';
-      
-     
-        (e || window.event).returnValue = confirmationMessage;
-      
-    
-        return confirmationMessage;
-      });
 
-   const [cr_q,setcurrq]=useState(0);
-   const [setq,setsetq]=useState(0);
-    const [opted,setopt]=useState(null)
-    const [dis,setd]=useState(true)
-    const auth=useContext(AuthContext)
-    const l=["ALL SECTIONS","PHYSICS","CHEMISTRY","MATHEMATICS"]
+
+
+    const [allqs, setallqs] = useState(null)
+
+    window.addEventListener('beforeunload', function (e) {
+
+        const confirmationMessage = 'Are you sure you want to leave this page?';
+
+
+        (e || window.event).returnValue = confirmationMessage;
+
+
+        return confirmationMessage;
+    });
+
+    const [cr_q, setcurrq] = useState(0);
+    const [setq, setsetq] = useState(0);
+    const [opted, setopt] = useState(null)
+    const [mcqOp, setmcqOp] = useState([])
+    const [dis, setd] = useState(true)
+    const auth = useContext(AuthContext)
+    const l = ["ALL SECTIONS", "PHYSICS", "CHEMISTRY", "MATHEMATICS"]
     const [solved, setsolved] = useState([])
-    
-    let unsolved=[1]
-    let notvisited=[]
-    
+    const [inputValue, setInputValue] = useState('');
+    let unsolved = [1]
+    let notvisited = []
+
     // useEffect(() => {
-        
+
     //     const receiveMessage = (event) => {
     //         if (event.origin !== window.location.origin) {
     //           return;
     //         }
-        
-            
     //         setpid(event.data.id);
-           
     //         setMessageReceived(true);
-            
     //     }
     //     window.addEventListener('message', receiveMessage);
-    
-      
     // }, [])
     // const i=getPid()
     // console.log(i)
-    const token=decryptString(localStorage.getItem("jwtToken"))
-    const jdata=decryptData(localStorage.getItem("user"))
-    const i=  localStorage.getItem("pid");
-    useEffect(() => {
-       
-        // setpid(i)
-      
-        if (i) {
-          fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json', 
-              'x-auth-token': token,
-              'AuthGuardPass' :process.env.REACT_APP_AUTHGUARD_PASS
-            },
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((responseData) => {
-              setallqs(responseData);
-              console.log(responseData)
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      }, [i]);
 
-      
+
+    const token = decryptString(localStorage.getItem("jwtToken"))
+    const jdata = decryptData(localStorage.getItem("user"))
+    const i = localStorage.getItem("pid");
+    useEffect(() => {
+
+        // setpid(i)
+
+        if (i) {
+            fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token,
+                    'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS
+                },
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then((responseData) => {
+                    setallqs(responseData);
+                    console.log(responseData)
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [i]);
+
+
+
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+
+        // Ensure that the input value is a single-digit integer
+        if (/^\d{0,1}$/.test(value)) {
+            setInputValue(value);
+        }
+    };
+
+
     return (
-       
-        
-       
-        allqs? <section className='main-ques'>
+        allqs ? <section className='main-ques'>
             <div className="heading" >
                 <h3>ONLINE TEST</h3>
             </div>
@@ -129,178 +134,215 @@ const Questionp = () => {
                 <div className="ques-leftp">
                     <div className="ques-secs">
                         {
-                            l.map((d,i)=>{
-                                return(
-                                    <div className="ques-sec" style={{backgroundColor:setq==i?"rgb(6, 6, 115)":"rgb(77, 77, 188)"}} onClick={()=>setsetq(i)}>
-                                    {d}
-                                </div>
+                            l.map((d, i) => {
+                                return (
+                                    <div className="ques-sec" style={{ backgroundColor: setq == i ? "rgb(6, 6, 115)" : "rgb(77, 77, 188)" }} onClick={() => setsetq(i)}>
+                                        {d}
+                                    </div>
                                 )
                             })
                         }
 
-                        
+
 
                     </div>
                     <div className="ques-mainbox">
                         <div className="qno">
-                        Question {allqs?cr_q+1:"loading..."}
+                            Question {allqs ? cr_q + 1 : "loading..."}
                         </div>
                         <div className="question-box">
                             <p className='ques'>
-                                {allqs?allqs[cr_q].body:"loading..."}
+                                {allqs ? allqs[cr_q].body : "loading..."}
                             </p>
-                            <div className="ques-img">
-                                <img src={allqs?allqs[cr_q].imageurl:"loading..."} alt="" />
 
-                            </div>
-                            <div className="options">
-                                <form action="" className='form'>
+                            {allqs[cr_q]["type"] == 2 ? <div className="ans-input option">
 
-                                {
-                                   allqs? allqs[cr_q].options.map((opt, index) => {
+                                <input type="text" id='siq' value={inputValue} onInput={handleInputChange} />
+
+                            </div> : null}
+
+                            {
+                                allqs[cr_q].imageurl!=""?<div className="ques-img">
+                                <img src={allqs ? allqs[cr_q].imageurl : "loading..."} alt="" />
+
+                            </div>:null}
+
+
+                            {allqs ? <div className="options">
+                                {allqs[cr_q]["type"] == 1 ? allqs[cr_q].options.map((option, id) => (
+                                    <div key={id} className="option">
+                                        <input
+                                            type="checkbox"
+                                            id={id}
+                                            checked={mcqOp.includes(id + 1)}
+                                            onChange={
+                                                () => {
+                                                    if (mcqOp.includes(id + 1)) {
+                                                        const newArray = mcqOp.filter(item => item !== (id + 1));
+                                                        setmcqOp(newArray)
+                                                    } else {
+
+                                                        setmcqOp([...mcqOp, id + 1]);
+                                                    }
+
+                                                }
+                                            }
+                                        />
+                                        <label for={id}>
+
+                                            {option}
+                                        </label>
+                                    </div>
+                                )) : null
+                                }
+
+                                {allqs[cr_q]["type"] == 0 ? <form action="" className='form'>
+
+
+                                    {allqs[cr_q].options.map((opt, index) => {
                                         return (
-                                              <div className="option">
+                                            <div className="option">
 
-                                                <input type="radio" id={index}  value={opt} name="opts" className='r'checked={opted===index} onChange={()=>setopt(index)}/>
+                                                <input type="radio" id={index} value={opt} name="opts" className='r' checked={opted === index} onChange={() => setopt(index)} />
                                                 <label for={index}>{opt}</label><br />
                                             </div>
-                                            
-                                        );
-                                    }):null
-                                }
-                                </form>
 
-                            </div>
+                                        );
+                                    })}
+
+                                </form> : null}
+
+                            </div> : null}
                         </div>
                     </div>
 
                     <div className="nav-btns-ques">
-                                <div className="nav-btn-que" onClick={()=>setopt(null)} >
-                                    CLEAR RESPONSE
-                                </div>
-                                <div className="nav-btn-que">
-                                    REVIEW
-                                </div>
-                                {
-                                    cr_q===0?null:
+                        <div className="nav-btn-que" onClick={() => setopt(null)} >
+                            CLEAR RESPONSE
+                        </div>
+                        <div className="nav-btn-que">
+                            REVIEW
+                        </div>
+                        {
+                            cr_q === 0 ? null :
 
-                                <div className="nav-btn-que"  onClick={()=>{
-                                    
-                                    
-                                        if(opted){
-                                            solved.push(cr_q)
-                                            setsolved(solved) 
-                                        }
-                                        setopt(null)
-                                        setcurrq(cr_q-1)
-                                    
-                                    
+                                <div className="nav-btn-que" onClick={() => {
+
+
+                                    if (opted) {
+                                        solved.push(cr_q)
+                                        setsolved(solved)
+                                    }
+                                    setopt(null)
+                                    setcurrq(cr_q - 1)
+
+
                                 }
-                                    } >
+                                } >
                                     PREVIOUS
                                 </div>
-                                }
-                                {
-                                    cr_q===allqs.length-1?null:
+                        }
+                        {
+                            cr_q === allqs.length - 1 ? null :
 
-                                <div className="nav-btn-que"  onClick={()=>{
-                                    
-                                    if(cr_q!=allqs.length-1){
-                                        if(opted){
+                                <div className="nav-btn-que" onClick={() => {
+
+                                    if (cr_q != allqs.length - 1) {
+                                        if (opted) {
                                             solved.push(cr_q)
                                             setsolved(solved)
                                         }
                                         setopt(null)
-                                        setcurrq(cr_q+1)
+                                        setcurrq(cr_q + 1)
                                     }
-                                    
+
                                 }
-                                    } >
+                                } >
                                     NEXT
                                 </div>
-                                }
+                        }
                     </div>
                 </div>
                 <div className="ques-rightp">
-                        <div className="stu-details">
-                            <div className="stu-img"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" /></div>
-                            <div className="stu-data">
+                    <div className="stu-details">
+                        <div className="stu-img"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" /></div>
+                        <div className="stu-data">
 
-                                <CountdownTimer className="timer"/>
-                                
-                                <p className="stu-name">
-                                    {localStorage.getItem("user")?jdata["name"]:null}
-                                </p>
+                            <CountdownTimer className="timer" />
+
+                            <p className="stu-name">
+                                {localStorage.getItem("user") ? jdata["name"] : null}
+                            </p>
+                        </div>
+
+                    </div>
+                    <div className="ques-palette">
+                        <div className="p-head">Quesions Palette</div>
+                        <div className="pal-ques">
+                            {
+                                allqs ? allqs.map((t, index) => {
+                                    return (
+                                        <>
+                                            <div className={notvisited.includes(index) ? "notvisited-q" : (solved.includes(index) ? "solved-q" : "unsolved-q")} key={index} onClick={() => setcurrq(index)}>
+                                                {index + 1}
+                                            </div>
+                                        </>
+                                    );
+                                }) : null
+                            }
+                        </div>
+
+                    </div>
+                    <div className="no-ques">
+                        <div className="p-head">Legend</div>
+                        <div className="no-qp">
+                            <div className="sq">
+                                {solved.length} Answered
                             </div>
-
-                        </div>
-                        <div className="ques-palette">
-                            <div className="p-head">Quesions Palette</div>
-                            <div className="pal-ques">
-                                {
-                                    allqs?allqs.map((t,index)=>{
-                                        return(
-                                            <>  
-                                                <div className={notvisited.includes(index)?"notvisited-q":  (solved.includes(index)?"solved-q":"unsolved-q")} key={index} onClick={()=>setcurrq(index)}>
-                                                    {index+1}
-                                                </div>
-                                            </>
-                                        );
-                                    }):null
-                                }
+                            <div className="usq">
+                                {unsolved.length} UnAnswered
                             </div>
-
+                            <div className="nvq">
+                                {notvisited.length} Not visited
+                            </div>
+                            <div className="mq">
+                                0 Marked
+                            </div>
                         </div>
-                        <div className="no-ques">
-                         <div className="p-head">Legend</div>
-                         <div className="no-qp">
-                                <div className="sq">
-                                    {solved.length} Answered
-                                </div>
-                                <div className="usq">
-                                    {unsolved.length} UnAnswered
-                                </div>
-                                <div className="nvq">
-                                    {notvisited.length} Not visited
-                                </div>
-                                <div className="mq">
-                                    0 Marked
-                                </div>
-                         </div>
-                         <div className="tqh">{allqs?allqs.length:54} Questions</div>
-                         <div className="exam-btns-ques">
-                         <div className="exam-btn-que"  >
-                                    Profile
-                                </div>
-                                <div className="exam-btn-que" onClick={()=>setd(true)}>
-                                    Instr
-                                </div>
-                                <div className="exam-btn-que">
-                                    Questions
-                                </div>
-                                <div className="exam-btn-que">
-                                    Submit
-                                </div>
-                         </div>
+                        <div className="tqh">{allqs ? allqs.length : 54} Questions</div>
+                        <div className="exam-btns-ques">
+                            <div className="exam-btn-que"  >
+                                Profile
+                            </div>
+                            <div className="exam-btn-que" onClick={() => setd(true)}>
+                                Instr
+                            </div>
+                            <div className="exam-btn-que">
+                                Questions
+                            </div>
+                            <div className="exam-btn-que">
+                                Submit
+                            </div>
                         </div>
+                    </div>
 
                 </div>
 
             </div>
-            <div className="lay" style={{display:dis?"flex":"none"}}>
+            <div className="lay" style={{ display: dis ? "flex" : "none" }}>
 
-            <div className="popup" >
-                <div className="h-cr">
+                <div className="popup" >
+                    <div className="h-cr">
 
-                <h3>INSTRUCTIONS</h3>
-                <div className="cross" onClick={()=>setd(false)} >
+                        <h3>INSTRUCTIONS</h3>
+                        <div className="cross" onClick={() => setd(false)} >
                             <strong>close</strong>
-                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-        </section>: <div className="s"><Spinner/></div>
-        
+        </section> : <div className="s"><Spinner /></div>
+
     )
 }
 

@@ -42,9 +42,9 @@ function App() {
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='home' element={<HomePage/>}/>
                 <Route path="q"  element={
-                  <ProtectedRoute redirect={"/login"}>
+                  
                     <Quesionpage/>
-                  </ProtectedRoute>
+                 
                 }/>
                 <Route path='soc' element={<Socketc/>}/>
                 
