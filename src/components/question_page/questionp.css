@@ -169,11 +169,13 @@
     display: flex;
 }
 .options{
+    padding-bottom: 10px;
     width: 100%;
+    position: relative;
 }
 .form{
-    width: max-content;
-   
+    width: 100%;
+    position: relative;
     display: flex;
     align-content: flex-start;
     justify-content: flex-start;
@@ -184,10 +186,10 @@
 
 }
 .option{
-    width: max-content;
-
+    width: 100%;
     display: flex;
     gap: 20px;
+    position: relative;
     justify-content: baseline;
     align-items: baseline;
     margin-left: 20px;
@@ -370,6 +372,12 @@ align-items: center;
         width: 95%;
         overflow-x: hidden;
     }
+    .ques-sec{
+        padding: 5;
+    }
+    .question-box .ques{
+        width: 90%;
+    }
     .ques-rightp{
        width: 95%;
        margin: 10px;
@@ -378,12 +386,10 @@ align-items: center;
        left: 0;
     }
     .option{
-        width: max-content;
+        width: 100%;
         height: max-content;
     }
-    .option label{
-        width: max-content;
-    }
+    
     .ques-palette{
         min-height: 0;
         height: max-content;

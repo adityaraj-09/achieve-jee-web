@@ -60,7 +60,7 @@ const Questionp = () => {
     const [mcqOp, setmcqOp] = useState([])
     const [dis, setd] = useState(true)
     const auth = useContext(AuthContext)
-    const l = ["ALL SECTIONS", "PHYSICS", "CHEMISTRY", "MATHEMATICS"]
+    const l = ["ALL", "PHY", "CHEM", "MATHS"]
     const [solved, setsolved] = useState([])
     const [inputValue, setInputValue] = useState('');
     let unsolved = [1]
@@ -155,7 +155,7 @@ const Questionp = () => {
                                 {allqs ? allqs[cr_q].body : "loading..."}
                             </p>
 
-                            {allqs[cr_q]["type"] == 2 ? <div className="ans-input option">
+                            {allqs[cr_q]["type"] == 2 ? <div className="ans-input option" >
 
                                 <input type="text" id='siq' value={inputValue} onInput={handleInputChange} />
 
@@ -188,7 +188,7 @@ const Questionp = () => {
                                                 }
                                             }
                                         />
-                                        <label for={id}>
+                                        <label for={id} style={{ wordWrap: 'break-word', maxWidth: '85%' ,fontSize:"medium"}}>
 
                                             {option}
                                         </label>
@@ -204,7 +204,7 @@ const Questionp = () => {
                                             <div className="option">
 
                                                 <input type="radio" id={index} value={opt} name="opts" className='r' checked={opted === index} onChange={() => setopt(index)} />
-                                                <label for={index}>{opt}</label><br />
+                                                <label for={index} style={{ wordWrap: 'break-word', maxWidth: '85%' ,fontSize:"medium"}}>{opt}</label><br />
                                             </div>
 
                                         );
@@ -218,7 +218,7 @@ const Questionp = () => {
 
                     <div className="nav-btns-ques">
                         <div className="nav-btn-que" onClick={() => setopt(null)} >
-                            CLEAR RESPONSE
+                            CLEAR
                         </div>
                         <div className="nav-btn-que">
                             REVIEW
