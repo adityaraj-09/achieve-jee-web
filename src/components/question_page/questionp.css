@@ -99,7 +99,10 @@
 .stu-details .stu-img{
     height: 80px;
     width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }
+
 .stu-details .stu-data{
     display: flex;
     padding-left: 0px;
@@ -107,7 +110,8 @@
     flex-direction: column;
 }
 .stu-details .timer{
-    margin-left: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 .ques-secs{
     display: flex;
@@ -136,7 +140,9 @@
 }
 .qno{
     display: flex;
+    padding:0 15px ;
     width: 100%;
+    justify-content: space-between;
     background-color: var(--color-paper);
     color: white;
 }

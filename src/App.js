@@ -42,8 +42,10 @@ function App() {
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='home' element={<HomePage/>}/>
                 <Route path="q"  element={
-                  
+                  <ProtectedRoute>
+
                     <Quesionpage/>
+                  </ProtectedRoute>
                  
                 }/>
                 <Route path='soc' element={<Socketc/>}/>

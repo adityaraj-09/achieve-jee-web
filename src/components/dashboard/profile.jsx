@@ -116,6 +116,7 @@ const ProfileDash = () => {
                 <IoMdAddCircle/>
                 </label>
             </div>
+            
             <div className="nea">
                 <h3>{jdata["name"]}</h3>
                 <h4>{jdata["email"]}</h4>

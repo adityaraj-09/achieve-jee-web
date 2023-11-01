@@ -2,21 +2,18 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import CountdownTimer from './countdown';
 import "./questionp.css"
-import { AuthContext, useAuth } from '../../AuthContext'
-import { ImCross } from "react-icons/im"
+import { AuthContext} from '../../AuthContext'
 import { useContext } from 'react';
-import { io } from "socket.io-client";
 import { useLocation } from 'react-router-dom';
-import { getCachedData, cacheData, getPid, pidData } from '../cached-api';
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
 const Questionp = () => {
 
-    const location = useLocation();
+    // const location = useLocation();
 
-    const [pid, setpid] = useState(null)
-    const [istimer, setistimer] = useState(false)
-    const [messageReceived, setMessageReceived] = useState(false)
+    // const [pid, setpid] = useState(null)
+    // const [istimer, setistimer] = useState(false)
+    // const [messageReceived, setMessageReceived] = useState(false)
 
     // const socket = io('https://achieve-jee-server.onrender.com'); 
     // socket.connect()
@@ -57,7 +54,7 @@ const Questionp = () => {
     const [cr_q, setcurrq] = useState(0);
     const [setq, setsetq] = useState(0);
     const [opted, setopt] = useState(null)
-    const [mcqOp, setmcqOp] = useState([])
+    
     const [dis, setd] = useState(true)
     const auth = useContext(AuthContext)
     const l = ["ALL", "PHY", "CHEM", "MATHS"]
@@ -65,7 +62,15 @@ const Questionp = () => {
     const [inputValue, setInputValue] = useState('');
     let unsolved = [1]
     let notvisited = []
-
+    const [answers,setAnswers]=useState({})
+    const addAnswer = (questionNo, answerArray) => {
+        setAnswers((prevAnswers) => ({
+          ...prevAnswers, 
+          [questionNo]: answerArray, 
+        }));
+      };
+     
+      
     // useEffect(() => {
 
     //     const receiveMessage = (event) => {
@@ -80,7 +85,7 @@ const Questionp = () => {
     // const i=getPid()
     // console.log(i)
 
-
+      
     const token = decryptString(localStorage.getItem("jwtToken"))
     const jdata = decryptData(localStorage.getItem("user"))
     const i = localStorage.getItem("pid");
@@ -105,6 +110,7 @@ const Questionp = () => {
                 })
                 .then((responseData) => {
                     setallqs(responseData);
+                    addAnswer(0,[])
                     console.log(responseData)
                 })
                 .catch((error) => {
@@ -117,8 +123,6 @@ const Questionp = () => {
 
     const handleInputChange = (event) => {
         const value = event.target.value;
-
-        // Ensure that the input value is a single-digit integer
         if (/^\d{0,1}$/.test(value)) {
             setInputValue(value);
         }
@@ -148,7 +152,13 @@ const Questionp = () => {
                     </div>
                     <div className="ques-mainbox">
                         <div className="qno">
-                            Question {allqs ? cr_q + 1 : "loading..."}
+                            <div className="small-inst">
+
+                            Question {allqs ? cr_q + 1 : "loading..."} {allqs?(allqs[cr_q]["type"]===0?"SELECT ONE CORRECT ANSWER":allqs[cr_q]["type"]===1?"SELECT ALL CORRECT OPTIONS ":"ENTER SINGLE DIGIT INTEGER"):null}
+                            </div>
+                        <div className="marking-sch">
+                            +{allqs?(allqs[cr_q]["marks"][0]):null} for RIGHT answer/{allqs?(allqs[cr_q]["marks"][1]):null} for WRONG answer
+                        </div>
                         </div>
                         <div className="question-box">
                             <p className='ques'>
@@ -162,10 +172,10 @@ const Questionp = () => {
                             </div> : null}
 
                             {
-                                allqs[cr_q].imageurl!=""?<div className="ques-img">
-                                <img src={allqs ? allqs[cr_q].imageurl : "loading..."} alt="" />
+                                allqs[cr_q].imageurl != "" ? <div className="ques-img">
+                                    <img src={allqs ? allqs[cr_q].imageurl : "loading..."} alt="" />
 
-                            </div>:null}
+                                </div> : null}
 
 
                             {allqs ? <div className="options">
@@ -174,21 +184,23 @@ const Questionp = () => {
                                         <input
                                             type="checkbox"
                                             id={id}
-                                            checked={mcqOp.includes(id + 1)}
+                                            checked={(answers[cr_q] && answers[cr_q].length!=0)?answers[cr_q].includes(id+1) :false}
                                             onChange={
                                                 () => {
-                                                    if (mcqOp.includes(id + 1)) {
-                                                        const newArray = mcqOp.filter(item => item !== (id + 1));
-                                                        setmcqOp(newArray)
+                                                    if (answers[cr_q].includes(id + 1)) {
+                                                        const newArray = answers[cr_q].filter(item => item !== (id + 1));
+                                                        addAnswer(cr_q,newArray)
+                                                       
                                                     } else {
-
-                                                        setmcqOp([...mcqOp, id + 1]);
+                                                        const array=[...answers[cr_q],id+1]
+                                                        addAnswer(cr_q,array)
+                                                        
                                                     }
 
                                                 }
                                             }
                                         />
-                                        <label for={id} style={{ wordWrap: 'break-word', maxWidth: '85%' ,fontSize:"medium"}}>
+                                        <label for={id} style={{ wordWrap: 'break-word', maxWidth: '85%', fontSize: "medium" }}>
 
                                             {option}
                                         </label>
@@ -203,8 +215,16 @@ const Questionp = () => {
                                         return (
                                             <div className="option">
 
-                                                <input type="radio" id={index} value={opt} name="opts" className='r' checked={opted === index} onChange={() => setopt(index)} />
-                                                <label for={index} style={{ wordWrap: 'break-word', maxWidth: '85%' ,fontSize:"medium"}}>{opt}</label><br />
+                                                <input type="radio" id={index} value={opt} name="opts" className='r' 
+                                                checked={ answers[cr_q].length!=0?answers[cr_q][0]-1===index :false} 
+                                                onChange={() =>{ 
+                                                    
+                                                        const a=[]
+                                                        a.push(index+1)
+                                                        addAnswer(cr_q,a)
+                                                    
+                                                    }} />
+                                                <label for={index} style={{ wordWrap: 'break-word', maxWidth: '85%', fontSize: "medium" }}>{opt}</label><br />
                                             </div>
 
                                         );
@@ -217,7 +237,7 @@ const Questionp = () => {
                     </div>
 
                     <div className="nav-btns-ques">
-                        <div className="nav-btn-que" onClick={() => setopt(null)} >
+                        <div className="nav-btn-que" onClick={() =>addAnswer(cr_q,[])} >
                             CLEAR
                         </div>
                         <div className="nav-btn-que">
@@ -227,13 +247,17 @@ const Questionp = () => {
                             cr_q === 0 ? null :
 
                                 <div className="nav-btn-que" onClick={() => {
-
-
-                                    if (opted) {
-                                        solved.push(cr_q)
-                                        setsolved(solved)
+                                   
+                                    
+                                    if(allqs[cr_q].type==2){
+                                        if(inputValue!=""){
+                                            const a= parseInt(inputValue, 10)
+                                            addAnswer(cr_q,[a])
+                                        }
                                     }
-                                    setopt(null)
+
+                                    
+                                    
                                     setcurrq(cr_q - 1)
 
 
@@ -246,15 +270,27 @@ const Questionp = () => {
                             cr_q === allqs.length - 1 ? null :
 
                                 <div className="nav-btn-que" onClick={() => {
-
-                                    if (cr_q != allqs.length - 1) {
-                                        if (opted) {
-                                            solved.push(cr_q)
-                                            setsolved(solved)
+                                    
+                                    
+                                    if(allqs[cr_q].type===2){
+                                        if(inputValue!=""){
+                                            const a= parseInt(inputValue, 10)
+                                            const b=[]
+                                            b.push(a)
+                                            addAnswer(cr_q,b)
                                         }
-                                        setopt(null)
-                                        setcurrq(cr_q + 1)
                                     }
+
+                                    
+                                        
+
+                                        
+                                        if(!answers[cr_q+1]){
+                                            addAnswer(cr_q+1,[])
+                                        }
+                                        setcurrq(cr_q + 1)
+                                    
+
 
                                 }
                                 } >
@@ -265,7 +301,7 @@ const Questionp = () => {
                 </div>
                 <div className="ques-rightp">
                     <div className="stu-details">
-                        <div className="stu-img"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" /></div>
+                        <div className="stu-img"><img src={jdata["image"]==""?"https://cdn-icons-png.flaticon.com/512/149/149071.png":jdata["image"]} alt="" /></div>
                         <div className="stu-data">
 
                             <CountdownTimer className="timer" />
@@ -283,7 +319,13 @@ const Questionp = () => {
                                 allqs ? allqs.map((t, index) => {
                                     return (
                                         <>
-                                            <div className={notvisited.includes(index) ? "notvisited-q" : (solved.includes(index) ? "solved-q" : "unsolved-q")} key={index} onClick={() => setcurrq(index)}>
+                                            <div className={!answers[index] ? "notvisited-q" : (answers[index].length!=0 ? "solved-q" : "unsolved-q")} key={index} onClick={() => {
+                                                setcurrq(index)
+                                                
+                                                if(!answers[index]){
+                                                    addAnswer(index,[])
+                                                }
+                                                }}>
                                                 {index + 1}
                                             </div>
                                         </>

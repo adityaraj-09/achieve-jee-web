@@ -65,7 +65,7 @@ const Dashboard = () => {
   return (
     <div className="con-dash ">
       {
-        popup ? <div className='overlay'> <div className="logout-popup">
+        popup ? <div className='overlay' onClick={()=>setPopup(false)}> <div className="logout-popup">
           <div className="logout-head">
             <strong>LOG OUT</strong>
 
@@ -79,7 +79,7 @@ const Dashboard = () => {
       }
 
       {
-        theme_popup && <div className="overlay">
+        theme_popup && <div className="overlay" onClick={()=>setthemepopup(false)}>
           <div className="theme-popup">
             <h3>Choose your theme</h3>
             
@@ -94,7 +94,7 @@ const Dashboard = () => {
           </div>
         </div>
       }
-      <div className="con-dash-prof">
+      <div className="con-dash-prof" >
         <div className="side-menu" onClick={() => setsidemenuVis(true)}><GiHamburgerMenu /></div>
         <div className="dash-prof">
           <div className="search-bar">
@@ -145,7 +145,7 @@ const Dashboard = () => {
 
           </div>
         </aside>
-        <main className='main-dash'>
+        <main className='main-dash' onClick={()=>setsidemenuVis(false)}>
           
           <div className="box-main">
             {
