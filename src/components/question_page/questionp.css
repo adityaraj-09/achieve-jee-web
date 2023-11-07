@@ -53,14 +53,14 @@
 .main-ques .heading{
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     background-color: var(--color-paper);
     color: white;
 }
 .heading h3{
     color: white;
-    margin: auto;
+  
 }
 .box-ques{
     display: flex;

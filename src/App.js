@@ -11,6 +11,7 @@ import RequireAuth from './components/requireAuth';
 import { AuthContextProvider } from './AuthContext';
 import Dashboard from './components/dashboard/dashboard';
 import Socketc from './pages/socketc';
+import OTPVerificationPage from './components/dashboard/verify_otp';
 
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
                   </ProtectedRoute>
                  
                 }/>
-                <Route path='soc' element={<Socketc/>}/>
+                
+                <Route path='verify-otp' element={<OTPVerificationPage/>}/>
                 
     </Route> 
   

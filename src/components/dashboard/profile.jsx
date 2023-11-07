@@ -6,11 +6,15 @@ import {  getDownloadURL, ref,uploadBytesResumable } from "firebase/storage";
 import userEvent from '@testing-library/user-event';
 import { decryptData, decryptString, encryptData } from '../encryption';
 import {IoMdAddCircle} from "react-icons/io"
+import { useNavigate } from 'react-router-dom';
+
 
 const ProfileDash = () => {
+  const [otpsending, setotpsending] = useState(false)
     const [selectedimgURL, setSelectedImageURL] = useState(null)
     const [selectedImage, setSelectedImage] = useState(null)
     const [uploadProgress, setUploadProgress] = useState(0);
+    const navigate=useNavigate()
     let jdata=decryptData(localStorage.getItem("user"))
     const [img,setimg]=useState(jdata["image"])
     const fileInputRef = useRef(null);
@@ -58,6 +62,45 @@ const ProfileDash = () => {
            
           });
       }
+
+      const handleVerifyOTP = () => {
+        setotpsending(true)
+        let token=decryptString(localStorage.getItem("jwtToken"))
+       let jdata=decryptData(localStorage.getItem("user"))
+        const data = {
+       
+         email:jdata["email"]
+        };
+    
+        fetch('http://achieve-jee-server.onrender.com/api/send-otp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS,
+            'x-auth-token': token,
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            setotpsending(false)
+            if (response.ok) {
+             
+              return response.json(); 
+            } else {
+              // Handle error response
+              return response.json().then(errorData => {
+                throw new Error(`${errorData.msg}`);
+              });
+            }
+          })
+          .then((responseData) => {
+            navigate("/verify-otp")
+          })
+          .catch((error) => {
+           console.log(error)
+          });
+      };
+    
       const resetData=(imgUrl)=>{
         addImageToDatabse(imgUrl) 
         let json=decryptData(localStorage.getItem('user'))
@@ -108,7 +151,7 @@ const ProfileDash = () => {
             <div className="outer-cir">
                 <div className="inner-cir">
 
-                <img src={selectedimgURL?selectedimgURL:img} alt="" />
+                <img src={selectedimgURL?selectedimgURL:(img?img:"https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg")} alt="" />
                 </div>
                 <label htmlFor="up" style={{display:selectedimgURL?"none":"block"}} id="label-img">
 
@@ -139,6 +182,7 @@ const ProfileDash = () => {
             </div>
 
         </div>
+        {!jdata["verified"] && <h4>Please verify your email <a  style={{color:"blue",cursor:"pointer"}} onClick={handleVerifyOTP}>{otpsending?<div className="spinner-cir"></div>:"here"}</a></h4>}
     </div>
   )
 }

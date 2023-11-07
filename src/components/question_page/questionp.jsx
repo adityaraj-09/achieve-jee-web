@@ -6,7 +6,9 @@ import { AuthContext} from '../../AuthContext'
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
-import { decryptData, decryptString } from '../encryption';
+import { decryptData, decryptString, encryptData } from '../encryption';
+import { Button } from '@mui/material';
+
 const Questionp = () => {
 
     // const location = useLocation();
@@ -124,22 +126,40 @@ const Questionp = () => {
     const handleInputChange = (event) => {
         const value = event.target.value;
         if (/^\d{0,1}$/.test(value)) {
-            setInputValue(value);
+            const array=[]
+            const a=parseInt(value)
+            array.push(a)
+
+            addAnswer(cr_q,array)
         }
     };
+
+    function encryptAnswers(){
+        const anss=encryptData(answers)
+        return anss;
+    }
+
+    function generateEncrypedTxtFile(){
+        
+    }
+    const submit=()=>{
+        console.log("jsk")
+    }
 
 
     return (
         allqs ? <section className='main-ques'>
             <div className="heading" >
                 <h3>ONLINE TEST</h3>
+                <Button variant="contained"><CountdownTimer paperSubmit={submit}/></Button>
+                {/* <div style={{display:"flex",backgroundColor:"white",color:"black",padding:"5px",boxShadow:" 1px 2px 3px 4px rgba(184, 182, 182, 0.4)",fontWeight:"bold"}}><CountdownTimer/></div> */}
             </div>
             <div className="box-ques">
                 <div className="ques-leftp">
                     <div className="ques-secs">
                         {
                             l.map((d, i) => {
-                                return (
+                                return (  
                                     <div className="ques-sec" style={{ backgroundColor: setq == i ? "rgb(6, 6, 115)" : "rgb(77, 77, 188)" }} onClick={() => setsetq(i)}>
                                         {d}
                                     </div>
@@ -153,7 +173,7 @@ const Questionp = () => {
                     <div className="ques-mainbox">
                         <div className="qno">
                             <div className="small-inst">
-
+ 
                             Question {allqs ? cr_q + 1 : "loading..."} {allqs?(allqs[cr_q]["type"]===0?"SELECT ONE CORRECT ANSWER":allqs[cr_q]["type"]===1?"SELECT ALL CORRECT OPTIONS ":"ENTER SINGLE DIGIT INTEGER"):null}
                             </div>
                         <div className="marking-sch">
@@ -167,7 +187,7 @@ const Questionp = () => {
 
                             {allqs[cr_q]["type"] == 2 ? <div className="ans-input option" >
 
-                                <input type="text" id='siq' value={inputValue} onInput={handleInputChange} />
+                                <input type="text" id='siq' value={(answers[cr_q] && answers[cr_q].length!=0)?`${answers[cr_q][0]}`:""} onInput={handleInputChange} />
 
                             </div> : null}
 
@@ -249,12 +269,7 @@ const Questionp = () => {
                                 <div className="nav-btn-que" onClick={() => {
                                    
                                     
-                                    if(allqs[cr_q].type==2){
-                                        if(inputValue!=""){
-                                            const a= parseInt(inputValue, 10)
-                                            addAnswer(cr_q,[a])
-                                        }
-                                    }
+                                   
 
                                     
                                     
@@ -272,14 +287,7 @@ const Questionp = () => {
                                 <div className="nav-btn-que" onClick={() => {
                                     
                                     
-                                    if(allqs[cr_q].type===2){
-                                        if(inputValue!=""){
-                                            const a= parseInt(inputValue, 10)
-                                            const b=[]
-                                            b.push(a)
-                                            addAnswer(cr_q,b)
-                                        }
-                                    }
+                                   
 
                                     
                                         
@@ -362,7 +370,9 @@ const Questionp = () => {
                             <div className="exam-btn-que">
                                 Questions
                             </div>
-                            <div className="exam-btn-que">
+                        
+                            <div className="exam-btn-que" >
+
                                 Submit
                             </div>
                         </div>
@@ -384,7 +394,6 @@ const Questionp = () => {
                 </div>
             </div>
         </section> : <div className="s"><Spinner /></div>
-
     )
 }
 

@@ -22,6 +22,7 @@ import styled from 'styled-components';
 import ProfileDash from './profile'
 import { decryptData } from '../encryption'
 import AlertDialog from './alert'
+
 const Dashboard = () => {
 
   const navigate = useNavigate()
@@ -63,12 +64,15 @@ const Dashboard = () => {
 
 
   return (
-    <div className="con-dash ">
+    
+
+    
+   <div className="con-dash ">
       {
         popup ? <div className='overlay' onClick={()=>setPopup(false)}> <div className="logout-popup">
           <div className="logout-head">
             <strong>LOG OUT</strong>
-
+            
           </div>
           <div className="confirmation">Are you sure you want to logout?</div>
           <div className="confirm-btns">
@@ -102,7 +106,7 @@ const Dashboard = () => {
             <input type="text" placeholder='search'/></div>
           <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
           <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
-          <div className="dp-cir" onClick={() => setdi(1)}><img src={jdata["image"]}>
+          <div className="dp-cir" onClick={() => setdi(3)}><img src={jdata["image"]?jdata["image"]:"https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"}>
             </img></div>
         </div>
       </div>
