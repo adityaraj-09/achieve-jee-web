@@ -204,7 +204,7 @@ const Login = () => {
         fpdialog && <div className="overlay"><FPDialog executeFunction={changeVisibility} exfg={dialogfgChange} /></div>
       }
       {
-        isv && <AlertDialog isVisible={true} message={errmsg} color={color} executeFunction={changeByAlertD} />
+        isv && <AlertDialog isVisible={true} message={errmsg} color={color} executeFunction={changeByAlertD} left="50px" top="85vh"/>
       }
 
 

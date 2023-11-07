@@ -12,6 +12,7 @@ import { AuthContextProvider } from './AuthContext';
 import Dashboard from './components/dashboard/dashboard';
 import Socketc from './pages/socketc';
 import OTPVerificationPage from './components/dashboard/verify_otp';
+import OtpPage from './pages/otp-verify';
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
                  
                 }/>
                 
-                <Route path='verify-otp' element={<OTPVerificationPage/>}/>
+                <Route path='verify-otp' element={<OtpPage/>}/>
                 
     </Route> 
   
