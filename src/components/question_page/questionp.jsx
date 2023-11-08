@@ -143,7 +143,8 @@ const Questionp = () => {
         setspin(true)
         
         const data={
-            hashmaps:answers
+            hashmaps:answers,
+            pid:i
         }
         fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
       method: 'POST',
@@ -174,7 +175,7 @@ const Questionp = () => {
 
       })
       .catch((error) => {
-        
+        console.log(error.message)
         setspin(false)
 
       });
