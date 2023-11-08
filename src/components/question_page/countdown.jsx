@@ -5,12 +5,9 @@ class CountdownTimer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 3 * 60 * 60, // 3 hours in seconds
+      secondsRemaining: (props.time)* 60, // 3 hours in seconds
     };
 
-    if(this.state.secondsRemaining>0){
-      props.paperSubmit()
-    }
   }
 
   componentDidMount() {

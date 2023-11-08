@@ -4,7 +4,7 @@ import CountdownTimer from './countdown';
 import "./questionp.css"
 import { AuthContext} from '../../AuthContext'
 import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString, encryptData } from '../encryption';
 import { Button } from '@mui/material';
@@ -39,7 +39,7 @@ const Questionp = () => {
     // },[])
 
 
-
+    const navigate=useNavigate()
     const [allqs, setallqs] = useState(null)
 
     window.addEventListener('beforeunload', function (e) {
@@ -55,16 +55,13 @@ const Questionp = () => {
 
     const [cr_q, setcurrq] = useState(0);
     const [setq, setsetq] = useState(0);
-    const [opted, setopt] = useState(null)
-    
     const [dis, setd] = useState(true)
-    const auth = useContext(AuthContext)
     const l = ["ALL", "PHY", "CHEM", "MATHS"]
     const [solved, setsolved] = useState([])
-    const [inputValue, setInputValue] = useState('');
     let unsolved = [1]
     let notvisited = []
     const [answers,setAnswers]=useState({})
+    const [spin, setspin] = useState(false)
     const addAnswer = (questionNo, answerArray) => {
         setAnswers((prevAnswers) => ({
           ...prevAnswers, 
@@ -143,7 +140,44 @@ const Questionp = () => {
         
     }
     const submit=()=>{
-        console.log("jsk")
+        setspin(true)
+        
+        const data={
+            hashmaps:answers
+        }
+        fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS,
+        'x-auth-token': token
+
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Handle successful response here
+          return response.json(); // Parse the JSON response
+        } else {
+          // Handle error response
+          return response.json().then(errorData => {
+            throw new Error(`${errorData.msg}`);
+          });
+        }
+      })
+      .then((responseData) => {
+        setspin(false)
+        const data = encryptData(responseData)
+        localStorage.setItem("user", data)
+        navigate("/", { replace: true })
+
+      })
+      .catch((error) => {
+        
+        setspin(false)
+
+      });
     }
 
 
@@ -151,7 +185,7 @@ const Questionp = () => {
         allqs ? <section className='main-ques'>
             <div className="heading" >
                 <h3>ONLINE TEST</h3>
-                <Button variant="contained"><CountdownTimer paperSubmit={submit}/></Button>
+                <Button variant="contained"><CountdownTimer time={180}/></Button>
                 {/* <div style={{display:"flex",backgroundColor:"white",color:"black",padding:"5px",boxShadow:" 1px 2px 3px 4px rgba(184, 182, 182, 0.4)",fontWeight:"bold"}}><CountdownTimer/></div> */}
             </div>
             <div className="box-ques">
@@ -312,7 +346,7 @@ const Questionp = () => {
                         <div className="stu-img"><img src={jdata["image"]==""?"https://cdn-icons-png.flaticon.com/512/149/149071.png":jdata["image"]} alt="" /></div>
                         <div className="stu-data">
 
-                            <CountdownTimer className="timer" />
+                            <CountdownTimer className="timer" time={180}/>
 
                             <p className="stu-name">
                                 {localStorage.getItem("user") ? jdata["name"] : null}
@@ -371,9 +405,9 @@ const Questionp = () => {
                                 Questions
                             </div>
                         
-                            <div className="exam-btn-que" >
+                            <div className="exam-btn-que" onClick={submit}>
 
-                                Submit
+                                {spin? <div className='spinner-cir'></div>:"Submit"}
                             </div>
                         </div>
                     </div>
