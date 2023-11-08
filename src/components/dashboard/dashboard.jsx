@@ -1,6 +1,6 @@
 
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import "./dashboard.css"
 
@@ -30,12 +30,68 @@ const Dashboard = () => {
   const li = ["Dashboard", "Test Papers", 'Add Question', "Analytics", 'Notifications', 'Profile', 'Settings']
   const ic = ['grid_view', 'description', 'description', 'bar_chart', 'notifications', 'account_circle', 'settings']
   const [popup, setPopup] = useState(false)
+  
   const [di, setdi] = useState(0)
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
   
-  const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
+  
+  const updateSearchParams = (state) => {
+    // Create a new URLSearchParams object
+   
 
+    switch (state) {
+      case "TestPapers":
+        setdi(1)
+        break;
+      case "Dashboard":
+       setdi(0)
+        break;
+      case "Analytics":
+       setdi(3)
+        break;
+      case "AddQuestion":
+       setdi(2)
+        break;
+      case "Notifications":
+       setdi(4)
+        break;
+      case "Profile":
+       setdi(5)
+        break;
+      case "Settings":
+       setdi(6)
+        break;
+     
+      default:
+        setdi(0)
+        break;
+        // Code to be executed when no case matches the expression
+    }
+    
+    const newSearchParams = new URLSearchParams(window.location.search);
+
+    // Set new search parameters
+    newSearchParams.set('state', state);
+   
+
+    // Update the URL with the new search parameters
+    window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
+  };
+  const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
+  const searchParams = new URLSearchParams(window.location.search);
+
+    // Access specific query parameters
+    const param1 = searchParams.get('state');
+    useEffect(() => {
+      if(!param1){
+        updateSearchParams("Dashboard")
+      }else{
+        updateSearchParams(param1)
+      }
+    }, [])
+  
+    
   let jdata={}
   if(localStorage.getItem("user")){
     jdata=decryptData(localStorage.getItem("user"))
@@ -60,7 +116,7 @@ const Dashboard = () => {
     body.classList.add(classes[i]);
     setthemepopup(false)
   }
-
+ 
 
 
   return (
@@ -106,7 +162,7 @@ const Dashboard = () => {
             <input type="text" placeholder='search'/></div>
           <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
           <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
-          <div className="dp-cir" onClick={() => setdi(3)}><img src={jdata["image"]?jdata["image"]:"https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"}>
+          <div className="dp-cir" onClick={()=>updateSearchParams("Analytics")}><img src={jdata["image"]?jdata["image"]:"https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"}>
             </img></div>
         </div>
       </div>
@@ -127,8 +183,9 @@ const Dashboard = () => {
           <div className="sidebar">
             {
               li.map((t, i) => {
+                
                 return <a onClick={() => {
-                  setdi(i)
+                 updateSearchParams(t.replace(/\s+/g, ''))
                   setsidemenuVis(false)
                 }} id={di === i ? "active" : "null"}>
                   <span class="material-icons-sharp">
@@ -136,6 +193,7 @@ const Dashboard = () => {
                   </span>
                   <strong>{t}</strong>
                 </a>
+                
               })
             }
 
