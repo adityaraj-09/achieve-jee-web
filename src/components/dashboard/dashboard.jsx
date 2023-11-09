@@ -30,7 +30,8 @@ const Dashboard = () => {
   const li = ["Dashboard", "Test Papers", 'Add Question', "Analytics", 'Notifications', 'Profile', 'Settings']
   const ic = ['grid_view', 'description', 'description', 'bar_chart', 'notifications', 'account_circle', 'settings']
   const [popup, setPopup] = useState(false)
-  
+  const [alert,setAlert]=useState(null)
+  const [color, setcolor] = useState("red")
   const [di, setdi] = useState(0)
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
@@ -78,7 +79,10 @@ const Dashboard = () => {
     // Update the URL with the new search parameters
     window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams.toString()}`);
   };
-  const com_list = [<Dashmain />, <Testpaper />, <AddQuestions />,<ProfileDash/>]
+  const com_list = [<Dashmain />, <Testpaper alertFunction={(e)=>{
+    updateSearchParams("Analytics") 
+    setcolor("red")
+    setAlert(e)}}/>, <AddQuestions />,<ProfileDash/>]
   const searchParams = new URLSearchParams(window.location.search);
 
     // Access specific query parameters
@@ -124,6 +128,9 @@ const Dashboard = () => {
 
     
    <div className="con-dash ">
+    {
+      alert && <AlertDialog isVisible={true} right="20px" top="85vh" message={alert} color={color} executeFunction={()=>{setAlert(null)}}/>
+    }
       {
         popup ? <div className='overlay' onClick={()=>setPopup(false)}> <div className="logout-popup">
           <div className="logout-head">

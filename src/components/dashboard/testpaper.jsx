@@ -4,11 +4,12 @@ import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
 import "./testpaper.css"
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
-const Testpaper = () => {
+const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
     const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
     const token=decryptString(localStorage.getItem("jwtToken"))
+    const  jdata=decryptData(localStorage.getItem("user"))
     useEffect(() => {
       const cachedData =  getCachedData(apiUrl);
 
@@ -105,15 +106,23 @@ const Testpaper = () => {
             {
                             qs?qs.map((data,i)=>{
                                 const d=data._id
-                                return <div className="test-paper">
+                                const tq=data.total_q
+                                const tsq=data.qs.length
+                                return tsq!=0?<div className="test-paper" key={i}>
                                 <div className="test-details">
                                    
                                 <strong>{data.title}</strong>
                                 <p>180 min <span>created on {data.createdAt}</span></p>
                                 </div>
-                                <button className="start-btn" onClick={()=> openNewWindow(d)}>start</button>
+                                <button className="start-btn" onClick={()=>{ 
+                                  if(!jdata.verified){
+                                    alertFunction("please verify your account")
+                                  }else{
+                                    openNewWindow(d)
+                                  }
+                                  }}>start</button>
                                 
-                            </div>
+                            </div>:null
                             }):null
             }
             </div>

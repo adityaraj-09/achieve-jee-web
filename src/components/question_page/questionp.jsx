@@ -62,13 +62,20 @@ const Questionp = () => {
     let notvisited = []
     const [answers,setAnswers]=useState({})
     const [spin, setspin] = useState(false)
+    const [time,settime]=useState({})
     const addAnswer = (questionNo, answerArray) => {
         setAnswers((prevAnswers) => ({
-          ...prevAnswers, 
+          ...prevAnswers,
           [questionNo]: answerArray, 
         }));
       };
-     
+
+      const addTime = (questionNo, timer) => {
+        settime((prevAnswers) => ({
+          ...prevAnswers,
+          [questionNo]: timer, 
+        }));
+      };
       
     // useEffect(() => {
 
@@ -84,7 +91,22 @@ const Questionp = () => {
     // const i=getPid()
     // console.log(i)
 
-      
+    useEffect(() => {
+        let t=time[cr_q]?time[cr_q]:0
+        const interval = setInterval(() => {
+          // Increment the number by 1
+          
+           t=t+1
+          console.log(t)
+          addTime(cr_q,t)
+        }, 1000); // 1000ms = 1 second
+        return () => {
+            clearInterval(interval);
+            console.log('Interval is cleared');
+          };
+        // Cleanup the interval when the component unmounts
+        
+      }, [cr_q]);  
     const token = decryptString(localStorage.getItem("jwtToken"))
     const jdata = decryptData(localStorage.getItem("user"))
     const i = localStorage.getItem("pid");
@@ -144,7 +166,8 @@ const Questionp = () => {
         
         const data={
             hashmaps:answers,
-            pid:i
+            pid:i,
+            time:time
         }
         fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
       method: 'POST',
@@ -214,6 +237,7 @@ const Questionp = () => {
                         <div className="marking-sch">
                             +{allqs?(allqs[cr_q]["marks"][0]):null} for RIGHT answer/{allqs?(allqs[cr_q]["marks"][1]):null} for WRONG answer
                         </div>
+                       
                         </div>
                         <div className="question-box">
                             <p className='ques'>
@@ -396,7 +420,7 @@ const Questionp = () => {
                         </div>
                         <div className="tqh">{allqs ? allqs.length : 54} Questions</div>
                         <div className="exam-btns-ques">
-                            <div className="exam-btn-que"  >
+                            <div className="exam-btn-que"  onClick={()=> console.log(time)}>
                                 Profile
                             </div>
                             <div className="exam-btn-que" onClick={() => setd(true)}>
