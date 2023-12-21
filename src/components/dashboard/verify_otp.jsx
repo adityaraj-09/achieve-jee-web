@@ -65,7 +65,7 @@ function OTPVerificationPage() {
   const handleVerifyOTP = () => {
     setmsg(null)
     let jdata=decryptData(localStorage.getItem("user"))
-    console.log(otp)
+  
     setspin(true)
     const data = {
      otp:otp,
@@ -124,7 +124,7 @@ function OTPVerificationPage() {
 
   return (
     <div className='container-vefify'>
-      <h2>OTP VERFICATION</h2>
+      <h2>OTP VERIFICATION</h2>
       { msg && <AlertDialog isVisible={true} message={msg} color={color} executeFunction={()=>{}} right="50px" top="85px"/>}
         <div className='box-verify'>
          

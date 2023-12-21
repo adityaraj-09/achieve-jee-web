@@ -4,12 +4,16 @@ import { getCachedData, cacheData ,getPid,pidData} from '../cached-api';
 import "./testpaper.css"
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
+import {GrFormNext} from "react-icons/gr"
+import { Button } from '@mui/base';
 const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
     const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
     const token=decryptString(localStorage.getItem("jwtToken"))
     const  jdata=decryptData(localStorage.getItem("user"))
+   
+    const [attem_pid,setpid]=useState(null)
     useEffect(() => {
       const cachedData =  getCachedData(apiUrl);
 
@@ -45,10 +49,9 @@ const Testpaper = ({alertFunction}) => {
     return ()=>{};
       
     }, [])
+
     const openNewWindow = (id) => {
-      // pidData(id);
-      // const i=getPid()
-      // console.log(i)
+      
       localStorage.setItem("pid",id);
      
       const url = '/q';
@@ -108,11 +111,12 @@ const Testpaper = ({alertFunction}) => {
                                 const d=data._id
                                 const tq=data.total_q
                                 const tsq=data.qs.length
-                                return tsq!=0?<div className="test-paper" key={i}>
+                                const attempts=jdata.attempts
+                                return (((tp===1 && attempts[d]) || (tp===0 && !attempts[d]))?<div className="test-paper" key={i}>
                                 <div className="test-details">
                                    
                                 <strong>{data.title}</strong>
-                                <p>180 min <span>created on {data.createdAt}</span></p>
+                                <p>{data.duration} min | <span> {data.total_q} Questions</span></p>
                                 </div>
                                 <button className="start-btn" onClick={()=>{ 
                                   if(!jdata.verified){
@@ -121,10 +125,27 @@ const Testpaper = ({alertFunction}) => {
                                     openNewWindow(d)
                                   }
                                   }}>start</button>
+                                  {tp===1 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{
+                                    console.log(jdata.attempts[d])
+                                     setpid(d)}}/>}
                                 
-                            </div>:null
+                            </div>:null)
                             }):null
             }
+            </div>
+            <div className="test-paper-attempts">
+                {
+                  attem_pid && tp===1?<div className="tp-attempt" >
+                      {
+                        jdata.attempts[attem_pid].map((data,id)=>{
+                          return <div className="attempt-info">
+                            <p>attempt No. {id+1} | At {data.startTime}</p>
+                              {/* {data.status===0? <h4>resume</h4>:null} */}
+                            </div>
+                        })
+                      }
+                  </div>:null
+                }
             </div>
         </div>
     </div>

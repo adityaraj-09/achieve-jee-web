@@ -5,6 +5,10 @@
     flex-direction: column;
 
 }
+.main-ques ::-webkit-scrollbar{
+    width: 0;  
+    background: transparent; 
+}
 .s{
     height: 100vh;
     display: flex;

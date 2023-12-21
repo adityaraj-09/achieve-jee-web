@@ -13,6 +13,8 @@ import Dashboard from './components/dashboard/dashboard';
 import Socketc from './pages/socketc';
 import OTPVerificationPage from './components/dashboard/verify_otp';
 import OtpPage from './pages/otp-verify';
+import Summary from './components/exams/summary';
+import ResultPage from './components/exams/result';
 
 
 function App() {
@@ -45,13 +47,15 @@ function App() {
                 <Route path='home' element={<HomePage/>}/>
                 <Route path="q"  element={
                   <ProtectedRoute>
-
+ 
                     <Quesionpage/>
                   </ProtectedRoute>
                  
                 }/>
                 
                 <Route path='verify-otp' element={<OtpPage/>}/>
+                <Route path='summary' element={<Summary/>}/>
+                <Route path='result/:pid' element={<ResultPage/>}/>
                 
     </Route> 
   

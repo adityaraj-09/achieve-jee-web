@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { decryptData, decryptString, encryptData } from '../encryption';
 import {IoMdAddCircle} from "react-icons/io"
 import { useNavigate } from 'react-router-dom';
+import { async } from '@firebase/util';
 
 
 const ProfileDash = () => {
@@ -19,11 +20,25 @@ const ProfileDash = () => {
     const [img,setimg]=useState(jdata["image"])
     const fileInputRef = useRef(null);
 
+    function convertToBase64(file){
+      return new Promise((resolve,reject)=>{
+        const filereader=new FileReader()
+        filereader.readAsDataURL(file)
+        filereader.onload=()=>{
+          resolve(filereader.result)
+        }
+        filereader.onerror=(error)=>{
+          reject(error)
+        }
+      })
+    }
     
-    const handleImageChange = (event) => {
+    const handleImageChange =async (event) => {
        
         const file = event.target.files[0];
         setSelectedImage(file)
+        // const img=await convertToBase64(file)
+        // console.log(img)
         if (file && file.type.startsWith('image/')) {
             const imageUrl = URL.createObjectURL(file);
             setSelectedImageURL(imageUrl);

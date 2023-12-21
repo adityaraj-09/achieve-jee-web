@@ -1,0 +1,220 @@
+.con-result{
+    width: 100vw;
+    min-height: 100vh;
+    height: max-content;
+   
+    overflow: hidden;
+    background: #1f1f38;
+    color: white;
+    background-image: url(../../assets/bg-texture.png);
+}
+.top-box{
+  width: 80%;
+  margin: auto;
+    justify-content: center;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    padding: 40px;
+}
+
+
+.head{
+    font-size: 20px;
+    
+    color: white;
+}
+
+.ans_pn p{
+    font-weight: 600;
+    color: #4db5ff;
+    font-size: 30px;
+}
+.ans_pn{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.ans_pn .btn-ans{
+    background-color: rgba(77,181,255,0.4);
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 2px solid #4db5ff;
+}
+.cir_datas{
+    display: flex;
+    gap: 20px;
+}
+.cir_data_res{
+    height: 130px;
+    width: 130px;
+    background-color: #2B3674;
+    display: flex;
+    color: white;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid #4db5ff;
+}
+.cir_data_res p{
+    color: white;
+}
+.cir_data_res .basel{
+    width: 80px;
+    background-color: #4db5ff;
+    height: 3px;
+}
+.cir_data_res strong{
+    margin: 0;
+    padding: 0;
+}
+.con-marks{
+    padding: 15px;
+}
+.box-subjectwise{
+    display: flex;
+    margin: auto;
+    width: 70%;
+    position: relative;
+    flex-direction: column;
+}
+.box-overall{
+    display: flex;
+    padding: 40px 0;
+    margin: auto;
+    width: 70%;
+    position: relative;
+    justify-content: space-between;
+   gap: 40px;
+}
+.con-barChart{
+    display: flex;
+    gap: 30px;
+    position: relative;
+    height: 200px;
+
+}
+.con-barChart .y-axis{
+    display: flex;
+   
+    height: 100%;
+    gap: 15px;
+    
+    flex-direction: column-reverse;
+}
+.y-axis p{
+    color: white;
+}
+.con-barChart .barChart{
+    display: flex;
+    gap: 10px;
+
+}
+.con-barChart .con-bar{
+    display: flex;
+    height: 100%;
+    width: max-content;
+   
+    flex-direction: column-reverse;
+}
+.hover{
+    display: none;
+}
+.bar{
+    position: relative;
+}
+.bar:hover .hover{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  left: 50px ;
+  top: 30px;
+    
+    
+}
+.hover::after{
+    content: "";
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 12px;
+    
+    position: absolute;
+    bottom: -5px;
+    border-radius: 3px;
+    transform: rotate(45deg);
+}
+.box-subjectwise .p-charts{
+   
+   
+    margin: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.p-chart h3{
+    margin: 0;
+    padding: 0;
+}
+.box-subjectwise .p-chart{
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width: 300px;
+    position: relative;
+}
+.box-bar-head{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.box-bar-head strong{
+    margin: 0;
+    padding: 0;
+    color: #4db5ff;
+    left: 0;
+    position: absolute;
+}
+.color-schemes{
+    margin-top: 40px;
+}
+.p-chart h3{
+    top: 0;
+}
+.p-chart .main-chart{
+    top: 0px;
+}
+.p-chart .main-chart ,.p-chart h3{
+    position: absolute;
+    
+}
+
+.con-errorResult{
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.container-error-box{
+  
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: max-content;
+    background-color: #f9f9f9;
+}
+.container-error-box h1{
+    color: #e74c3c; 
+}

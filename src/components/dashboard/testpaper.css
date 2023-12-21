@@ -26,16 +26,21 @@
     background-color: var(--color-primary);
 }
 .con-test-papers{
-    width: 500px;
-    border-radius: 10px;
-    background-color: white;
+    width: max-content;
+    
+    
    display: flex;
-   justify-content: center;
-   align-items: center;
+   gap: 25px;
+   justify-content: flex-start;
+   flex-direction: row;
+   
 }
 .test-papers{
-    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
     display: flex;
+    background-color: white;
+    height: max-content;
     flex-direction: column;
     gap: 10px;
     justify-content: flex-start;
@@ -74,6 +79,28 @@
     border-radius: 5px;
     background-color: var(--color-primary);
     height: 80%;
+}
+.test-paper-attempts{
+    display: flex;
+    justify-content: center;
+    width: max-content;
+    height: 500px;
+    background-color:white;
+}
+.tp-attempt{
+    display: flex;
+    padding: 15px;
+    width: fit-content;
+    height: 500px;
+    overflow-y: scroll;
+    flex-direction: column;
+}
+.tp-attempt .attempt-info{
+    display: flex;
+    height: max-content;
+    width: max-content;
+    gap: 10px;
+    flex-direction: row;
 }
 
 @media screen and (max-width:700px) {

@@ -1,4 +1,4 @@
-::-webkit-scrollbar {
+.slider_link ::-webkit-scrollbar {
     width: 0;  
     background: transparent;  
 }
