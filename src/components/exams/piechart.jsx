@@ -6,7 +6,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
  
 const options = {
-    radius: '60%', 
+    radius: '50%', 
     cutoutPercentage: 10,
     plugins: {
         legend: {

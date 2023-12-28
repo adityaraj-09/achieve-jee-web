@@ -1,0 +1,173 @@
+
+#leaderboard{
+    display: flex;
+    padding: 40px 0;
+    margin: auto;
+    
+    width: 80%;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-between;
+   gap: 10px;
+}
+.box-toppers{
+    width: 90%;
+    margin: auto;
+   position: relative;
+    display: flex;
+    height: max-content;
+    justify-content: center;
+    
+    align-items: center;
+    background-color: black;
+}
+.col-toppers{
+   margin-top: 20px;
+    display: flex;
+
+    width: 50%;
+    
+    height: 100%;
+  position: relative;
+    gap: 40px;
+    justify-content: space-between;
+    
+   
+   
+}
+.col-topper{
+    display: flex;
+   
+    position: relative;
+    justify-content: flex-end;
+    align-items: center;
+    
+    flex-direction: column;
+   
+    
+}
+.col-topper .img{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.col-topper p{
+    color: white;
+}
+.first{
+   
+    border-radius: 10px;
+    color: white;
+    height: 130px;
+    background-color: rgb(249, 22, 139);
+}
+.first h2{
+    margin: 0;
+    padding: 0;
+   
+    color: white;
+}
+.second{
+    
+   
+    height: 150px;
+    background-color: yellow;
+}
+.third{
+   
+    color: white;
+    height: 110px;
+    background-color: rgb(136, 2, 136);
+}
+.second h2{
+    margin: 0;
+    padding: 0;
+}
+.third h2{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+.con-details-topper{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    justify-content: center;
+    
+    width: max-content;
+    border-radius: 10px 10px 0 0;
+}
+.con-details-topper strong{
+    padding: 0;
+    margin: 0;
+}
+.con-details-topper div{
+    display: flex;
+    justify-content: center;
+}
+.box-leaders{
+    display: flex;
+    padding: 10px;
+    width: 90%;
+   max-height: 350px;
+  
+   border-radius: 15px;
+    overflow-y: scroll;
+    background-color: rgb(204, 201, 201);
+    margin: auto;
+    gap: 15px;
+    flex-direction: column;
+}
+.box-leader{
+    display: flex;
+   
+    justify-content: space-between;
+}
+ .gapline{
+    height: 2px;
+    background-color: rgb(32, 94, 148);
+    width: 100%;
+    display: none;
+}
+.box-leaders .img{
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.rankAndName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.rankAndName strong{
+    font-size: 20px;
+}
+.rankAndName p{
+    font-size: 18px;
+}
+
+@media screen and (max-width:900px){
+    #leaderboard{
+        width: 100%;
+    }
+    .box-toppers{
+        width: 100%;
+    }
+    .col-toppers{
+        width: 90%;
+    }
+    .con-details-topper{
+        padding: 8px;
+    }
+    .box-leaders{
+        width: 100%;
+        max-height: 300px;
+        overflow-y: scroll;
+
+    }
+}

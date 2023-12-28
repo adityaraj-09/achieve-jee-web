@@ -6,13 +6,14 @@ import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
 import {GrFormNext} from "react-icons/gr"
 import { Button } from '@mui/base';
+import { useNavigate } from 'react-router-dom';
 const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
     const apiUrl='https://achieve-jee-server.onrender.com/api/papers'
     const token=decryptString(localStorage.getItem("jwtToken"))
     const  jdata=decryptData(localStorage.getItem("user"))
-   
+   const navigate=useNavigate()
     const [attem_pid,setpid]=useState(null)
     useEffect(() => {
       const cachedData =  getCachedData(apiUrl);
@@ -50,11 +51,11 @@ const Testpaper = ({alertFunction}) => {
       
     }, [])
 
-    const openNewWindow = (id) => {
+    const openNewWindow = (id,resume) => {
       
       localStorage.setItem("pid",id);
      
-      const url = '/q';
+      const url = `q/${resume}`;
       const windowName = 'myNewWindow';
       const width = 800;
       const height = 800;
@@ -122,12 +123,18 @@ const Testpaper = ({alertFunction}) => {
                                   if(!jdata.verified){
                                     alertFunction("please verify your account")
                                   }else{
-                                    openNewWindow(d)
+                                    openNewWindow(d,false)
                                   }
                                   }}>start</button>
+ {
+                                      tp===1 &&  <button className="start-btn" onClick={()=>{ 
+                                       navigate("/result",{state:data})
+                                        }}>view result</button>
+                                     }
                                   {tp===1 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{
                                     console.log(jdata.attempts[d])
                                      setpid(d)}}/>}
+                                    
                                 
                             </div>:null)
                             }):null

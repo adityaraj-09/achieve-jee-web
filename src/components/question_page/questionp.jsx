@@ -4,14 +4,16 @@ import CountdownTimer from './countdown';
 import "./questionp.css"
 import { AuthContext} from '../../AuthContext'
 import { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString, encryptData } from '../encryption';
 import { Button } from '@mui/material';
+import userEvent from '@testing-library/user-event';
 
 const Questionp = () => {
 
-    // const location = useLocation();
+    
+    const {resume}=useParams()
 
     // const [pid, setpid] = useState(null)
     // const [istimer, setistimer] = useState(false)
@@ -63,6 +65,7 @@ const Questionp = () => {
     const [answers,setAnswers]=useState({})
     const [spin, setspin] = useState(false)
     const [time,settime]=useState({})
+    
     const addAnswer = (questionNo, answerArray) => {
         setAnswers((prevAnswers) => ({
           ...prevAnswers,
@@ -110,12 +113,16 @@ const Questionp = () => {
     const token = decryptString(localStorage.getItem("jwtToken"))
     const jdata = decryptData(localStorage.getItem("user"))
     const i = localStorage.getItem("pid");
+    let len=jdata["attempts"][i].length
+    if(resume){
+        setAnswers(jdata["attempts"][i][len-1].markedAns)
+    }
     useEffect(() => {
 
         // setpid(i)
 
         if (i) {
-            fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}`, {
+            fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}/${resume}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +138,10 @@ const Questionp = () => {
                 })
                 .then((responseData) => {
                     setallqs(responseData);
-                    addAnswer(0,[])
+                    if(!answers[0]){
+
+                        addAnswer(0,[])
+                    }
                     console.log(responseData)
                 })
                 .catch((error) => {
@@ -140,7 +150,7 @@ const Questionp = () => {
         }
     }, [i]);
 
-
+    
 
     const handleInputChange = (event) => {
         const value = event.target.value;
@@ -158,9 +168,7 @@ const Questionp = () => {
         return anss;
     }
 
-    function generateEncrypedTxtFile(){
-        
-    }
+    
     const submit=()=>{
         setspin(true)
         

@@ -2,11 +2,14 @@
     width: 100vw;
     min-height: 100vh;
     height: max-content;
-   
+   font-family: 'poppins';
     overflow: hidden;
-    background: #1f1f38;
-    color: white;
-    background-image: url(../../assets/bg-texture.png);
+   
+    
+   
+}
+.trop{
+    color: red;
 }
 .top-box{
   width: 80%;
@@ -21,8 +24,8 @@
 
 .head{
     font-size: 20px;
+    font-weight: 500;
     
-    color: white;
 }
 
 .ans_pn p{
@@ -50,7 +53,6 @@
     width: 130px;
     background-color: #2B3674;
     display: flex;
-    color: white;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -58,7 +60,8 @@
     border: 1px solid #4db5ff;
 }
 .cir_data_res p{
-    color: white;
+   color: white;
+    font-size: 25px;
 }
 .cir_data_res .basel{
     width: 80px;
@@ -67,6 +70,7 @@
 }
 .cir_data_res strong{
     margin: 0;
+    color: white;
     padding: 0;
 }
 .con-marks{
@@ -104,7 +108,7 @@
     flex-direction: column-reverse;
 }
 .y-axis p{
-    color: white;
+   
 }
 .con-barChart .barChart{
     display: flex;
@@ -176,18 +180,18 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
+   
 }
 .box-bar-head strong{
     margin: 0;
     padding: 0;
     color: #4db5ff;
     left: 0;
+    font-size: large;
     position: absolute;
 }
-.color-schemes{
-    margin-top: 40px;
-}
+
 .p-chart h3{
     top: 0;
 }
@@ -196,6 +200,7 @@
 }
 .p-chart .main-chart ,.p-chart h3{
     position: absolute;
+   
     
 }
 
@@ -217,4 +222,62 @@
 }
 .container-error-box h1{
     color: #e74c3c; 
+}
+
+@media screen and (max-width:900px){
+    .cir_data_res{
+        width: 95px;
+        height: 95px;
+        position: relative;
+    }
+    .cir_data_res .basel{
+        width: 90%;
+       
+    }
+    .cir_data_res p{
+        font-size: 20px;
+    }
+    .ans_pn{
+        width: 100%;
+    }
+    .ans_pn p{
+        font-size:25px ;
+    }
+    .res_nav{
+        display: none;
+    }
+    .top-box{
+        width: 100%;
+        padding: 10px;
+    }
+    .cir_datas{
+        width: 80%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        
+    }
+    .box-overall{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+    .box-subjectwise{
+        width: 100%;
+    }
+    .p-charts{
+        width: 100%;
+        gap: 10px;
+        flex-direction: column;
+    }
+    .p-chart{
+        height: 250px;
+        width: 250px;
+    }
+    .p-chart h3{
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
 }

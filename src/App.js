@@ -45,7 +45,7 @@ function App() {
                 <Route index element={<ProtectedRoute redirect={"/home"}><Dashboard/></ProtectedRoute>}/>
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='home' element={<HomePage/>}/>
-                <Route path="q"  element={
+                <Route path="q/:resume"  element={
                   <ProtectedRoute>
  
                     <Quesionpage/>
@@ -55,7 +55,7 @@ function App() {
                 
                 <Route path='verify-otp' element={<OtpPage/>}/>
                 <Route path='summary' element={<Summary/>}/>
-                <Route path='result/:pid' element={<ResultPage/>}/>
+                <Route path='result' element={<ResultPage/>}/>
                 
     </Route> 
   
