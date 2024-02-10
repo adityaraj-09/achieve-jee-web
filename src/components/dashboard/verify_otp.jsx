@@ -24,7 +24,6 @@ function OTPVerificationPage() {
     let token=decryptString(localStorage.getItem("jwtToken"))
    let jdata=decryptData(localStorage.getItem("user"))
     const data = {
-   
      email:jdata["email"]
     };
 

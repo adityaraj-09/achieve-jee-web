@@ -47,13 +47,12 @@ function App() {
                 <Route path='home' element={<HomePage/>}/>
                 <Route path="q/:resume"  element={
                   <ProtectedRoute>
- 
                     <Quesionpage/>
                   </ProtectedRoute>
                  
                 }/>
                 
-                <Route path='verify-otp' element={<OtpPage/>}/>
+                
                 <Route path='summary' element={<Summary/>}/>
                 <Route path='result' element={<ResultPage/>}/>
                 

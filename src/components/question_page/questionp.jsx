@@ -14,6 +14,7 @@ const Questionp = () => {
 
     
     const {resume}=useParams()
+    console.log(resume)
 
     // const [pid, setpid] = useState(null)
     // const [istimer, setistimer] = useState(false)
@@ -94,29 +95,14 @@ const Questionp = () => {
     // const i=getPid()
     // console.log(i)
 
-    useEffect(() => {
-        let t=time[cr_q]?time[cr_q]:0
-        const interval = setInterval(() => {
-          // Increment the number by 1
-          
-           t=t+1
-          console.log(t)
-          addTime(cr_q,t)
-        }, 1000); // 1000ms = 1 second
-        return () => {
-            clearInterval(interval);
-            console.log('Interval is cleared');
-          };
-        // Cleanup the interval when the component unmounts
-        
-      }, [cr_q]);  
+      
     const token = decryptString(localStorage.getItem("jwtToken"))
     const jdata = decryptData(localStorage.getItem("user"))
     const i = localStorage.getItem("pid");
-    let len=jdata["attempts"][i].length
-    if(resume){
-        setAnswers(jdata["attempts"][i][len-1].markedAns)
-    }
+    // let len=jdata["attempts"][i].length
+    // if(resume){
+    //     setAnswers(jdata["attempts"][i][len-1].markedAns)
+    // }
     useEffect(() => {
 
         // setpid(i)
@@ -149,7 +135,22 @@ const Questionp = () => {
                 });
         }
     }, [i]);
-
+    useEffect(() => {
+        let t=time[cr_q]?time[cr_q]:0
+        const interval = setInterval(() => {
+          // Increment the number by 1
+          
+           t=t+1
+          console.log(t)
+          addTime(cr_q,t)
+        }, 1000); // 1000ms = 1 second
+        return () => {
+            clearInterval(interval);
+            console.log('Interval is cleared');
+          };
+        // Cleanup the interval when the component unmounts
+        
+      }, [cr_q]);
     
 
     const handleInputChange = (event) => {
@@ -170,6 +171,25 @@ const Questionp = () => {
 
     
     const submit=()=>{
+        let tq=allqs.length
+        let as=0
+        let nvq=0
+        let naq=0
+        
+        let mq=0
+        for (let i = 0; i < allqs.length; i++) {
+            const element = answers[`${i}`];
+            if(element){
+                if(element.length===0){
+                    naq++
+                }else{
+                    as++
+                }
+            }else{
+                nvq++
+            }
+            
+        }
         setspin(true)
         
         const data={
@@ -217,7 +237,7 @@ const Questionp = () => {
         allqs ? <section className='main-ques'>
             <div className="heading" >
                 <h3>ONLINE TEST</h3>
-                <Button variant="contained"><CountdownTimer time={180}/></Button>
+                {/* <Button variant="contained"><CountdownTimer time={180}/></Button> */}
                 {/* <div style={{display:"flex",backgroundColor:"white",color:"black",padding:"5px",boxShadow:" 1px 2px 3px 4px rgba(184, 182, 182, 0.4)",fontWeight:"bold"}}><CountdownTimer/></div> */}
             </div>
             <div className="box-ques">
@@ -460,7 +480,7 @@ const Questionp = () => {
                     </div>
                 </div>
             </div>
-        </section> : <div className="s"><Spinner /></div>
+        </section> : <div className="s"><Spinner/></div>
     )
 }
 

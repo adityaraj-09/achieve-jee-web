@@ -16,7 +16,7 @@ code {
 :root{
   --color-bg:#f6f6f9;
   --color-light:rgba(132,139,200,0.18);
-  --box-shadow:0 2rem 3rem var(--color-light);
+  --box-shadow:2px 0 4px 0 #0000001a;
   --color-primary:#4318FF;
   --color-paper:rgb(77, 77, 188);
   --color-secondary:#C6D2FD;
@@ -25,7 +25,7 @@ code {
 .light-theme{
   --color-bg:#f6f6f9;
   --color-light:rgba(132,139,200,0.18);
-  --box-shadow:0 2rem 3rem var(--color-light);
+  --box-shadow:2px 0 4px 0 #0000001a;
   --color-primary:#2B3674;
   --color-paper:rgb(77, 77, 188);
   --color-secondary:#C6D2FD;
@@ -34,7 +34,7 @@ code {
 .dark-theme{
   --color-bg:#f6f6f9;
   --color-light:rgba(132,139,200,0.18);
-  --box-shadow:0 2rem 3rem var(--color-light);
+  --box-shadow:2px 0 4px 0 #0000001a;
   --color-primary:rgb(125,7,125);
   --color-paper:rgb(77, 77, 188);
   --color-secondary:#f6c2e7;
@@ -42,7 +42,7 @@ code {
 .green-theme{
   --color-bg:#f6f6f9;
   --color-light:rgba(132,139,200,0.18);
-  --box-shadow:0 2rem 3rem var(--color-light);
+  --box-shadow:2px 0 4px 0 #0000001a;
   --color-primary:#04CD00;
   --color-paper:rgb(77, 77, 188);
   --color-secondary:#BCEFBD;

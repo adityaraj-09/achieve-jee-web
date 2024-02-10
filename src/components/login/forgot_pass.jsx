@@ -28,7 +28,7 @@ const FPDialog = (props) => {
         const data={
             email:email
         }
-        fetch('http://achieve-jee-server.onrender.com/api/sendlink', {
+        fetch('https://achieve-jee-server.onrender.com/api/sendlink', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', 

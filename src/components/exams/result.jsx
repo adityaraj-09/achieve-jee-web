@@ -15,7 +15,7 @@ const ResultPage = () => {
   
   
 
-    var paperData = location.state
+    var paperData = location.state        
   
 
 
@@ -110,16 +110,16 @@ const ResultPage = () => {
 
         <div className="ans_pn"><p>Jee Advanced Part Test</p> <div className="btn-ans">Solutions</div></div>
         <div className="cir_datas">
-          <div className="cir_data_res"><p>177</p><div className="basel"></div><strong>MY RANK</strong></div>
-          <div className="cir_data_res"><p>7(5%)</p><div className="basel"></div><strong>MY SCORE</strong></div>
-          <div className="cir_data_res"><p>45%</p><div className="basel"></div><strong>ACCURACY</strong></div>
-          <div className="cir_data_res"><p>{360}</p><div className="basel"></div><strong>HIGHEST</strong></div>
-          <div className="cir_data_res"><p>{-10}</p><div className="basel"></div><strong>LOWEST</strong></div>
+          <div className="cir_data_res"><p>{paperData? data.rank:177}</p><div className="basel"></div><strong>MY RANK</strong></div>
+          <div className="cir_data_res"><p>{`${paperData?data.stuMT:"250"}(${paperData?data.stuPer:53}%)`}</p><div className="basel"></div><strong>MY SCORE</strong></div>
+          <div className="cir_data_res"><p>{paperData?data.stuAcc:65}%</p><div className="basel"></div><strong>ACCURACY</strong></div>
+          <div className="cir_data_res"><p>{paperData?paperData.AttemptedBy[0].marks:"360"}</p><div className="basel"></div><strong>HIGHEST</strong></div>
+          <div className="cir_data_res"><p>{paperData?paperData.AttemptedBy[paperData.AttemptedBy.length-1].marks:"360"}</p><div className="basel"></div><strong>LOWEST</strong></div>
         </div>
 
         <div className="con-marks" >
         <p className='head'>LEADERBOARD <HiTrophy className='trop'/></p>
-        <Leaderboard/>
+        <Leaderboard  students={paperData?paperData.AttemptedBy:[]}/>
           <p className='head'>OVERALL</p>
 
           <div className="box-overall" id='overall'>

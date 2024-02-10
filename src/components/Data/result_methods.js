@@ -44,11 +44,11 @@
 
     export const getUserData=(data,marks)=>{
         if(data){
-
+            const stuAcc=(((data["phy"][1]+data["chem"][1]+data["math"][1])*100.0)/(data["phy"][3]+data["chem"][3]+data["math"][3])).toFixed(2)
             const stuMT=data["phy"][0]+data["chem"][0]+data["math"][0]
             const stuPer=(stuMT*100.0/marks).toFixed(2)
             const individualTime=data['time'][0]+data['time'][1]+data['time'][2]
-            return {stuMT,stuPer,individualTime}
+            return {stuMT,stuPer,individualTime,rank:data.rank,stuAcc}
         }
         
     }

@@ -9,6 +9,10 @@
     width: 0;  
     background: transparent; 
 }
+h1,h2,h3,h4,h5,h6,strong{
+    margin: 0;
+    padding: 0;
+}
 .s{
     height: 100vh;
     display: flex;
@@ -63,6 +67,8 @@
     color: white;
 }
 .heading h3{
+    margin: 0;
+    padding: 0;
     color: white;
   
 }

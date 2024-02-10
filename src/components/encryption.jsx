@@ -10,6 +10,9 @@ export const encryptData = (data) => {
 
 
  export const decryptData = (encryptedData) => {
+  if(!encryptedData){
+    return null
+  }
   const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
   if (!bytes) {
     return null;
@@ -25,6 +28,9 @@ export const encryptString = (text) => {
 
 // Function to decrypt a string
 export const decryptString = (encryptedText) => {
+  if(!encryptedText){
+    return null
+  }
   const bytes = CryptoJS.AES.decrypt(encryptedText, secretKey);
   if (!bytes) {
     return null;

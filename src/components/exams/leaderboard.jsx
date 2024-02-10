@@ -1,10 +1,11 @@
 import React from 'react'
 import "./leaderboard.css"
-const Leaderboard = () => {
+const Leaderboard = ({students}) => {
     const img="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
   return (
     <div id='leaderboard'>
-        <div className="box-toppers">
+        {
+            students.length>=3 &&   <div className="box-toppers">
             <div className="col-toppers">
 
             <div className="col-topper ">
@@ -35,40 +36,22 @@ const Leaderboard = () => {
             </div>
 
         </div>
+        }
+      
         <div className="box-leaders">
+            {
+                students.map((data,i)=>{
+                    return (
+                        <div className="box-leader">
+                        <div className="rankAndName"><strong>{i+1}</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>{data.name}</p></div>
+                        <strong>{data.marks}</strong>
+                    </div>
+                    )
+                })
+            }
             
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
-            <div className="box-leader">
-                <div className="rankAndName"><strong>4</strong><div className="img"><img src={img} alt="" height={"50px"} width={"50px"}/></div> <p>Aditya</p></div>
-                <strong>280</strong>
-            </div>
+           
+            
             
             
         </div>
