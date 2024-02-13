@@ -7,6 +7,7 @@ import { decryptData, decryptString } from '../encryption';
 import {GrFormNext} from "react-icons/gr"
 import { Button } from '@mui/base';
 import { useNavigate } from 'react-router-dom';
+import CameraComponent from '../exams/camera';
 const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
@@ -105,6 +106,7 @@ const Testpaper = ({alertFunction}) => {
             
         </div>
 
+
         <div className="con-test-papers">
             <div className="test-papers">
             {
@@ -154,7 +156,9 @@ const Testpaper = ({alertFunction}) => {
                   </div>:null
                 }
             </div>
+            
         </div>
+       
     </div>
   )
 }

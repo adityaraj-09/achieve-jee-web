@@ -9,6 +9,7 @@ import Spinner from '../spinner/spinner';
 import { decryptData, decryptString, encryptData } from '../encryption';
 import { Button } from '@mui/material';
 import userEvent from '@testing-library/user-event';
+import CameraComponent from '../exams/camera';
 
 const Questionp = () => {
 
@@ -260,7 +261,7 @@ const Questionp = () => {
                         <div className="qno">
                             <div className="small-inst">
  
-                            Question {allqs ? cr_q + 1 : "loading..."} {allqs?(allqs[cr_q]["type"]===0?"SELECT ONE CORRECT ANSWER":allqs[cr_q]["type"]===1?"SELECT ALL CORRECT OPTIONS ":"ENTER SINGLE DIGIT INTEGER"):null}
+                            Question {allqs ? cr_q + 1 : "loading..."} {allqs?(allqs[cr_q]["type"]===0?"SELECT ONE CORRECT ANSWER":allqs[cr_q]["type"]===1?"SELECT ALL CORRECT OPTIONS ":allqs[cr_q]["type"]===2?"ENTER SINGLE DIGIT INTEGER":"ENTER NUMERICAL VALUE"):null}
                             </div>
                         <div className="marking-sch">
                             +{allqs?(allqs[cr_q]["marks"][0]):null} for RIGHT answer/{allqs?(allqs[cr_q]["marks"][1]):null} for WRONG answer
@@ -272,7 +273,7 @@ const Questionp = () => {
                                 {allqs ? allqs[cr_q].body : "loading..."}
                             </p>
 
-                            {allqs[cr_q]["type"] == 2 ? <div className="ans-input option" >
+                            {(allqs[cr_q]["type"] == 2 || allqs[cr_q]["type"] == 3) ? <div className="ans-input option" >
 
                                 <input type="text" id='siq' value={(answers[cr_q] && answers[cr_q].length!=0)?`${answers[cr_q][0]}`:""} onInput={handleInputChange} />
 
@@ -323,7 +324,7 @@ const Questionp = () => {
                                             <div className="option">
 
                                                 <input type="radio" id={index} value={opt} name="opts" className='r' 
-                                                checked={ answers[cr_q].length!=0?answers[cr_q][0]-1===index :false} 
+                                                checked={answers[cr_q] && answers[cr_q].length!=0?answers[cr_q][0]-1===index :false} 
                                                 onChange={() =>{ 
                                                     
                                                         const a=[]
@@ -396,7 +397,7 @@ const Questionp = () => {
                 </div>
                 <div className="ques-rightp">
                     <div className="stu-details">
-                        <div className="stu-img"><img src={jdata["image"]==""?"https://cdn-icons-png.flaticon.com/512/149/149071.png":jdata["image"]} alt="" /></div>
+                        <CameraComponent/>
                         <div className="stu-data">
 
                             <CountdownTimer className="timer" time={180}/>
@@ -434,13 +435,13 @@ const Questionp = () => {
                         <div className="p-head">Legend</div>
                         <div className="no-qp">
                             <div className="sq">
-                                {solved.length} Answered
+                                Answered
                             </div>
                             <div className="usq">
-                                {unsolved.length} UnAnswered
+                                 UnAnswered
                             </div>
                             <div className="nvq">
-                                {notvisited.length} Not visited
+                                 Not visited
                             </div>
                             <div className="mq">
                                 0 Marked

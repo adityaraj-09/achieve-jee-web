@@ -10,26 +10,26 @@ const Leaderboard = ({students}) => {
 
             <div className="col-topper ">
                 <div className="img"><img src={img} alt="" height={"60px"} width="60px"/></div>
-                <p>Aditya</p>
+                <p>{students[1].name}</p>
                 <div className="con-details-topper first">
                     <div><h2>2</h2><strong>nd</strong></div>
-                    <strong>280 pts</strong>
+                    <strong>{students[1].marks}</strong>
                 </div>
             </div>
             <div className="col-topper ">
                 <div className="img"><img src={img} alt="" /></div>
-                <p>Aditya</p>
+                <p>{students[0].name}</p>
                 <div className="con-details-topper second">
                     <div><h2>1</h2><strong>st</strong></div>
-                    <strong>280 pts</strong>
+                    <strong>{students[0].marks}</strong>
                 </div>
             </div>
             <div className="col-topper ">
                 <div className="img"><img src={img} alt="" /></div>
-                <p>Aditya</p>
+                <p>{students[2].name}</p>
                 <div className="con-details-topper third">
                     <div><h2>3</h2><strong>rd</strong></div>
-                    <strong>280 pts</strong>
+                    <strong>{students[2].marks}</strong>
                 </div>
             </div>
             

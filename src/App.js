@@ -15,6 +15,7 @@ import OTPVerificationPage from './components/dashboard/verify_otp';
 import OtpPage from './pages/otp-verify';
 import Summary from './components/exams/summary';
 import ResultPage from './components/exams/result';
+import UploadForm from './folders/question-upload';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                 
                 
                 <Route path='summary' element={<Summary/>}/>
+                <Route path='upload' element={<UploadForm/>}/>
                 <Route path='result' element={<ResultPage/>}/>
                 
     </Route> 
