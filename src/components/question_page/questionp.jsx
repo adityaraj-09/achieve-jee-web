@@ -10,6 +10,7 @@ import { decryptData, decryptString, encryptData } from '../encryption';
 import { Button } from '@mui/material';
 import userEvent from '@testing-library/user-event';
 import CameraComponent from '../exams/camera';
+import FaceDetectionComponent from '../exams/face-detection';
 
 const Questionp = () => {
 
@@ -397,7 +398,7 @@ const Questionp = () => {
                 </div>
                 <div className="ques-rightp">
                     <div className="stu-details">
-                        <CameraComponent/>
+                        <FaceDetectionComponent/>
                         <div className="stu-data">
 
                             <CountdownTimer className="timer" time={180}/>

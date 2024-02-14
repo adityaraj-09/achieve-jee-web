@@ -8,6 +8,7 @@ import {GrFormNext} from "react-icons/gr"
 import { Button } from '@mui/base';
 import { useNavigate } from 'react-router-dom';
 import CameraComponent from '../exams/camera';
+import FaceDetectionComponent from '../exams/face-detection';
 const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
@@ -80,6 +81,7 @@ const Testpaper = ({alertFunction}) => {
   return (
    !qs? <Spinner/>:<div className="con-test">
         <h2>Test Papers</h2>
+        
         <div className="type-exams">
             <div className="type-exam">
 
