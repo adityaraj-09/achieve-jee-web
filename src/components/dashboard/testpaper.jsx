@@ -81,22 +81,24 @@ const Testpaper = ({alertFunction}) => {
   return (
    !qs? <Spinner/>:<div className="con-test">
         <h2>Test Papers</h2>
-        
+       
         <div className="type-exams">
+          
+            
             <div className="type-exam">
 
-            <strong onClick={()=>settp(0)}>Upcoming</strong>
+            <strong onClick={()=>settp(0)}>Attempted</strong>
             {
               tp===0?<div className="under-line"></div>:null
             }
-            
             </div>
             <div className="type-exam">
 
-            <strong onClick={()=>settp(1)}>Attempted</strong>
+            <strong onClick={()=>settp(1)}>Upcoming</strong>
             {
               tp===1?<div className="under-line"></div>:null
             }
+            
             </div>
             <div className="type-exam">
 
@@ -117,7 +119,8 @@ const Testpaper = ({alertFunction}) => {
                                 const tq=data.total_q
                                 const tsq=data.qs.length
                                 const attempts=jdata.attempts
-                                return (((tp===1 && attempts[d]) || (tp===0 && !attempts[d]))?<div className="test-paper" key={i}>
+                                return (((tp===0 && attempts[d]) || (tp===1 && !attempts[d]))?
+                                <div className="test-paper" key={i}>
                                 <div className="test-details">
                                    
                                 <strong>{data.title}</strong>
@@ -131,11 +134,11 @@ const Testpaper = ({alertFunction}) => {
                                   }
                                   }}>start</button>
  {
-                                      tp===1 &&  <button className="start-btn" onClick={()=>{ 
+                                      tp===0 &&  <button className="start-btn" onClick={()=>{ 
                                        navigate("/result",{state:data})
                                         }}>view result</button>
                                      }
-                                  {tp===1 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{
+                                  {tp===0 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{
                                     console.log(jdata.attempts[d])
                                      setpid(d)}}/>}
                                     

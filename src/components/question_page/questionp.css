@@ -33,9 +33,11 @@ h1,h2,h3,h4,h5,h6,strong{
     position: fixed;
     top: calc((100% - 400px)/2);
     left: calc((100% - 400px)/2);
-    height: 400px;
+    height: max-content;
+    overflow-x: hidden;
     background-color: var(--color-paper);
    display: flex;
+   
    flex-direction: column;
    
     width: 400px;
@@ -91,7 +93,8 @@ h1,h2,h3,h4,h5,h6,strong{
     display: flex;
     gap: 20px;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
     left: 80%;
     right: 20px;
     position: fixed;
@@ -233,6 +236,7 @@ h1,h2,h3,h4,h5,h6,strong{
     display: flex;
     height: fit-content;
     min-height: 300px;
+    height: max-content;
     flex-direction: column;
     background-color: aliceblue;
 }

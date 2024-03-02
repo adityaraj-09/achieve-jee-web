@@ -42,19 +42,21 @@ const FaceDetectionComponent = () => {
       faceapi.matchDimensions(canvas, displaySize);
 
       setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks();
+        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions({inputSize:160,scoreThreshold:0.3})).withFaceLandmarks();
         
         // Clear previous drawings
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+        
+// draw detections into the canvas
+
 
         if (detections.length === 1) {
           console.log('Face detected');
           // Draw landmarks on each detected face
           const resizedDetections = faceapi.resizeResults(detections, displaySize);
-          resizedDetections.forEach(detection => {
-            faceapi.draw.drawFaceLandmarks(canvas, detection.landmarks, { drawLines: true, color: 'green' });
-          });
+          faceapi.draw.drawDetections(canvas, resizedDetections)
         } else if(detections.length===0) {
+          console.log('No Face detected');
             NOfaceDet++
           if (NOfaceDet >= 10) { // Change this value as needed
             NOfaceDet=0; // Reset counter
@@ -63,7 +65,7 @@ const FaceDetectionComponent = () => {
         }else{
             MulFaceDet++;
             if (consecutiveNoFaceDetections >= 5) { // Change this value as needed
-              alert('No face detected multiple times!');
+              alert('more than one face detected multiple times!');
               MulFaceDet=0; // Reset counter
             }
         }
@@ -81,7 +83,7 @@ const FaceDetectionComponent = () => {
     };
   }, []);
 
-  return <video ref={videoRef} autoPlay playsInline muted style={{ maxWidth: '100%',height:"80px",width:"80px" }} />;
+  return <video ref={videoRef} autoPlay playsInline muted style={{ height:"80px",width:"80px" }} />;
 };
 
 export default FaceDetectionComponent;

@@ -70,7 +70,7 @@
     margin: 0;
 }
 .start-btn{
-    width: 80px;
+    width: max-content;
     display: flex;
     font-size: medium;
     justify-content: center;

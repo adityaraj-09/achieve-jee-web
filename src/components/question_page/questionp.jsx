@@ -398,7 +398,7 @@ const Questionp = () => {
                 </div>
                 <div className="ques-rightp">
                     <div className="stu-details">
-                        <FaceDetectionComponent/>
+                       
                         <div className="stu-data">
 
                             <CountdownTimer className="timer" time={180}/>
@@ -434,6 +434,33 @@ const Questionp = () => {
                     </div>
                     <div className="no-ques">
                         <div className="p-head">Legend</div>
+                        
+                        <div className="exam-btns-ques">
+                            
+                            <div className="exam-btn-que" onClick={() => setd(true)}>
+                                Actions
+                            </div>
+                            
+                        
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div className="lay" style={{ display: dis ? "flex" : "none" }}>
+
+                <div className="popup" >
+                    <div className="h-cr">
+
+                        <h3>Summary</h3>
+                        <div className="cross" onClick={() => setd(false)} >
+                            <strong>close</strong>
+                        </div>
+                    </div>
+                    <div className="no-ques">
+                       
                         <div className="no-qp">
                             <div className="sq">
                                 Answered
@@ -453,9 +480,7 @@ const Questionp = () => {
                             <div className="exam-btn-que"  onClick={()=> console.log(time)}>
                                 Profile
                             </div>
-                            <div className="exam-btn-que" onClick={() => setd(true)}>
-                                Instr
-                            </div>
+                           
                             <div className="exam-btn-que">
                                 Questions
                             </div>
@@ -464,20 +489,6 @@ const Questionp = () => {
 
                                 {spin? <div className='spinner-cir'></div>:"Submit"}
                             </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div className="lay" style={{ display: dis ? "flex" : "none" }}>
-
-                <div className="popup" >
-                    <div className="h-cr">
-
-                        <h3>INSTRUCTIONS</h3>
-                        <div className="cross" onClick={() => setd(false)} >
-                            <strong>close</strong>
                         </div>
                     </div>
                 </div>
