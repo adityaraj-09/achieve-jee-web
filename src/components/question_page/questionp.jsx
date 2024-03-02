@@ -61,7 +61,7 @@ const Questionp = () => {
     const [cr_q, setcurrq] = useState(0);
     const [setq, setsetq] = useState(0);
     const [dis, setd] = useState(true)
-    const l = ["ALL", "PHY", "CHEM", "MATHS"]
+    const l = ["ALL","MATHS", "PHY", "CHEM"]
     const [solved, setsolved] = useState([])
     let unsolved = [1]
     let notvisited = []
@@ -155,16 +155,38 @@ const Questionp = () => {
       }, [cr_q]);
     
 
-    const handleInputChange = (event) => {
+      const handleInputChange = (event) => {
         const value = event.target.value;
-        if (/^\d{0,1}$/.test(value)) {
-            const array=[]
-            const a=parseInt(value)
-            array.push(a)
+        if (value === '') {
+            // Handle the case where the input is empty
+            addAnswer(cr_q, []);
+            return;
+        }
+            const array = [];
+            const a = parseFloat(value);
+            array[0] = a; 
+            addAnswer(cr_q, array);
+        
+    };
 
-            addAnswer(cr_q,array)
+    const handleKeyPress = (event) => {
+        // Allow digits, decimal point, and certain control keys
+        const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', 'Enter'];
+        const keyPressed = event.key;
+    
+        // Allow only one decimal point
+        if (keyPressed === '.' && event.target.value.includes('.')) {
+            event.preventDefault();
+            return;
+        }
+    
+        if (!allowedKeys.includes(keyPressed)) {
+            event.preventDefault(); // Prevent the default action of the key
         }
     };
+    
+    
+    
 
     function encryptAnswers(){
         const anss=encryptData(answers)
@@ -248,7 +270,25 @@ const Questionp = () => {
                         {
                             l.map((d, i) => {
                                 return (  
-                                    <div className="ques-sec" style={{ backgroundColor: setq == i ? "rgb(6, 6, 115)" : "rgb(77, 77, 188)" }} onClick={() => setsetq(i)}>
+                                    <div className="ques-sec" style={{ backgroundColor: setq == i ? "rgb(6, 6, 115)" : "rgb(77, 77, 188)" }} onClick={() =>{ 
+                                        if(i===1){
+                                            if(!answers[0]){
+                                                addAnswer(0,[])
+                                            }
+                                            setcurrq(0)
+                                        }else if(i===2){
+                                            if(!answers[(allqs.length)/3]){
+                                                addAnswer((allqs.length)/3,[])
+                                            }
+                                            setcurrq((allqs.length)/3)
+                                        }else if(i===3){
+                                            if(!answers[2*(allqs.length/3)]){
+                                                addAnswer(2*(allqs.length/3),[])
+                                            }
+                                            setcurrq(2*(allqs.length/3))
+                                        }
+                                       
+                                        setsetq(i)}}>
                                         {d}
                                     </div>
                                 )
@@ -276,7 +316,7 @@ const Questionp = () => {
 
                             {(allqs[cr_q]["type"] == 2 || allqs[cr_q]["type"] == 3) ? <div className="ans-input option" >
 
-                                <input type="text" id='siq' value={(answers[cr_q] && answers[cr_q].length!=0)?`${answers[cr_q][0]}`:""} onInput={handleInputChange} />
+                                <input type="text" id='siq' value={(answers[cr_q] && answers[cr_q].length!=0)?`${answers[cr_q][0]}`:""} onInput={handleInputChange} onKeyPress={handleKeyPress} />
 
                             </div> : null}
 

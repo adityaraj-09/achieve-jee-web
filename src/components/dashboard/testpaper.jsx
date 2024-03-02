@@ -58,24 +58,25 @@ const Testpaper = ({alertFunction}) => {
       localStorage.setItem("pid",id);
      
       const url = `q/${resume}`;
-      const windowName = 'myNewWindow';
-      const width = 800;
-      const height = 800;
-      const top=(window.innerHeight-800)/2
-      const left=(window.innerWidth-800)/2
+      navigate('/'+url)
+      // const windowName = 'myNewWindow';
+      // const width = 800;
+      // const height = 800;
+      // const top=(window.innerHeight-800)/2
+      // const left=(window.innerWidth-800)/2
 
      
     
       
-      const features = `width=${width},height=${height},top=${top},left=${left} scrollbars=no,resizable=yes,status=no,toolbar=no,location=no,menubar=no`;
+      // const features = `width=${width},height=${height},top=${top},left=${left} scrollbars=no,resizable=yes,status=no,toolbar=no,location=no,menubar=no`;
       
-      const win=window.open(url, windowName, features);
-      if (win) {
-        win.onload = () => {
-          const data = { id: id };
-          win.postMessage(data, window.location.origin);
-        }; 
-      }
+      // const win=window.open(url, windowName, features);
+      // if (win) {
+      //   win.onload = () => {
+      //     const data = { id: id };
+      //     win.postMessage(data, window.location.origin);
+      //   }; 
+      // }
     };
     
   return (
@@ -135,7 +136,8 @@ const Testpaper = ({alertFunction}) => {
                                   }}>start</button>
  {
                                       tp===0 &&  <button className="start-btn" onClick={()=>{ 
-                                       navigate("/result",{state:data})
+                                        localStorage.setItem("paper",JSON.stringify(data))
+                                       navigate("/result")
                                         }}>view result</button>
                                      }
                                   {tp===0 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{

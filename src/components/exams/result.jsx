@@ -15,7 +15,7 @@ const ResultPage = () => {
   
   
 
-    var paperData = location.state        
+    var paperData = JSON.parse( localStorage.getItem('paper'))      
   
 
 
