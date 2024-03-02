@@ -33,9 +33,9 @@
         const avgMarks=Math.round(totalMarksOfAllStu*1.0/AttemptedBy.length)
         const avgAccuracy=(totalAccuracyOfAllStu*100.0/AttemptedBy.length).toFixed(2)
         const avgTime=Math.round(totalTimeOfAllStu*1.0/AttemptedBy.length)
-        const avgMP=Math.round(totalMarksP*0.1/AttemptedBy.length)
-        const avgMC=Math.round(totalMarksC*0.1/AttemptedBy.length)
-        const avgMM=Math.round(totalMarksM*0.1/AttemptedBy.length)
+        const avgMP=Math.round(totalMarksP*1.0/AttemptedBy.length)
+        const avgMC=Math.round(totalMarksC*1.0/AttemptedBy.length)
+        const avgMM=Math.round(totalMarksM*1.0/AttemptedBy.length)
         res.push({avgMarks,avgMP,avgMC,avgMM,avgAccuracy,avgTime})
 
         return res

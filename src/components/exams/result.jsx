@@ -94,6 +94,13 @@ const ResultPage = () => {
      data = getUserData( getAvgMarks(paperData.AttemptedBy,jdata._id)[0]
     ,paperData.marks)
   }
+  const marksPerSub=()=>{
+    let d=getAvgMarks(paperData.AttemptedBy,jdata._id)[0]
+    let arr=[d['phy'][0],d['chem'][0],d['math'][0]]
+    return arr
+  }
+  
+
   
   return (
    error ? <div className='con-errorResult'>
@@ -143,14 +150,14 @@ const ResultPage = () => {
                 <div className="barChart">
                   <div className="con-bar">
 
-                    <div className="bar" style={{ height: `${50}%`, width: "120px", backgroundColor: "rgb(77, 77, 188)" }} key="1">
-                      <div className="hover">{50}</div>
+                    <div className="bar" style={{ height: `${paperData?data.stuPer:53}%`, width: "120px", backgroundColor: "rgb(77, 77, 188)" }} key="1">
+                      <div className="hover">{paperData?data.stuPer:53}</div>
                     </div>
                   </div>
                   <div className="con-bar">
 
-                    <div className="bar" style={{ height: `${50}%`, width: "120px", backgroundColor: "red" }} key="2">
-                      <div className="hover">{avgMarks}</div>
+                    <div className="bar" style={{ height: `${avgPer}%`, width: "120px", backgroundColor: "red" }} key="2">
+                      <div className="hover">{avgPer}</div>
                     </div>
                   </div>
                 </div>
@@ -175,14 +182,14 @@ const ResultPage = () => {
                 <div className="barChart">
                   <div className="con-bar">
 
-                    <div className="bar" style={{ height: `${(1800/60).toFixed(2)}%`, width: "120px", backgroundColor: "rgb(77, 77, 188)" }} key="1">
-                      <div className="hover">{secondsToHMS(1800)}</div>
+                    <div className="bar" style={{ height: `${paperData?(data.individualTime/(paperData.duration*60)).toFixed(2):30}%`, width: "120px", backgroundColor: "rgb(77, 77, 188)" }} key="1">
+                      <div className="hover">{secondsToHMS(paperData?data.individualTime:1800)}</div>
                     </div>
                   </div>
                   <div className="con-bar">
 
-                    <div className="bar" style={{ height: `${(1800/60).toFixed(2)}%`, width: "120px", backgroundColor: "red" }} key="2">
-                      <div className="hover">{secondsToHMS(1800)}</div>
+                    <div className="bar" style={{ height: `${paperData?(avgTime/(paperData.duration*60)).toFixed(2):30}%`, width: "120px", backgroundColor: "red" }} key="2">
+                      <div className="hover">{secondsToHMS(paperData?avgTime:1800)}</div>
                     </div>
                   </div>
                 </div>
@@ -196,11 +203,11 @@ const ResultPage = () => {
             <div className="p-charts">
               <div className="p-chart">
                 <h3>YOU</h3>
-                <PieChart per={[40,40,30]} key="1" />
+                <PieChart per={paperData?marksPerSub():[40,40,30]} key="1" />
               </div>
               <div className="p-chart">
                 <h3>Average</h3>
-                <PieChart per={[50, 30, 70]} key="1" />
+                <PieChart per={paperData?[avgMP,avgMC,avgMM]:[50, 30, 70]} key="1" />
               </div>
 
 
@@ -216,5 +223,5 @@ const ResultPage = () => {
     </div>:<Spinner/>
   )
 }
-
+ 
 export default ResultPage
