@@ -17,6 +17,31 @@
     justify-content: center;
     align-items: center;
 }
+.con-dash-prof .con-msgs{
+    position: absolute;
+    right: 100px;
+    z-index: 1001;
+   
+    top: 40px;
+    background-color: rgb(237, 227, 227);
+    height: 300px;
+    width: 220px;
+    border-radius: 10px;
+
+    box-shadow: var(--box-shadow);
+
+}
+.t{
+    background-color: rgb(204, 179, 179);
+}
+.con-msgs h3{
+    width: 100%;
+    background-color: aliceblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    gap: 10px;
+}
 .con-dash-prof .side-menu{
     display: none;
 }

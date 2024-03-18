@@ -107,7 +107,7 @@ const Questionp = () => {
         // setpid(i)
 
         if (i ) {
-            fetch(`http://localhost:8000/api/start-paper/${i}/${resume}`, {
+            fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}/${resume}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

@@ -35,7 +35,41 @@ const Dashboard = () => {
   const [di, setdi] = useState(0)
   const [sidemenuVis, setsidemenuVis] = useState(false)
   const [theme_popup, setthemepopup] = useState(false)
+  const [msg,setmsg]=useState(null)
+  const [notiV,setnotiV]=useState(false)
+  useEffect(() => {
+    fetch("https://achieve-jee-server.onrender.com/api/messages", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS
+        },
+       
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Handle successful response here
+            return response.json(); // Parse the JSON response
+          } else {
+            // Handle error response
+            return response.json().then(errorData => {
+              throw new Error(`${errorData.msg}`);
+            });
+          }
+        })
+        .then((responseData) => {
+        
+          
+         setmsg(responseData)
+
+
+        })
+        .catch((error) => {
+          
+        })
   
+    
+  }, [])
   
   const updateSearchParams = (state) => {
     // Create a new URLSearchParams object
@@ -120,7 +154,7 @@ const Dashboard = () => {
     body.classList.add(classes[i]);
     setthemepopup(false)
   }
- 
+  
 
 
   return (
@@ -167,11 +201,31 @@ const Dashboard = () => {
           <div className="search-bar">
             <CiSearch/>
             <input type="text" placeholder='search'/></div>
-          <div className="ic-noti"><IoMdNotificationsOutline className='io-noti' /> <div>8</div></div>
+          <div className="ic-noti" onClick={()=>setnotiV(!notiV)}><IoMdNotificationsOutline className='io-noti' /> {msg && <div>{msg.length}</div>}</div>
           <MdNightlight className='io-set' onClick={()=> setthemepopup(true) }/>
           <div className="dp-cir" onClick={()=>updateSearchParams("Analytics")}><img src={jdata["image"]?jdata["image"]:"https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"}>
             </img></div>
         </div>
+        {notiV && <div className="con-msgs">
+          <div className="box-msgs">
+            <h3> <IoMdNotificationsOutline/>Notifications</h3>
+            <div className="messages" style={(msg && msg.length!=0)?{height: "100%",
+    display: "flex",gap:"10px",flexDirection: "column"}:{height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+   flexDirection: "column"}}>
+              {
+                msg? (msg.length!=0 ?<div className='message'>
+                  {
+                    msg.map((m,i)=>{
+                      return <h4 style={{width:"100%",backgroundColor:i%2===0?"transparent":"rgb(204, 179, 179)",padding:"5px"}}>{`(${i+1})`}{m.body}</h4>
+                    })
+                }</div>:<p>No Notifications found</p>):<div className='spinner-cir'></div>
+              }
+            </div>
+          </div>
+        </div>}
       </div>
 
 
