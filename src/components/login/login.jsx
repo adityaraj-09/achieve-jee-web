@@ -209,7 +209,7 @@ const Login = () => {
      email:jdata["email"]
     };
 
-    fetch('http://achieve-jee-server.onrender.com/api/send-otp', {
+    fetch('https://achieve-jee-server.onrender.com/api/send-otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -248,10 +248,15 @@ const Login = () => {
   const handleVerifyOTP = () => {
     seterrmsg(null)
     let jdata=decryptData(localStorage.getItem("user"))
-  
+    let fotp='';
+    for (let i = 0; i < otp.length; i++) {
+      fotp=fotp+otp[i];
+      
+    }
     setspin(true)
+    console.log(fotp)
     const data = {
-     otp:otp,
+     otp:fotp,
      id:jdata["_id"],
      email:jdata["email"]
     };
@@ -287,6 +292,7 @@ const Login = () => {
         setspin(false)
         setisv(true)
         setcolor("red")
+        console.log(error)
         seterrmsg(error.message)
         
         
