@@ -1,7 +1,7 @@
 
 
 
-   export const  getAvgMarks=(AttemptedBy,uid)=>{
+   export const  getAvgMarks=(AttemptedBy,uid,startTime)=>{
         
         let totalMarksOfAllStu=0
         let totalTimeOfAllStu=0
@@ -10,11 +10,12 @@
         let totalMarksC=0
         let totalMarksM=0 
         let res=[]
-
+        console.log("sent data in result page"+JSON.stringify({AttemptedBy,uid,startTime}))
         for (let i = 0; i < AttemptedBy.length; i++) {
             const userData = AttemptedBy[i];
-            if(AttemptedBy[i]['uid']===uid){
+            if(userData['uid']===uid && userData['startedAt']===startTime){
                 res.push({...userData,rank:i+1})
+                
             }
             totalMarksOfAllStu=totalMarksOfAllStu+userData["marks"]
             let t=userData['time']

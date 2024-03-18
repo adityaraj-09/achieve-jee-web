@@ -78,6 +78,18 @@ const Testpaper = ({alertFunction}) => {
       //   }; 
       // }
     };
+
+    const findPaperById=(id)=>{
+      for (let i = 0; i < qs.length; i++) {
+        const paper =qs[i];
+        if(paper._id===id){
+          
+          return paper
+        
+        }
+        
+      }
+    }
     
   return (
    !qs? <Spinner/>:<div className="con-test">
@@ -135,8 +147,11 @@ const Testpaper = ({alertFunction}) => {
                                   }
                                   }}>start</button>
  {
-                                      tp===0 &&  <button className="start-btn" onClick={()=>{ 
-                                        localStorage.setItem("paper",JSON.stringify(data))
+                                      tp===0 &&  <button className="start-btn" onClick={()=>{
+                                        let st=attempts[d][attempts[d].length-1 ].startTime
+                                        let finaldata={...data,startTime:st}
+                                        localStorage.setItem("paper",JSON.stringify(finaldata))
+                                        
                                        navigate("/result")
                                         }}>view result</button>
                                      }
@@ -151,11 +166,20 @@ const Testpaper = ({alertFunction}) => {
             </div>
             <div className="test-paper-attempts">
                 {
-                  attem_pid && tp===1?<div className="tp-attempt" >
+                  attem_pid && tp===0?<div className="tp-attempt" >
                       {
                         jdata.attempts[attem_pid].map((data,id)=>{
                           return <div className="attempt-info">
                             <p>attempt No. {id+1} | At {data.startTime}</p>
+                            {
+                              data.status===1 &&  <button onClick={()=>{
+                                let paper=findPaperById(attem_pid);
+                                let finaldata={...paper,startTime:data.startTime}
+                                          localStorage.setItem("paper",JSON.stringify(finaldata))
+                                          navigate("/result")
+                              }}>result</button>
+                            }
+                           
                               {/* {data.status===0? <h4>resume</h4>:null} */}
                             </div>
                         })

@@ -62,9 +62,6 @@ const Questionp = () => {
     const [setq, setsetq] = useState(0);
     const [dis, setd] = useState(true)
     const l = ["ALL","MATHS", "PHY", "CHEM"]
-    const [solved, setsolved] = useState([])
-    let unsolved = [1]
-    let notvisited = []
     const [answers,setAnswers]=useState({})
     const [spin, setspin] = useState(false)
     const [time,settime]=useState({})
@@ -106,11 +103,11 @@ const Questionp = () => {
     //     setAnswers(jdata["attempts"][i][len-1].markedAns)
     // }
     useEffect(() => {
-
+        console.log('useEffect running with value:', i);
         // setpid(i)
 
-        if (i) {
-            fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}/${resume}`, {
+        if (i ) {
+            fetch(`http://localhost:8000/api/start-paper/${i}/${resume}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -136,7 +133,7 @@ const Questionp = () => {
                     console.log(error);
                 });
         }
-    }, [i]);
+    }, []);
     useEffect(() => {
         let t=time[cr_q]?time[cr_q]:0
         const interval = setInterval(() => {
@@ -221,7 +218,7 @@ const Questionp = () => {
             pid:i,
             time:time
         }
-        fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
+        fetch('http://localhost:8000/api/submit-answer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

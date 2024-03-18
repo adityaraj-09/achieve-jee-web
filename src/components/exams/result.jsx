@@ -35,7 +35,7 @@ const ResultPage = () => {
   var avgTime 
   if(paperData){
 
-    var { avgMarks, avgMP, avgMC, avgMM, avgAccuracy, avgTime } = getAvgMarks(paperData.AttemptedBy,jdata._id)[1]
+    var { avgMarks, avgMP, avgMC, avgMM, avgAccuracy, avgTime } = getAvgMarks(paperData.AttemptedBy,jdata._id,paperData.startTime)[1]
   }
   // const [userData, setuserData] = useState(null)
   // useEffect(() => {
@@ -91,11 +91,11 @@ const ResultPage = () => {
   var data={}
   if(paperData){
 
-     data = getUserData( getAvgMarks(paperData.AttemptedBy,jdata._id)[0]
+     data = getUserData( getAvgMarks(paperData.AttemptedBy,jdata._id,paperData.startTime)[0]
     ,paperData.marks)
   }
   const marksPerSub=()=>{
-    let d=getAvgMarks(paperData.AttemptedBy,jdata._id)[0]
+    let d=getAvgMarks(paperData.AttemptedBy,jdata._id,paperData.startTime)[0]
     let arr=[d['phy'][0],d['chem'][0],d['math'][0]]
     return arr
   }
