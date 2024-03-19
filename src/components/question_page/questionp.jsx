@@ -218,7 +218,7 @@ const Questionp = () => {
             pid:i,
             time:time
         }
-        fetch('http://localhost:8000/api/submit-answer', {
+        fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
