@@ -5,10 +5,14 @@ import "./testpaper.css"
 import Spinner from '../spinner/spinner';
 import { decryptData, decryptString } from '../encryption';
 import {GrFormNext} from "react-icons/gr"
-import { Button } from '@mui/base';
+
 import { useNavigate } from 'react-router-dom';
 import CameraComponent from '../exams/camera';
+import { FaChevronDown } from "react-icons/fa";
+import { IoCaretForwardSharp } from "react-icons/io5";
+import { FaCaretDown } from "react-icons/fa";
 import FaceDetectionComponent from '../exams/face-detection';
+import { Button } from '@mui/material';
 const Testpaper = ({alertFunction}) => {
     const [qs,setqs] =useState(null)
     const [tp,settp]=useState(0)
@@ -139,54 +143,68 @@ const Testpaper = ({alertFunction}) => {
                                 <strong>{data.title}</strong>
                                 <p>{data.duration} min | <span> {data.total_q} Questions</span></p>
                                 </div>
-                                <button className="start-btn" onClick={()=>{ 
+                                <div className="actions">
+
+                                <Button  variant='contained' className="start-btn" onClick={()=>{ 
                                   if(!jdata.verified){
                                     alertFunction("please verify your account")
                                   }else{
                                     openNewWindow(d,false)
                                   }
-                                  }}>start</button>
+                                  }}>start</Button>
  {
-                                      tp===0 &&  <button className="start-btn" onClick={()=>{
+                                      tp===0 &&  <Button  variant='contained' className="start-btn" onClick={()=>{
                                         let st=attempts[d][attempts[d].length-1 ].startTime
                                         let finaldata={...data,startTime:st}
                                         localStorage.setItem("paper",JSON.stringify(finaldata))
                                         
                                        navigate("/result")
-                                        }}>view result</button>
+                                        }}>view result</Button>
                                      }
-                                  {tp===0 &&<GrFormNext style={{fontSize:"30px"}} onClick={()=>{
+                                  {tp===0 && (attem_pid!=d ?<IoCaretForwardSharp style={{fontSize:"30px"}} onClick={()=>{
                                     console.log(jdata.attempts[d])
-                                     setpid(d)}}/>}
+                                     setpid(d)}}/>:<FaCaretDown  style={{fontSize:"30px"}} onClick={()=>{
                                     
+                                       setpid(null)}}/>)}
+                                </div>
+
                                 
-                            </div>:null)
-                            }):null
-            }
-            </div>
-            <div className="test-paper-attempts">
                 {
-                  attem_pid && tp===0?<div className="tp-attempt" >
+                  attem_pid==d && tp===0?<div className="test-paper-attempts"><div className="tp-attempt" >
                       {
                         jdata.attempts[attem_pid].map((data,id)=>{
+                          var date=new Date(data.startTime)
                           return <div className="attempt-info">
-                            <p>attempt No. {id+1} | At {data.startTime}</p>
+                            <p><strong>({id+1})</strong> At {date.toLocaleDateString() }</p>
+                           
                             {
-                              data.status===1 &&  <button onClick={()=>{
+                              data.status===1 &&  <Button variant="contained" onClick={()=>{
                                 let paper=findPaperById(attem_pid);
                                 let finaldata={...paper,startTime:data.startTime}
                                           localStorage.setItem("paper",JSON.stringify(finaldata))
                                           navigate("/result")
-                              }}>result</button>
+                              }}>result</Button>
+                            }
+                            {
+                              data.status===0 &&  <Button disabled variant="contained" onClick={()=>{
+                               
+                              }}>Resume</Button>
                             }
                            
                               {/* {data.status===0? <h4>resume</h4>:null} */}
                             </div>
                         })
                       }
-                  </div>:null
+                  </div></div>:null
                 }
+           
+                                    
+                                
+                            </div>:null)
+                            }):null
+            }
             </div>
+           
             
         </div>
        

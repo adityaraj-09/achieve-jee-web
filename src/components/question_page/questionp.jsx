@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import userEvent from '@testing-library/user-event';
 import CameraComponent from '../exams/camera';
 import FaceDetectionComponent from '../exams/face-detection';
+import { cacheData } from '../cached-api';
 
 const Questionp = () => {
 
@@ -241,9 +242,11 @@ const Questionp = () => {
       })
       .then((responseData) => {
         setspin(false)
-        const data = encryptData(responseData)
-        localStorage.setItem("user", data)
-        navigate("/", { replace: true })
+        const userdata = encryptData(responseData['user'])
+        localStorage.setItem("user", userdata)
+        cacheData('https://achieve-jee-server.onrender.com/api/papers', responseData["papers"]);
+        navigate("/?state=TestPapers", { replace: true })
+        
 
       })
       .catch((error) => {

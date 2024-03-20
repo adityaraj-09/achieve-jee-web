@@ -49,8 +49,7 @@
     display: flex;
     width: max-content;
     justify-content: center;
-  
-    align-items: center;
+    align-items: flex-start;
     gap: 30px;
 }
 .test-details{
@@ -84,14 +83,14 @@
     display: flex;
     justify-content: center;
     width: max-content;
-    height: 500px;
+    height: 100px;
     background-color:white;
 }
 .tp-attempt{
     display: flex;
-    padding: 15px;
     width: fit-content;
-    height: 500px;
+    height: 100px;
+    gap: 10px;
     overflow-y: scroll;
     flex-direction: column;
 }
@@ -99,8 +98,13 @@
     display: flex;
     height: max-content;
     width: max-content;
-    gap: 10px;
+    gap: 15px;
     flex-direction: row;
+}
+.test-paper .actions{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 @media screen and (max-width:700px) {
@@ -116,5 +120,18 @@
     }
     .con-test-papers{
         width: max-content;
+    }
+   
+    .test-paper{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .test-paper .actions{
+        margin: 0;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        justify-content: flex-start;
     }
 }
