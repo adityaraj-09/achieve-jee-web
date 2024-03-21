@@ -16,8 +16,8 @@ import { cacheData } from '../cached-api';
 const Questionp = () => {
 
     
-    const {resume}=useParams()
-    console.log(resume)
+    const {resume,index}=useParams()
+    
 
     // const [pid, setpid] = useState(null)
     // const [istimer, setistimer] = useState(false)
@@ -58,14 +58,17 @@ const Questionp = () => {
 
         return confirmationMessage;
     });
-
+    const token = decryptString(localStorage.getItem("jwtToken"))
+    const jdata = decryptData(localStorage.getItem("user"))
+    const i = localStorage.getItem("pid");
+    console.log(jdata.attempts[i])
     const [cr_q, setcurrq] = useState(0);
     const [setq, setsetq] = useState(0);
     const [dis, setd] = useState(true)
     const l = ["ALL","MATHS", "PHY", "CHEM"]
-    const [answers,setAnswers]=useState({})
-    const [spin, setspin] = useState(false)
-    const [time,settime]=useState({})
+    const [answers,setAnswers]=useState(resume=="false"?{}:(jdata.attempts[i][index].markedAns ?jdata.attempts[i][index].markedAns:{}))
+    const [spin, setspin] = useState(null)
+    const [time,settime]=useState(resume=="false"?{}:(jdata.attempts[i][index].time ?jdata.attempts[i][index].time:{}))
     
     const addAnswer = (questionNo, answerArray) => {
         setAnswers((prevAnswers) => ({
@@ -96,16 +99,14 @@ const Questionp = () => {
     // console.log(i)
 
       
-    const token = decryptString(localStorage.getItem("jwtToken"))
-    const jdata = decryptData(localStorage.getItem("user"))
-    const i = localStorage.getItem("pid");
+    
     // let len=jdata["attempts"][i].length
     // if(resume){
     //     setAnswers(jdata["attempts"][i][len-1].markedAns)
     // }
     useEffect(() => {
         console.log('useEffect running with value:', i);
-        // setpid(i)
+       
 
         if (i ) {
             fetch(`https://achieve-jee-server.onrender.com/api/start-paper/${i}/${resume}`, {
@@ -136,7 +137,7 @@ const Questionp = () => {
         }
     }, []);
     useEffect(() => {
-        let t=time[cr_q]?time[cr_q]:0
+        let t=time && time[cr_q]?time[cr_q]:0
         const interval = setInterval(() => {
           // Increment the number by 1
           
@@ -212,12 +213,13 @@ const Questionp = () => {
             }
             
         }
-        setspin(true)
+        setspin("s")
         
         const data={
             hashmaps:answers,
             pid:i,
-            time:time
+            time:time,
+            index
         }
         fetch('https://achieve-jee-server.onrender.com/api/submit-answer', {
       method: 'POST',
@@ -241,19 +243,60 @@ const Questionp = () => {
         }
       })
       .then((responseData) => {
-        setspin(false)
+        setspin(null)
         const userdata = encryptData(responseData['user'])
         localStorage.setItem("user", userdata)
         cacheData('https://achieve-jee-server.onrender.com/api/papers', responseData["papers"]);
         navigate("/?state=TestPapers", { replace: true })
-        
-
       })
       .catch((error) => {
         console.log(error.message)
-        setspin(false)
+        setspin(null)
 
       });
+    }
+
+    const pause=()=>{
+        setspin("p")
+        const data={
+            hashmaps:answers,
+            pid:i,
+            time:time,
+            index
+        }
+        fetch('https://achieve-jee-server.onrender.com/api/pause-paper', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS,
+              'x-auth-token': token
+      
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => {
+              if (response.ok) {
+                // Handle successful response here
+                return response.json(); // Parse the JSON response
+              } else {
+                // Handle error response
+                return response.json().then(errorData => {
+                  throw new Error(`${errorData.msg}`);
+                });
+              }
+            })
+            .then((responseData) => {
+              setspin(null)
+              const userdata = encryptData(responseData['user'])
+              localStorage.setItem("user", userdata)
+              cacheData('https://achieve-jee-server.onrender.com/api/papers', responseData["papers"]);
+              navigate("/?state=TestPapers", { replace: true })
+            })
+            .catch((error) => {
+              console.log(error.message)
+              setspin(null)
+      
+            });
     }
 
 
@@ -365,7 +408,7 @@ const Questionp = () => {
                                             <div className="option">
 
                                                 <input type="radio" id={index} value={opt} name="opts" className='r' 
-                                                checked={answers[cr_q] && answers[cr_q].length!=0?answers[cr_q][0]-1===index :false} 
+                                                checked={answers && (answers[cr_q] && answers[cr_q].length!=0?answers[cr_q][0]-1===index :false)} 
                                                 onChange={() =>{ 
                                                     
                                                         const a=[]
@@ -397,11 +440,6 @@ const Questionp = () => {
 
                                 <div className="nav-btn-que" onClick={() => {
                                    
-                                    
-                                   
-
-                                    
-                                    
                                     setcurrq(cr_q - 1)
 
 
@@ -441,7 +479,7 @@ const Questionp = () => {
                        
                         <div className="stu-data">
 
-                            <CountdownTimer className="timer" time={180}/>
+                            <CountdownTimer className="timer" time={resume=="false"?180:(180-((jdata.attempts[i][index].finishTime-jdata.attempts[i][index].startTime)/60000)).toFixed(0)}/>
 
                             <p className="stu-name">
                                 {localStorage.getItem("user") ? jdata["name"] : null}
@@ -456,7 +494,7 @@ const Questionp = () => {
                                 allqs ? allqs.map((t, index) => {
                                     return (
                                         <>
-                                            <div className={!answers[index] ? "notvisited-q" : (answers[index].length!=0 ? "solved-q" : "unsolved-q")} key={index} onClick={() => {
+                                            <div className={ answers && (!answers[index] ? "notvisited-q" : answers[index].length!=0 ? "solved-q" : "unsolved-q")} key={index} onClick={() => {
                                                 setcurrq(index)
                                                 
                                                 if(!answers[index]){
@@ -527,7 +565,11 @@ const Questionp = () => {
                         
                             <div className="exam-btn-que" onClick={submit}>
 
-                                {spin? <div className='spinner-cir'></div>:"Submit"}
+                                {spin==="s"? <div className='spinner-cir'></div>:"Submit"}
+                            </div>
+                            <div className="exam-btn-que" onClick={pause}>
+
+                                {spin==="p"? <div className='spinner-cir'></div>:"Pause"}
                             </div>
                         </div>
                     </div>

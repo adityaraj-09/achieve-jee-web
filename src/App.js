@@ -46,7 +46,7 @@ function App() {
                 <Route index element={<ProtectedRoute redirect={"/home"}><Dashboard/></ProtectedRoute>}/>
                 <Route path='login' element={<LoginPage/>}/>
                 <Route path='home' element={<HomePage/>}/>
-                <Route path="q/:resume"  element={
+                <Route path="q/:resume/:index"  element={
                   <ProtectedRoute>
                     <Quesionpage/>
                   </ProtectedRoute>

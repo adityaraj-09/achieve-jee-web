@@ -10,6 +10,9 @@ import Leaderboard from './leaderboard'
 import PieChart from './piechart'
 import { HiTrophy } from "react-icons/hi2";
 import "./result.css"
+import BasicTable from './table'
+import CustomizedTables from './table'
+import StickyHeadTable from './table'
 const ResultPage = () => {
   const location=useLocation()
   
@@ -115,7 +118,7 @@ const ResultPage = () => {
 
       <div className="top-box">
 
-        <div className="ans_pn"><p>Jee Advanced Part Test</p> <div className="btn-ans">Solutions</div></div>
+        <div className="ans_pn"><p>{paperData && paperData["title"]}</p> <div className="btn-ans">Solutions</div></div>
         <div className="cir_datas">
           <div className="cir_data_res"><p>{paperData? data.rank:177}</p><div className="basel"></div><strong>MY RANK</strong></div>
           <div className="cir_data_res"><p>{`${paperData?data.stuMT:"250"}(${paperData?data.stuPer:53}%)`}</p><div className="basel"></div><strong>MY SCORE</strong></div>
@@ -126,7 +129,7 @@ const ResultPage = () => {
 
         <div className="con-marks" >
         <p className='head'>LEADERBOARD <HiTrophy className='trop'/></p>
-        <Leaderboard  students={paperData?paperData.AttemptedBy:[]}/>
+        <StickyHeadTable/>
           <p className='head'>OVERALL</p>
 
           <div className="box-overall" id='overall'>

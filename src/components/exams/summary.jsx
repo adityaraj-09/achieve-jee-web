@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import "./summ.css"
+
 const Summary = () => {
 
   const location=useLocation()
