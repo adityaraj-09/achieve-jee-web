@@ -376,15 +376,15 @@ const Questionp = () => {
                                         <input
                                             type="checkbox"
                                             id={id}
-                                            checked={(answers[cr_q] && answers[cr_q].length!=0)?answers[cr_q].includes(id+1) :false}
+                                            checked={(answers[cr_q] && answers[cr_q].length!=0)?answers[cr_q].includes(id) :false}
                                             onChange={
                                                 () => {
-                                                    if (answers[cr_q].includes(id + 1)) {
-                                                        const newArray = answers[cr_q].filter(item => item !== (id + 1));
+                                                    if (answers[cr_q].includes(id)) {
+                                                        const newArray = answers[cr_q].filter(item => item !== (id));
                                                         addAnswer(cr_q,newArray)
                                                        
                                                     } else {
-                                                        const array=[...answers[cr_q],id+1]
+                                                        const array=[...answers[cr_q],id]
                                                         addAnswer(cr_q,array)
                                                         
                                                     }
@@ -412,7 +412,7 @@ const Questionp = () => {
                                                 onChange={() =>{ 
                                                     
                                                         const a=[]
-                                                        a.push(index+1)
+                                                        a.push(index)
                                                         addAnswer(cr_q,a)
                                                     
                                                     }} />
