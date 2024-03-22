@@ -129,7 +129,7 @@ const ResultPage = () => {
 
         <div className="con-marks" >
         <p className='head'>LEADERBOARD <HiTrophy className='trop'/></p>
-        <StickyHeadTable/>
+        <Leaderboard students={paperData && paperData.AttemptedBy}/>
           <p className='head'>OVERALL</p>
 
           <div className="box-overall" id='overall'>

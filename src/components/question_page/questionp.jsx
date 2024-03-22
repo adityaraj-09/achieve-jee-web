@@ -408,7 +408,7 @@ const Questionp = () => {
                                             <div className="option">
 
                                                 <input type="radio" id={index} value={opt} name="opts" className='r' 
-                                                checked={answers && (answers[cr_q] && answers[cr_q].length!=0?answers[cr_q][0]-1===index :false)} 
+                                                checked={answers && (answers[cr_q] && answers[cr_q].length!=0?answers[cr_q][0]===index :false)} 
                                                 onChange={() =>{ 
                                                     
                                                         const a=[]
