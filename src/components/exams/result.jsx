@@ -40,50 +40,7 @@ const ResultPage = () => {
 
     var { avgMarks, avgMP, avgMC, avgMM, avgAccuracy, avgTime } = getAvgMarks(paperData.AttemptedBy,jdata._id,paperData.startTime)[1]
   }
-  // const [userData, setuserData] = useState(null)
-  // useEffect(() => {
-  //   let token = ' '
-  //   if (localStorage.getItem(("jwtToken"))) {
-
-  //     token = decryptString(localStorage.getItem("jwtToken"))
-  //   }
-  //   fetch('https://achieve-jee-server.onrender.com/api/get-marks/' + _id, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'x-auth-token': token,
-  //       'AuthGuardPass': process.env.REACT_APP_AUTHGUARD_PASS
-  //     },   
-
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-        
-  //         return response.json(); 
-  //       } else {
-        
-  //         return response.json().then(errorData => {
-  //           throw new Error(`${errorData.msg}`);
-  //         });
-  //       }
-  //     })
-  //     .then((responseData) => {
-  //       setspin(false)
-  //       console.log(responseData)
-  //       setuserData(responseData)
-
-
-  //     })
-  //     .catch((error) => {
-
-  //       seterror(error.message);
-  //       setuserData({})
-  //       setspin(false)
-  //     });
-
-  //   return () => {
-  //   }
-  // }, [])
+  
 
   
   let avgPer =""

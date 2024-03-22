@@ -6,7 +6,7 @@ import { AuthContext} from '../../AuthContext'
 import { useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
-import { decryptData, decryptString, encryptData } from '../encryption';
+import { decryptData, decryptString, encryptData, encryptString } from '../encryption';
 import { Button } from '@mui/material';
 import userEvent from '@testing-library/user-event';
 import CameraComponent from '../exams/camera';
@@ -42,7 +42,7 @@ const Questionp = () => {
     //         // Clean up the event listener when the component unmounts
     //         socket.off('timer');
     //       };
-    // },[])
+    // },[])npm 
 
 
     const navigate=useNavigate()
@@ -124,7 +124,9 @@ const Questionp = () => {
                     return response.json();
                 })
                 .then((responseData) => {
-                    setallqs(responseData);
+                    setallqs(responseData.ques);
+                    const token = encryptString(responseData["token"])
+                    localStorage.setItem('jwtToken', token);
                     if(!answers[0]){
 
                         addAnswer(0,[])
